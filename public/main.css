@@ -16,6 +16,15 @@ a{
   cursor: pointer;
 }
 
+#project_search:focus {
+  outline:none;
+}
+
+#dropdown {
+	background-color: #15202b;
+	color: white;
+}
+
 /* ________________________________________________________________________________________________________________________________________________________ */
 
 .cd-horizontal-timeline ol, .cd-horizontal-timeline ul {
