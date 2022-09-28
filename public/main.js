@@ -7,6 +7,10 @@ jQuery(document).ready(function ($) {
 		elem.fadeIn();
 		if (elem.length === 0)
 		$('#nofap').hide().html('<small class="fw-light">No projects available.</small>').fadeIn();
+		else
+		{
+			$('#nofap').hide();
+		}
 	});
 
 
