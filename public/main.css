@@ -25,6 +25,19 @@ a{
 	color: white;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #707a84;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: gray;
+}
+
 /* ________________________________________________________________________________________________________________________________________________________ */
 
 .cd-horizontal-timeline ol, .cd-horizontal-timeline ul {
