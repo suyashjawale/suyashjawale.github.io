@@ -1,14 +1,41 @@
 jQuery(document).ready(function ($) {
 
 
+    var dobYear = 99;
+    var dobMonth = 7;
+    var dobDate = 3;
+    var now = new Date();
+    var currentYear = now.getYear();
+    var currentMonth = now.getMonth();
+    var currentDate = now.getDate();
+    yearAge = currentYear - dobYear;
+    if (currentMonth >= dobMonth)
+      var monthAge = currentMonth - dobMonth;
+    else {
+      yearAge--;
+      var monthAge = 12 + currentMonth - dobMonth;
+    }
+
+    if (currentDate >= dobDate)
+      var dateAge = currentDate - dobDate;
+    else {
+      monthAge--;
+      var dateAge = 31 + currentDate - dobDate;
+      if (monthAge < 0) {
+        monthAge = 11;
+        yearAge--;
+      }
+    }
+
+	$("#age").html(`${yearAge} Years, ${monthAge} Months, ${dateAge} Days`);
+
 	$('#dropdown').on('change', function () {
 		var value = $(this).val();
 		var elem = $('.category').hide().filter(`.${value}`);
 		elem.fadeIn();
 		if (elem.length === 0)
-		$('#nofap').hide().html('<small class="fw-light">No projects available.</small>').fadeIn();
-		else
-		{
+			$('#nofap').hide().html('<small class="fw-light">No projects available.</small>').fadeIn();
+		else {
 			$('#nofap').hide();
 		}
 	});
