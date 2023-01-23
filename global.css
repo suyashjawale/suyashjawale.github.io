@@ -1,0 +1,51 @@
+body{
+    background-color:#15202b;
+}
+.ps-custom{
+  padding-left: 1.07rem!important;
+}
+.bg-custom{
+  background-color:#15202b;
+}
+#chatgpt{
+  font-size: x-small;
+}
+.bg-offcanvas
+{
+    background-color: #1f2d3b;
+}
+
+.profile-photo
+{
+    width: 14rem;
+}
+
+progress{
+  height: 0.5rem;
+}
+
+a{
+  cursor: pointer;
+}
+
+#project_search:focus {
+  outline:none;
+}
+
+#dropdown {
+	background-color: #15202b;
+	color: white;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #707a84;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: gray;
+}
