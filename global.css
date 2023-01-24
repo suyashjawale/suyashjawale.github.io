@@ -1,17 +1,17 @@
 body {
   background-color: #15202b;
 }
+
 .ps-custom {
   padding-left: 1.05rem !important;
 }
+
 .bg-custom {
   background-color: #15202b;
 }
+
 #chatgpt {
   font-size: x-small;
-}
-.bg-offcanvas {
-  background-color: #1f2d3b;
 }
 
 .profile-photo {
@@ -19,7 +19,7 @@ body {
 }
 
 progress {
-  height: 0.5rem;
+  height: 0.44rem;
 }
 
 a {
