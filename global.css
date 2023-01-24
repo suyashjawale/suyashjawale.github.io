@@ -1,41 +1,35 @@
-body{
-    background-color:#15202b;
+body {
+  background-color: #15202b;
 }
-.ps-custom{
-  padding-left: 1.05rem!important;
+.ps-custom {
+  padding-left: 1.05rem !important;
 }
-.bg-custom{
-  background-color:#15202b;
+.bg-custom {
+  background-color: #15202b;
 }
-#chatgpt{
+#chatgpt {
   font-size: x-small;
 }
-.bg-offcanvas
-{
-    background-color: #1f2d3b;
+.bg-offcanvas {
+  background-color: #1f2d3b;
 }
 
-.profile-photo
-{
-    width: 14rem;
+.profile-photo {
+  width: 14rem;
 }
 
-progress{
+progress {
   height: 0.5rem;
 }
 
-a{
+a {
   cursor: pointer;
 }
 
 #project_search:focus {
-  outline:none;
+  outline: none;
 }
 
-#dropdown {
-	background-color: #15202b;
-	color: white;
-}
 
 ::-webkit-scrollbar {
   width: 10px;
@@ -48,4 +42,29 @@ a{
 
 ::-webkit-scrollbar-thumb:hover {
   background: gray;
+}
+
+@media (min-width: 576px) {
+  .w-c-sm-100 {
+      width: 100% !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .w-c-md-60 {
+      width: 60% !important;
+  }
+
+}
+
+@media (min-width: 992px) {
+  .w-c-lg-40 {
+      width: 40% !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .w-c-xl-30 {
+      width: 30% !important;
+  }
 }
