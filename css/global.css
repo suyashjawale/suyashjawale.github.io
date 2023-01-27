@@ -4,6 +4,12 @@ body {
   font-weight: 300;
 }
 
+.margin-custom
+{
+   margin-left : 0.04rem;
+   margin-right : 0.04rem;
+}
+
 .font-weight-500
 {
   font-weight: 500;
@@ -38,10 +44,6 @@ a {
   cursor: pointer;
 }
 
-#project_search:focus {
-  outline: none;
-}
-
 .offcanvas-header-logo-padding{
   padding-left: .07rem!important;
 }
@@ -69,7 +71,10 @@ a {
   .w-c-md-60 {
       width: 60% !important;
   }
-
+  .text-justify{
+    text-align: justify;
+    text-justify: auto;
+}
 }
 
 @media (min-width: 992px) {
