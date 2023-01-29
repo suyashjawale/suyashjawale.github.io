@@ -28,8 +28,13 @@ body {
   background-color: #15202b;
 }
 
-#chatgpt {
+.font-size-xsmall {
   font-size: x-small;
+}
+
+.font-size-small
+{
+  font-size: small;
 }
 
 .profile-photo {
@@ -60,6 +65,7 @@ a {
 ::-webkit-scrollbar-thumb:hover {
   background: gray;
 }
+
 
 @media (min-width: 576px) {
   .w-c-sm-100 {
