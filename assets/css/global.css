@@ -1,22 +1,19 @@
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   background-color: #15202b;
   font-weight: 300;
 }
 
-.margin-custom
-{
-   margin-left : 0.04rem;
-   margin-right : 0.04rem;
+.margin-custom {
+  margin-left: 0.04rem;
+  margin-right: 0.04rem;
 }
 
-.font-weight-500
-{
+.font-weight-500 {
   font-weight: 500;
 }
 
-.font-weight-300
-{
+.font-weight-300 {
   font-weight: 300;
 }
 
@@ -32,8 +29,7 @@ body {
   font-size: x-small;
 }
 
-.font-size-small
-{
+.font-size-small {
   font-size: small;
 }
 
@@ -49,8 +45,8 @@ a {
   cursor: pointer;
 }
 
-.offcanvas-header-logo-padding{
-  padding-left: .07rem!important;
+.offcanvas-header-logo-padding {
+  padding-left: 0.07rem !important;
 }
 
 ::-webkit-scrollbar {
@@ -66,31 +62,36 @@ a {
   background: gray;
 }
 
-
 @media (min-width: 576px) {
   .w-c-sm-100 {
-      width: 100% !important;
+    width: 100% !important;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .px-c-0 {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
 @media (min-width: 768px) {
-  .w-c-md-60 {
-      width: 60% !important;
+  .w-c-md-70 {
+    width: 70% !important;
   }
-  .text-justify{
+  .text-justify {
     text-align: justify;
     text-justify: auto;
-}
+  }
 }
 
 @media (min-width: 992px) {
-  .w-c-lg-40 {
-      width: 40% !important;
+  .w-c-lg-55 {
+    width: 55% !important;
   }
 }
-
 @media (min-width: 1200px) {
-  .w-c-xl-30 {
-      width: 30% !important;
+  .w-c-xl-40 {
+    width: 40% !important;
   }
 }
