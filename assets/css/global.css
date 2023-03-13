@@ -146,3 +146,15 @@ a {
 .shadow-custom{
   box-shadow: 0 -.27rem 1rem rgba(var(--bs-body-color-rgb),.15)!important;
 }
+
+.wrapped {
+  white-space: pre-wrap;
+}
+
+#thought {
+  height: auto;
+  max-height: 200px; /* maximum height in pixels */
+  overflow-y: auto;
+  resize: none; /* disable resize handle */
+}
+  
