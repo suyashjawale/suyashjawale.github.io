@@ -186,3 +186,9 @@ a {
     width: 40%;
   }
 }
+
+.navbar-color{
+  backdrop-filter: blur(10px); 
+  -webkit-backdrop-filter: blur(10px); 
+  background-color: rgb(21, 32, 43, 0.7);
+}
