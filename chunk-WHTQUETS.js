@@ -1,0 +1,1 @@
+import{Xa as n,Ya as m,kb as a,ya as o}from"./chunk-EJLA3VPG.js";var s=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=o({type:t,selectors:[["app-l-home"]],decls:2,vars:0,template:function(e,l){e&1&&(n(0,"p"),a(1,"l-home works!"),m())},encapsulation:2})};export{s as LHome};
