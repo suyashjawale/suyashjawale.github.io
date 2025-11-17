@@ -1,1 +1,0 @@
-import{Ya as o,Za as n,lb as p,za as s}from"./chunk-3GERIT7D.js";var a=class e{static \u0275fac=function(t){return new(t||e)};static \u0275cmp=s({type:e,selectors:[["app-l-posts"]],decls:2,vars:0,template:function(t,l){t&1&&(o(0,"p"),p(1,"l-posts works!"),n())},encapsulation:2})};export{a as LPosts};

@@ -1,0 +1,1 @@
+import{Da as s,Xa as a,Ya as n,kb as o}from"./chunk-HLB2SOYD.js";var c=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=s({type:t,selectors:[["app-s-search"]],decls:2,vars:0,template:function(e,i){e&1&&(a(0,"p"),o(1,"s-search works!"),n())},encapsulation:2})};export{c as SSearch};
