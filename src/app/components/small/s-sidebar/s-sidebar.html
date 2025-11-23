@@ -1,0 +1,305 @@
+<div class="offcanvas offcanvas-start bg-custom" tabindex="-1" id="menu" aria-labelledby="menuLabel">
+	<div class="d-flex justify-content-between align-items-center ps-3 gap-2 bg-custom-shade rounded-end-5 mt-3 mb-4 me-2"
+		style="height: 4rem; max-height: 4rem;">
+		<div [class.highlight-animation]="isOpen()" (animationend)="animationDone()"
+			class="d-flex align-items-center gap-2" (click)="openLink(highLights()[currentHighlight()].link)">
+			@if(isOpen() && highLights().length>0){
+				@if(highLights()[currentHighlight()].hasImage){
+				<div style="min-width: 3.4rem;min-height: 3.4rem; height: 3.4rem;max-height: 3.4rem; width: 3.4rem; max-width: 3.4rem;" class="d-flex align-items-center">
+					<img [src]="highLights()[currentHighlight()].imageLink" class="img-fluid w-100 rounded" loading="lazy"/>
+				</div>
+				}
+				<div class="text-clamp-2 text-small">{{highLights()[currentHighlight()].content}}</div>
+			}
+		</div>
+
+		<button type="button" class="bg-custom-selected shadow-none border-0 rounded-circle p-0"
+			data-bs-dismiss="offcanvas" aria-label="Close"
+			style="min-width: 4rem; min-height: 4rem;max-width: 4rem; max-height: 4rem;">
+			<svg width="27" height="27" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<g stroke-width="0" />
+				<g stroke-linecap="round" stroke-linejoin="round" />
+				<path
+					d="M9.66 8.53a.75.75 0 0 0-1.059-1.06zm-5.19 3.063a.75.75 0 0 0 1.06 1.062zm1.043-.016a.75.75 0 1 0-1.026 1.094zm3.105 4.97a.75.75 0 1 0 1.026-1.094zM5 11.374a.75.75 0 0 0 0 1.5zm10.37.75v.75h.002zm2.563 1.053.528-.532zm.317 2.558a.75.75 0 0 0 1.5-.004zM8.601 7.47l-4.13 4.124 1.059 1.062L9.66 8.53zm-4.114 5.202 4.13 3.876 1.027-1.094-4.13-3.876zm.513.203h10.37v-1.5H5zm10.372 0a2.87 2.87 0 0 1 2.032.834l1.057-1.063a4.37 4.37 0 0 0-3.093-1.271zm2.032.834a2.87 2.87 0 0 1 .846 2.027l1.5-.004a4.37 4.37 0 0 0-1.289-3.086z"
+					fill="#fff" />
+			</svg>
+		</button>
+
+	</div>
+	<div class="offcanvas-body pt-0">
+
+		<div class="row g-1">
+			<div class="col-4 text-center">
+				<div class="bg-custom-shade p-2" data-bs-dismiss="offcanvas" aria-label="Close"
+					style="border-top-left-radius: 1rem;" routerLink="/" routerLinkActive="bg-custom-selected"
+					[routerLinkActiveOptions]={exact:true} ariaCurrentWhenActive="page">
+					<div class="mt-2">
+						<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<g stroke-width="0" />
+							<g stroke-linecap="round" stroke-linejoin="round" />
+							<path fill-rule="evenodd" clip-rule="evenodd"
+								d="M13.106 22h-2.212c-3.447 0-5.17 0-6.345-1.012s-1.419-2.705-1.906-6.093l-.279-1.937c-.38-2.637-.57-3.956-.029-5.083s1.691-1.813 3.992-3.183l1.385-.825C9.8 2.622 10.846 2 12 2s2.199.622 4.288 1.867l1.385.825c2.3 1.37 3.451 2.056 3.992 3.183s.35 2.446-.03 5.083l-.278 1.937c-.487 3.388-.731 5.081-1.906 6.093S16.553 22 13.106 22m-4.708-6.447a.75.75 0 0 1 1.049-.156c.728.54 1.607.853 2.553.853s1.825-.313 2.553-.853a.75.75 0 1 1 .894 1.205A5.77 5.77 0 0 1 12 17.75a5.77 5.77 0 0 1-3.447-1.148.75.75 0 0 1-.155-1.049"
+								fill="#fff" />
+						</svg>
+					</div>
+					<div class="mt-2 mb-1 text-small">Home</div>
+				</div>
+			</div>
+			<div class="col-4 text-center">
+				<div class="bg-custom-shade p-2" data-bs-dismiss="offcanvas" aria-label="Close" routerLink="/projects"
+					routerLinkActive="bg-custom-selected" ariaCurrentWhenActive="page">
+					<div class="mt-2">
+						<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+							stroke="#fff">
+							<g stroke-width="0" />
+							<g stroke-linecap="round" stroke-linejoin="round" />
+							<path fill-rule="evenodd" clip-rule="evenodd"
+								d="M5.4 2h13.2A3.4 3.4 0 0 1 22 5.4v13.2a3.4 3.4 0 0 1-3.4 3.4H5.4A3.4 3.4 0 0 1 2 18.6V5.4A3.4 3.4 0 0 1 5.4 2ZM7 5a1 1 0 0 1 1 1v8a1 1 0 1 1-2 0V6a1 1 0 0 1 1-1Zm5 0a1 1 0 0 1 1 1v6a1 1 0 1 1-2 0V6a1 1 0 0 1 1-1Zm6 1a1 1 0 1 0-2 0v10a1 1 0 1 0 2 0z"
+								fill="#fff" />
+						</svg>
+					</div>
+					<div class="mt-2 mb-1 text-small">Projects</div>
+				</div>
+			</div>
+			<div class="col-4 text-center">
+				<div class="bg-custom-shade p-2" data-bs-dismiss="offcanvas" aria-label="Close"
+					style="border-top-right-radius: 1rem;" routerLink="/blog" routerLinkActive="bg-custom-selected"
+					ariaCurrentWhenActive="page">
+					<div class="mt-2">
+						<svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+							viewBox="-30.72 -30.72 573.44 573.44" xml:space="preserve" fill="#fff">
+							<g id="SVGRepo_bgCarrier" stroke-width="0" />
+							<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+							<g id="SVGRepo_iconCarrier">
+								<style>
+									.st0 {
+										fill: #fff
+									}
+								</style>
+								<path class="st0"
+									d="M421.073 221.719c-.578 11.719-9.469 26.188-23.797 40.094v183.25c-.016 4.719-1.875 8.719-5.016 11.844-3.156 3.063-7.25 4.875-12.063 4.906H81.558c-4.781-.031-8.891-1.844-12.047-4.906-3.141-3.125-4.984-7.125-5-11.844V152.219c.016-4.703 1.859-8.719 5-11.844 3.156-3.063 7.266-4.875 12.047-4.906h158.609c12.828-16.844 27.781-34.094 44.719-49.906.078-.094.141-.188.219-.281H81.558c-18.75-.016-35.984 7.531-48.25 19.594-12.328 12.063-20.016 28.938-20 47.344v292.844c-.016 18.406 7.672 35.313 20 47.344C45.573 504.469 62.808 512 81.558 512h298.641c18.781 0 36.016-7.531 48.281-19.594 12.297-12.031 20-28.938 19.984-47.344V203.469s-.125-.156-.328-.313c-7.766 6.657-16.813 13-27.063 18.563" />
+								<path class="st0"
+									d="M498.058 0S482.37 23.438 379.902 58.109c-104.485 35.36-168.798 179.204-168.798 179.204-15.484 29.469-76.688 151.906-76.688 151.906-16.859 31.625 14.031 50.313 32.156 17.656 34.734-62.688 57.156-119.969 109.969-121.594 77.047-2.375 129.734-69.656 113.156-66.531-21.813 9.5-69.906.719-41.578-3.656 68-5.453 109.906-56.563 96.25-60.031-24.109 9.281-46.594.469-51-2.188C513.386 138.281 498.058 0 498.058 0" />
+							</g>
+						</svg>
+					</div>
+					<div class="mt-2 mb-1 text-small">Blog</div>
+				</div>
+			</div>
+			<div class="col-4 text-center">
+				<div class="bg-custom-shade p-2" data-bs-dismiss="offcanvas" aria-label="Close" routerLink="/collection"
+					routerLinkActive="bg-custom-selected" ariaCurrentWhenActive="page">
+					<div class="mt-2">
+						<svg fill="#fff" width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+							stroke="#fff" stroke-width="0">
+							<g />
+							<g stroke-linecap="round" stroke-linejoin="round" />
+							<path
+								d="M3 20V10h5v11H4a1 1 0 0 1-1-1M21 4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v4h18Zm-1 17a1 1 0 0 0 1-1V10H10v11Z"
+								stroke="none" />
+						</svg>
+					</div>
+					<div class="mt-2 mb-1 text-small">Collection</div>
+				</div>
+			</div>
+			<div class="col-4 text-center">
+				<div class="bg-custom-shade p-2" data-bs-dismiss="offcanvas" aria-label="Close" routerLink="/posts"
+					routerLinkActive="bg-custom-selected" ariaCurrentWhenActive="page">
+					<div class="mt-2">
+						<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<g stroke-width="0" />
+							<g stroke-linecap="round" stroke-linejoin="round" />
+							<path
+								d="M8 8h.01M8 12h.01M16 12h.01M16 8h.01M16 16h.01M8 16h.01m-.81 4h9.6c1.12 0 1.68 0 2.108-.218a2 2 0 0 0 .874-.874C20 18.48 20 17.92 20 16.8V7.2c0-1.12 0-1.68-.218-2.108a2 2 0 0 0-.874-.874C18.48 4 17.92 4 16.8 4H7.2c-1.12 0-1.68 0-2.108.218a2 2 0 0 0-.874.874C4 5.52 4 6.08 4 7.2v9.6c0 1.12 0 1.68.218 2.108a2 2 0 0 0 .874.874C5.52 20 6.08 20 7.2 20"
+								stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+						</svg>
+					</div>
+					<div class="mt-2 mb-1 text-small">Posts</div>
+				</div>
+			</div>
+			<div class="col-4 text-center">
+				<div class="bg-custom-shade p-2" data-bs-dismiss="offcanvas" aria-label="Close" routerLink="/snippets"
+					routerLinkActive="bg-custom-selected" ariaCurrentWhenActive="page">
+					<div class="mt-2">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<g stroke-width="0" />
+							<g stroke-linecap="round" stroke-linejoin="round" stroke="#CCC" stroke-width="1.152" />
+							<path fill-rule="evenodd" clip-rule="evenodd"
+								d="M11.372.19c.38-.253.875-.253 1.256 0L23.492 7.4c.317.21.508.565.508.946v7.308c0 .38-.19.736-.508.947l-10.864 7.21c-.38.252-.875.252-1.256 0L.508 16.6A1.14 1.14 0 0 1 0 15.654V8.346c0-.38.19-.736.508-.947zm-9.1 10.273v3.058l2.288-1.54zm4.337 2.878L3.18 15.648l7.684 5.1v-4.583zm6.527 2.824v4.582l7.684-5.1-3.43-2.306zm6.304-4.183 2.288 1.54v-3.06zm1.37-3.636-3.41 2.263-4.264-2.868V3.253zm-9.946-5.093V7.74l-4.263 2.868L3.19 8.346zM12 9.715l-3.35 2.254L12 14.192l3.35-2.223z"
+								fill="#fff" />
+						</svg>
+					</div>
+					<div class="mt-2 mb-1 text-small">Snippets</div>
+				</div>
+			</div>
+			<div class="col-4 text-center">
+				<div class="bg-custom-shade p-2" data-bs-dismiss="offcanvas" aria-label="Close"
+					style="border-bottom-left-radius: 1rem;">
+					<div class="mt-2">
+						<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+							stroke="#fff">
+							<g stroke-width="0" />
+							<g stroke-linecap="round" stroke-linejoin="round" />
+							<path
+								d="M20 12.5V6.8c0-1.68 0-2.52-.327-3.162a3 3 0 0 0-1.311-1.311C17.72 2 16.88 2 15.2 2H8.8c-1.68 0-2.52 0-3.162.327a3 3 0 0 0-1.311 1.311C4 4.28 4 5.12 4 6.8v10.4c0 1.68 0 2.52.327 3.162a3 3 0 0 0 1.311 1.311C6.28 22 7.12 22 8.8 22h3.7M14 11H8m2 4H8m8-8H8m7 12 3 3m0 0 3-3m-3 3v-6"
+								stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+						</svg>
+					</div>
+					<div class="mt-2 mb-1 text-small">Resume</div>
+				</div>
+			</div>
+			<div class="col-4 text-center">
+				<div class="bg-custom-shade p-2" data-bs-dismiss="offcanvas" aria-label="Close" routerLink="/playlist"
+					routerLinkActive="bg-custom-selected" ariaCurrentWhenActive="page">
+					<div class="mt-2">
+						<svg fill="#fff" width="22" height="22" viewBox="0 0 24 24" data-name="Flat Color"
+							xmlns="http://www.w3.org/2000/svg" class="icon flat-color">
+							<g stroke-width="0" />
+							<g stroke-linecap="round" stroke-linejoin="round" />
+							<path
+								d="M17 11a1 1 0 0 1 1-1h3a1 1 0 0 1 0 2h-3a1 1 0 0 1-1-1m4 7h-7a1 1 0 0 0 0 2h7a1 1 0 0 0 0-2m0-4h-7a1 1 0 0 0 0 2h7a1 1 0 0 0 0-2"
+								style="fill:#fff" />
+							<path
+								d="M13.59 5.19a22.3 22.3 0 0 1-2.82-2.83 1 1 0 0 0-1.11-.3A1 1 0 0 0 9 3v10.76a4.5 4.5 0 1 0 2 3.74V5.56a13 13 0 0 0 1.41 1.23 1.89 1.89 0 0 1 .69 2.76 1 1 0 0 0 1.8.88 3.86 3.86 0 0 0-1.31-5.24"
+								style="fill:#fff" />
+						</svg>
+					</div>
+					<div class="mt-2 mb-1 text-small">Playlist</div>
+				</div>
+			</div>
+			<div class="col-4 text-center">
+				<div class="bg-custom-shade p-2" data-bs-dismiss="offcanvas" aria-label="Close"
+					style="border-bottom-right-radius: 1rem;" (click)="toggleFullScreen()">
+					<div class="mt-2">
+						@if(isFullScreen()){
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<g stroke-width="0" />
+							<g stroke-linecap="round" stroke-linejoin="round" />
+							<path
+								d="M7 9a2 2 0 0 0 2-2V3a1 1 0 0 0-2 0v4H3a1 1 0 0 0 0 2zm10 0a2 2 0 0 1-2-2V3a1 1 0 1 1 2 0v4h4a1 1 0 1 1 0 2zm0 6a2 2 0 0 0-2 2v4a1 1 0 1 0 2 0v-4h4a1 1 0 1 0 0-2zm-8 2a2 2 0 0 0-2-2H3a1 1 0 1 0 0 2h4v4a1 1 0 1 0 2 0z"
+								fill="#fff" />
+						</svg>
+						}
+						@else {
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+							stroke="#fff" stroke-width=".264">
+							<g stroke-width="0" />
+							<g stroke-linecap="round" stroke-linejoin="round" />
+							<path
+								d="M4 2a2 2 0 0 0-2 2v4a1 1 0 0 0 2 0V4h4a1 1 0 0 0 0-2zm16 0a2 2 0 0 1 2 2v4a1 1 0 1 1-2 0V4h-4a1 1 0 1 1 0-2zm0 20a2 2 0 0 0 2-2v-4a1 1 0 1 0-2 0v4h-4a1 1 0 1 0 0 2zM2 20a2 2 0 0 0 2 2h4a1 1 0 1 0 0-2H4v-4a1 1 0 1 0-2 0z"
+								fill="#fff" />
+						</svg>
+						}
+					</div>
+					<div class="mt-2 mb-1 text-small">
+						@if(isFullScreen()){
+						Standard
+						}
+						@else{
+						Fullscreen
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+		<audio #audioPlayer class="d-none" [src]="playerState.currentSong().fileName" preload="none"
+			(ended)="onAudioEnded();playerState.canPlayAudio.set(false)" (pause)="onAudioPaused()"
+			(play)="onAudioPlayed()" (canplay)="playerState.canPlayAudio.set(true)">
+		</audio>
+		@if(playerState.songs().length>0){
+		<div class="card rounded-4 mt-4" style="height: 10rem;">
+			<img [src]="playerState.currentSong().thumbnail" class="card-img rounded-3 blur-filter my-auto"
+				style="height: 8.3rem;" alt="Music" loading="lazy" />
+			<div class="card-img-overlay">
+				<div class="row mx-0">
+					<div class="col-3 ps-0">
+						<img [src]="playerState.currentSong().thumbnail" class="img-fluid rounded-4" alt="..."
+							loading="lazy">
+					</div>
+					<div class="col ps-1">
+						<div class="font-w-500">{{playerState.currentSong().songName}}</div>
+						<div class="text-small">{{playerState.currentSong().artist}}</div>
+					</div>
+					<div class="col-auto p-0">
+						<button class="btn btn-transparent p-0 border-0 shadow-none"
+							(click)="openLink(playerState.currentSong().yt_link)">
+							<svg width="22" height="22" viewBox="0 -3 20 20" xmlns="http://www.w3.org/2000/svg"
+								fill="#fff" stroke="#fff">
+								<g stroke-width="0" />
+								<g stroke-linecap="round" stroke-linejoin="round" />
+								<path
+									d="M7.988 9.586V3.974c1.993.938 3.536 1.843 5.36 2.82-1.505.834-3.367 1.77-5.36 2.792m11.103-8.403c-.344-.453-.93-.805-1.553-.922-1.833-.348-13.267-.349-15.099 0q-.752.142-1.328.673C-.5 2.429.005 10.452.393 11.751c.164.562.375.968.64 1.235.343.352.812.594 1.351.703 1.51.312 9.284.486 15.122.047a2.6 2.6 0 0 0 1.39-.712c1.49-1.49 1.388-9.962.195-11.841"
+									fill-rule="evenodd" stroke="none" />
+							</svg>
+						</button>
+					</div>
+				</div>
+				<div class="d-flex align-items-center my-1">
+					<input #progressBar type="range" class="w-100" min="0"
+						[max]="audioPlayer!=undefined?audioPlayer?.duration || 0: 0" step="0.001"
+						(input)="seekAudio($event)" (mousedown)="onSeekStart()" (mouseup)="onSeekEnd()"
+						(touchstart)="onSeekStart()" (touchend)="onSeekEnd()">
+
+					<div class="ms-1 text-small time-display">
+						{{ (currentSongTime()/60) | number:'1.2-2' }}
+					</div>
+				</div>
+				<div class="d-flex justify-content-around pb-1 align-items-center">
+					@if(playerState.canPlayAudio()){
+					<button class="btn btn-transparent border-0 shadow-none"
+						(click)="playerState.canPlayAudio.set(false);previousSong()">
+						<svg width="19" height="19" viewBox="0 -2 12 12" xmlns="http://www.w3.org/2000/svg" fill="#fff">
+							<g stroke-width="0" />
+							<g stroke-linecap="round" stroke-linejoin="round" />
+							<path
+								d="M11.999.868v6.263c0 .714-1.145 1.122-1.781.694L5.999 5.14v1.991c0 .714-.573 1.122-1.209.694L.479 4.693c-.514-.347-.681-1.04-.167-1.387L4.79.176c.636-.43 1.209-.022 1.209.692v1.991L10.218.175c.636-.429 1.781-.02 1.781.693"
+								fill-rule="evenodd" />
+						</svg>
+					</button>
+					<button class="btn btn-transparent border-0 shadow-none">
+						@if(playerState.currentSong().playingSong){
+						<svg (click)="pauseSong()" fill="#fff" width="22" height="22" viewBox="0 0 32 32"
+							xmlns="http://www.w3.org/2000/svg" stroke="#fff" stroke-width="0">
+							<g />
+							<g stroke-linecap="round" stroke-linejoin="round" />
+							<path
+								d="M5.92 24.096q0 .832.576 1.408t1.44.608h4.032q.832 0 1.44-.608t.576-1.408V7.936q0-.832-.576-1.44t-1.44-.576H7.936q-.832 0-1.44.576t-.576 1.44zm12.096 0q0 .832.608 1.408t1.408.608h4.032q.832 0 1.44-.608t.576-1.408V7.936q0-.832-.576-1.44t-1.44-.576h-4.032q-.832 0-1.408.576t-.608 1.44z"
+								stroke="none" />
+						</svg>
+						}
+						@else {
+						<svg (click)="playSong()" width="19" height="19" viewBox="0 0 24 24" fill="none"
+							xmlns="http://www.w3.org/2000/svg">
+							<g stroke-width="0" />
+							<g stroke-linecap="round" stroke-linejoin="round" />
+							<path
+								d="M21.409 9.353a2.998 2.998 0 0 1 0 5.294L8.597 21.614C6.534 22.737 4 21.277 4 18.968V5.033c0-2.31 2.534-3.769 4.597-2.648z"
+								fill="#fff" />
+						</svg>
+						}
+					</button>
+					<button class="btn btn-transparent border-0 shadow-none"
+						(click)="playerState.canPlayAudio.set(false);nextSong()">
+						<svg width="19" height="19" viewBox="0 -2 12 12" xmlns="http://www.w3.org/2000/svg" fill="#fff">
+							<g stroke-width="0" />
+							<g stroke-linecap="round" stroke-linejoin="round" />
+							<path
+								d="m11.684 4.694-4.477 3.13C6.571 8.254 6 7.846 6 7.132V5.141L1.78 7.825c-.635.429-1.78.02-1.78-.693V.869C0 .155 1.145-.253 1.78.175L6 2.86V.869c0-.714.571-1.122 1.207-.694l4.309 3.132c.514.347.682 1.04.168 1.387"
+								fill-rule="evenodd" />
+						</svg>
+					</button>
+					}
+					@else {
+					<div class="px-1 py-2">
+						<div class="spinner-border spinner-border-sm" role="status">
+							<span class="visually-hidden">Loading...</span>
+						</div>
+					</div>
+					}
+				</div>
+			</div>
+		</div>
+		}
+
+	</div>
+</div>

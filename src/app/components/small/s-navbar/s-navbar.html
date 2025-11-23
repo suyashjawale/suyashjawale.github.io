@@ -1,0 +1,31 @@
+<div class="container-fluid py-2 border-bottom navbar-background fixed-top">
+	<div class="d-flex justify-content-between">
+		<div class="d-flex">
+			<img class="rounded-circle me-2" src="images/suyash.webp" width="44" height="44" alt="Banner Photo"
+				loading="lazy" />
+			<div class="d-flex flex-column">
+				<div class="avatar-name">
+					Suyash Jawale
+				</div>
+				<div class="d-flex align-items-center fade-in">
+					@if(musicPlayer.songs().length>0){
+					<div class="boxContainer d-flex justify-content-between me-2">
+						<div class="box" [ngClass]="{'box1': musicPlayer.canPlayAudio() && musicPlayer.currentSong().playingSong}"></div>
+						<div class="box" [ngClass]="{'box2': musicPlayer.canPlayAudio() && musicPlayer.currentSong().playingSong}"></div>
+						<div class="box" [ngClass]="{'box3': musicPlayer.canPlayAudio() && musicPlayer.currentSong().playingSong}"></div>
+						<div class="box" [ngClass]="{'box4': musicPlayer.canPlayAudio() && musicPlayer.currentSong().playingSong}"></div>
+						<div class="box" [ngClass]="{'box5': musicPlayer.canPlayAudio() && musicPlayer.currentSong().playingSong}"></div>
+					</div>
+					<div class="text-small">
+						{{musicPlayer.currentSong().songName}}
+					</div>
+					}
+				</div>
+			</div>
+		</div>
+		<button class="btn btn-transparent px-0 border-0 shadow-none" type="button" data-bs-toggle="offcanvas"
+			data-bs-target="#menu" aria-controls="menu" name="menu" aria-label="Open Sidebar Menu for other page links">
+			<svg fill="#fff" width="30" height="30" viewBox="0 0 64 64" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"><g stroke-width="0"/><g stroke-linecap="round" stroke-linejoin="round"/><path d="M21.86 18.73H9.18a2 2 0 0 1 0-4h12.68a2 2 0 0 1 0 4m32.96 0H34.88a2 2 0 0 1 0-4h19.94a2 2 0 0 1 0 4m0 15.27H9.18a2 2 0 0 1 0-4h45.64a2 2 0 0 1 0 4m0 15.27H30.07a2 2 0 0 1 0-4h24.75a2 2 0 0 1 0 4"/></svg>
+		</button>
+	</div>
+</div>

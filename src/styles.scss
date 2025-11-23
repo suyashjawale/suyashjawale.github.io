@@ -1,0 +1,46 @@
+@use '../node_modules/bootstrap/scss/bootstrap' as *;
+@use '@fontsource/poppins'; // Keep for CSS font import
+
+$form-range-thumb-width: 0.7rem;
+$form-range-track-height: 0.15rem;
+$form-range-thumb-bg: white;
+$form-range-track-bg: rgb(226, 226, 226);
+
+body {
+    font-family: 'Poppins', sans-serif !important;
+    background-color: #15202b !important;
+    color: rgb(255, 255, 255);
+
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+}
+
+.bg-custom {
+    background-color: #15202b !important;
+}
+
+.bg-custom-shade {
+    background-color: #233547 !important;
+    color: white !important;
+}
+
+.bg-custom-selected {
+    background-color: #344d68 !important;
+}
+
+.text-small {
+    font-size: small !important;
+}
+
+.text-x-small {
+    font-size: x-small !important;
+}
+
+.font-w-500 {
+    font-weight: 500 !important;
+}
+
+.top-marginal-height{
+    margin-top: 4.2rem;
+}
