@@ -1,7 +1,7 @@
 import { Component, effect, ElementRef, signal, ViewChild } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { StateService } from '../../../services/state-service';
-import { DecimalPipe } from '@angular/common';
+import { DecimalPipe, NgStyle } from '@angular/common';
 import { Highlights } from '../../../interfaces/Highlights';
 import { MusicPlayer } from '../../../services/music-player';
 import { HttpClient } from '@angular/common/http';
@@ -9,7 +9,7 @@ import { PhoneResponse } from '../../../interfaces/phoneResponse';
 
 @Component({
 	selector: 'app-s-sidebar',
-	imports: [RouterLink, RouterLinkActive, DecimalPipe],
+	imports: [RouterLink, RouterLinkActive, DecimalPipe, NgStyle],
 	templateUrl: './s-sidebar.html',
 	styleUrl: './s-sidebar.scss',
 })

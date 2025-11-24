@@ -7,7 +7,16 @@ import { HttpClient } from '@angular/common/http';
 })
 export class MusicPlayer {
 	songs = signal<Song[]>([]);
-
+	blankSong = signal<Song>({
+		artist:'',
+		fileName:'',
+		playingSong:false,
+		queueNumber:0,
+		rank:0,
+		songName:'',
+		thumbnail:'',
+		yt_link:''
+	});
 	// Index of the currently playing song
 	currentSongIdx = signal<number>(0);
 
@@ -15,7 +24,7 @@ export class MusicPlayer {
 	currentSong = computed(() => {
 		const list = this.songs();
 		const idx = this.currentSongIdx();
-		return list[idx] ?? null;
+		return list[idx] ?? this.blankSong;
 	});
 
 	// Reactive playing/paused state

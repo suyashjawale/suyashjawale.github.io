@@ -4,12 +4,14 @@
 		<div [class.highlight-animation]="isOpen()" (animationend)="animationDone()"
 			class="d-flex align-items-center gap-2" (click)="openLink(highLights()[currentHighlight()].link)">
 			@if(isOpen() && highLights().length>0){
-				@if(highLights()[currentHighlight()].hasImage){
-				<div style="min-width: 3.4rem;min-height: 3.4rem; height: 3.4rem;max-height: 3.4rem; width: 3.4rem; max-width: 3.4rem;" class="d-flex align-items-center">
-					<img [src]="highLights()[currentHighlight()].imageLink" class="img-fluid w-100 rounded" loading="lazy"/>
-				</div>
-				}
-				<div class="text-clamp-2 text-small">{{highLights()[currentHighlight()].content}}</div>
+			@if(highLights()[currentHighlight()].hasImage){
+			<div style="min-width: 3.4rem;min-height: 3.4rem; height: 3.4rem;max-height: 3.4rem; width: 3.4rem; max-width: 3.4rem;"
+				class="d-flex align-items-center">
+				<img [src]="highLights()[currentHighlight()].imageLink" class="img-fluid w-100 rounded"
+					loading="lazy" />
+			</div>
+			}
+			<div class="text-clamp-2 text-small">{{highLights()[currentHighlight()].content}}</div>
 			}
 		</div>
 
@@ -202,12 +204,9 @@
 				</div>
 			</div>
 		</div>
-		<audio #audioPlayer class="d-none" [src]="playerState.currentSong().fileName" preload="none"
-			(ended)="onAudioEnded();playerState.canPlayAudio.set(false)" (pause)="onAudioPaused()"
-			(play)="onAudioPlayed()" (canplay)="playerState.canPlayAudio.set(true)">
-		</audio>
-		@if(playerState.songs().length>0){
-		<div class="card rounded-4 mt-4" style="height: 10rem;">
+
+		<div class="card rounded-4 mt-4 fade-in" style="height: 10rem;"
+			[ngStyle]="{'visibility': playerState.songs().length>0 ? 'visible' : 'hidden'}">
 			<img [src]="playerState.currentSong().thumbnail" class="card-img rounded-3 blur-filter my-auto"
 				style="height: 8.3rem;" alt="Music" loading="lazy" />
 			<div class="card-img-overlay">
@@ -221,7 +220,7 @@
 						<div class="text-small">{{playerState.currentSong().artist}}</div>
 					</div>
 					<div class="col-auto p-0">
-						<button class="btn btn-transparent p-0 border-0 shadow-none"
+						<button aria-labelledby="openYoutubeLink" aria-label="openYoutubeLink" class="btn btn-transparent p-0 border-0 shadow-none"
 							(click)="openLink(playerState.currentSong().yt_link)">
 							<svg width="22" height="22" viewBox="0 -3 20 20" xmlns="http://www.w3.org/2000/svg"
 								fill="#fff" stroke="#fff">
@@ -235,7 +234,11 @@
 					</div>
 				</div>
 				<div class="d-flex align-items-center my-1">
-					<input #progressBar type="range" class="w-100" min="0"
+					<audio #audioPlayer class="d-none" [src]="playerState.currentSong().fileName" preload="none"
+						(ended)="onAudioEnded();playerState.canPlayAudio.set(false)" (pause)="onAudioPaused()"
+						(play)="onAudioPlayed()" (canplay)="playerState.canPlayAudio.set(true)">
+					</audio>
+					<input #progressBar type="range" class="w-100" min="0" aria-label="Progress Bar"
 						[max]="audioPlayer!=undefined?audioPlayer?.duration || 0: 0" step="0.001"
 						(input)="seekAudio($event)" (mousedown)="onSeekStart()" (mouseup)="onSeekEnd()"
 						(touchstart)="onSeekStart()" (touchend)="onSeekEnd()">
@@ -299,7 +302,5 @@
 				</div>
 			</div>
 		</div>
-		}
-
 	</div>
 </div>
