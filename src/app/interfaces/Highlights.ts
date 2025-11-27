@@ -4,5 +4,6 @@ export interface Highlights {
 	content : string,
 	hasImage : boolean,
 	link : string,
-	imageLink : string
+	imageLink : string,
+	rank : number
 }

@@ -2,16 +2,16 @@
 	<div class="d-flex justify-content-between align-items-center ps-3 gap-2 bg-custom-shade rounded-end-5 mt-3 mb-4 me-2"
 		style="height: 4rem; max-height: 4rem;">
 		<div [class.highlight-animation]="isOpen()" (animationend)="animationDone()"
-			class="d-flex align-items-center gap-2" (click)="openLink(highLights()[currentHighlight()].link)">
+			class="d-flex align-items-center gap-2" (click)="openLink(sortedHighLights()[currentHighlight()].link)">
 			@if(isOpen() && highLights().length>0){
-			@if(highLights()[currentHighlight()].hasImage){
+			@if(sortedHighLights()[currentHighlight()].hasImage){
 			<div style="min-width: 3.4rem;min-height: 3.4rem; height: 3.4rem;max-height: 3.4rem; width: 3.4rem; max-width: 3.4rem;"
 				class="d-flex align-items-center">
-				<img [src]="highLights()[currentHighlight()].imageLink" class="img-fluid w-100 rounded"
+				<img [src]="sortedHighLights()[currentHighlight()].imageLink" class="img-fluid w-100 rounded"
 					loading="lazy" />
 			</div>
 			}
-			<div class="text-clamp-2 text-small">{{highLights()[currentHighlight()].content}}</div>
+			<div class="text-clamp-2 text-small">{{sortedHighLights()[currentHighlight()].content}}</div>
 			}
 		</div>
 

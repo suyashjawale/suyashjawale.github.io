@@ -1,4 +1,4 @@
-import { Component, effect, ElementRef, signal, ViewChild } from '@angular/core';
+import { Component, computed, effect, ElementRef, signal, ViewChild } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { StateService } from '../../../services/state-service';
 import { DecimalPipe, NgStyle } from '@angular/common';
@@ -28,6 +28,10 @@ export class SSidebar {
 
 	highLights = signal<Highlights[]>([]);
 
+	sortedHighLights = computed(() => {
+		return this.highLights().sort((a, b) => a.rank - b.rank);
+	});
+
 	constructor(public playerState: MusicPlayer, public RootScope: StateService, private http: HttpClient) {
 		effect(() => {
 			if (this.RootScope.interaction() != 0) {
@@ -43,7 +47,8 @@ export class SSidebar {
 					content: `🥳🎉🎂 Happy Birthday ${item.name}`,
 					imageLink: '',
 					hasImage: false,
-					link: ''
+					link: '',
+					rank: 1
 				}))]);
 			}
 		});
@@ -62,7 +67,8 @@ export class SSidebar {
 						content: rss.querySelector('title')?.textContent,
 						hasImage: true,
 						imageLink: rss.getElementsByTagName('media:content')[0].getAttribute("url"),
-						link: rss.querySelector('link')?.textContent
+						link: rss.querySelector('link')?.textContent,
+						rank: 2
 					}))])
 				}
 			});
@@ -80,7 +86,8 @@ export class SSidebar {
 						content: rss.querySelector('title')?.textContent,
 						hasImage: true,
 						imageLink: 'organization_logo/gnews.webp',
-						link: rss.querySelector('link')?.textContent
+						link: rss.querySelector('link')?.textContent,
+						rank: 3
 					}))])
 				}
 			});
@@ -94,7 +101,8 @@ export class SSidebar {
 					content: item.title,
 					hasImage: true,
 					imageLink: item.image_url,
-					link: item.url
+					link: item.url,
+					rank: 4
 				}))])
 			}
 		});
@@ -112,7 +120,8 @@ export class SSidebar {
 								content: `${data1.title} ${data1.text != undefined ? ' - ' + this.strip(data1.text) : ''}`,
 								hasImage: true,
 								imageLink: 'organization_logo/hacker_news.svg',
-								link: data1.url
+								link: data1.url,
+								rank: 5
 							}
 							])
 						}
