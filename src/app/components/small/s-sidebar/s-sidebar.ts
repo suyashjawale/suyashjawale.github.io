@@ -5,7 +5,6 @@ import { DecimalPipe, NgStyle } from '@angular/common';
 import { Highlights } from '../../../interfaces/Highlights';
 import { MusicPlayer } from '../../../services/music-player';
 import { HttpClient } from '@angular/common/http';
-import { PhoneResponse } from '../../../interfaces/phoneResponse';
 
 @Component({
 	selector: 'app-s-sidebar',
@@ -20,12 +19,13 @@ export class SSidebar {
 	isOpen = signal(false);
 	@ViewChild('audioPlayer') audioPlayerRef!: ElementRef<HTMLAudioElement>;
 	@ViewChild('progressBar') progressBarRef!: ElementRef<HTMLInputElement>;
+	@ViewChild('birthdayButton') birthdayButton!: ElementRef<HTMLInputElement>;
 
 	currentSongTime = signal<number>(0);
 
 	private progressAnimationFrame: number | null = null;
 	private isUserSeeking = false;
-
+	birthday = signal<any>([]);
 	highLights = signal<Highlights[]>([]);
 
 	sortedHighLights = computed(() => {
@@ -39,12 +39,12 @@ export class SSidebar {
 			}
 		});
 
-		this.http.get<any>('https://dashing-llama-639318.netlify.app/.netlify/functions/birthday').subscribe({
+		this.http.post<any>('https://dashing-llama-639318.netlify.app/.netlify/functions/getBirthdays', { "password": "" }).subscribe({
 			next: (data: any) => {
 				this.highLights.update((item) => [...item, ...data.map((item: any) => ({
-					uid: item.uid,
+					uid: '',
 					isBirthdayHighlight: true,
-					content: `🥳🎉🎂 Happy Birthday ${item.name}`,
+					content: `🥳🎉 ${item.message}`,
 					imageLink: '',
 					hasImage: false,
 					link: '',
@@ -93,42 +93,42 @@ export class SSidebar {
 			});
 
 
-		this.http.get<any>('https://api.spaceflightnewsapi.net/v4/articles/?limit=5').subscribe({
-			next: data => {
-				this.highLights.update((item) => [...item, ...data.results.map((item: any) => ({
-					uid: item.id,
-					isBirthdayHighlight: false,
-					content: item.title,
-					hasImage: true,
-					imageLink: item.image_url,
-					link: item.url,
-					rank: 4
-				}))])
-			}
-		});
+		// this.http.get<any>('https://api.spaceflightnewsapi.net/v4/articles/?limit=5').subscribe({
+		// 	next: data => {
+		// 		this.highLights.update((item) => [...item, ...data.results.map((item: any) => ({
+		// 			uid: item.id,
+		// 			isBirthdayHighlight: false,
+		// 			content: item.title,
+		// 			hasImage: true,
+		// 			imageLink: item.image_url,
+		// 			link: item.url,
+		// 			rank: 4
+		// 		}))])
+		// 	}
+		// });
 
-		this.http.get<any>('https://hacker-news.firebaseio.com/v0/topstories.json').subscribe({
-			next: data => {
+		// this.http.get<any>('https://hacker-news.firebaseio.com/v0/topstories.json').subscribe({
+		// 	next: data => {
 
-				for (let i = 0; i < 5; i++) {
-					this.http.get<any>(`https://hacker-news.firebaseio.com/v0/item/${data[i]}.json`).subscribe({
-						next: data1 => {
-							this.highLights.update((item) => [...item,
-							{
-								uid: data1.id,
-								isBirthdayHighlight: false,
-								content: `${data1.title} ${data1.text != undefined ? ' - ' + this.strip(data1.text) : ''}`,
-								hasImage: true,
-								imageLink: 'organization_logo/hacker_news.svg',
-								link: data1.url,
-								rank: 5
-							}
-							])
-						}
-					});
-				}
-			}
-		});
+		// 		for (let i = 0; i < 5; i++) {
+		// 			this.http.get<any>(`https://hacker-news.firebaseio.com/v0/item/${data[i]}.json`).subscribe({
+		// 				next: data1 => {
+		// 					this.highLights.update((item) => [...item,
+		// 					{
+		// 						uid: data1.id,
+		// 						isBirthdayHighlight: false,
+		// 						content: `${data1.title} ${data1.text != undefined ? ' - ' + this.strip(data1.text) : ''}`,
+		// 						hasImage: true,
+		// 						imageLink: 'organization_logo/hacker_news.svg',
+		// 						link: data1.url,
+		// 						rank: 5
+		// 					}
+		// 					])
+		// 				}
+		// 			});
+		// 		}
+		// 	}
+		// });
 	}
 
 	strip(html: string) {
@@ -144,17 +144,6 @@ export class SSidebar {
 		this.stopProgressLoop();
 	}
 
-	wishHappyBirthday(uid: string) {
-		let result = prompt("Please enter password before proceeding");
-		this.http.post<PhoneResponse>('https://dashing-llama-639318.netlify.app/.netlify/functions/getNumber', {
-			uid: uid,
-			password: result
-		}).subscribe({
-			next: (data) => {
-				window.open(`https://api.whatsapp.com/send?phone=${data.phone_number[0]}&text=${data.message}`)
-			}
-		});
-	}
 
 	private startProgressLoop() {
 		const update = () => {
@@ -221,7 +210,6 @@ export class SSidebar {
 		}
 	}
 
-
 	toggleFullScreen() {
 		const element: any = document.documentElement;
 		if (this.isFullScreen()) {
@@ -262,6 +250,30 @@ export class SSidebar {
 
 	ngOnInit() {
 		this.isOpen.set(true);
+	}
+
+	openHighlight(highlight: Highlights) {
+		if (highlight.isBirthdayHighlight) {
+			let result = prompt("Please enter password before proceeding");
+			this.http.post<any>('https://dashing-llama-639318.netlify.app/.netlify/functions/getBirthdays', {
+				password: result
+			}).subscribe({
+				next: (data) => {
+					this.birthday.set(data);
+					this.birthdayButton.nativeElement.click();
+				},
+				error: err => {
+					alert("OOPs, something went wrong")
+				}
+			});
+		}
+		else {
+			this.openLink(highlight.link);
+		}
+	}
+
+	wishBirthday(message: string, mob: string) {
+		window.open(`https://api.whatsapp.com/send?phone=${mob}&text=${message}`)
 	}
 
 	openLink(link: string) {

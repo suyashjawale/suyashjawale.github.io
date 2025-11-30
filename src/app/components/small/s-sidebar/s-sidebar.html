@@ -2,7 +2,7 @@
 	<div class="d-flex justify-content-between align-items-center ps-3 gap-2 bg-custom-shade rounded-end-5 mt-3 mb-4 me-2"
 		style="height: 4rem; max-height: 4rem;">
 		<div [class.highlight-animation]="isOpen()" (animationend)="animationDone()"
-			class="d-flex align-items-center gap-2" (click)="openLink(sortedHighLights()[currentHighlight()].link)">
+			class="d-flex align-items-center gap-2" (click)="openHighlight(sortedHighLights()[currentHighlight()])">
 			@if(isOpen() && highLights().length>0){
 			@if(sortedHighLights()[currentHighlight()].hasImage){
 			<div style="min-width: 3.4rem;min-height: 3.4rem; height: 3.4rem;max-height: 3.4rem; width: 3.4rem; max-width: 3.4rem;"
@@ -220,7 +220,8 @@
 						<div class="text-small">{{playerState.currentSong().artist}}</div>
 					</div>
 					<div class="col-auto p-0">
-						<button aria-labelledby="openYoutubeLink" aria-label="openYoutubeLink" class="btn btn-transparent p-0 border-0 shadow-none"
+						<button aria-labelledby="openYoutubeLink" aria-label="openYoutubeLink"
+							class="btn btn-transparent p-0 border-0 shadow-none"
 							(click)="openLink(playerState.currentSong().yt_link)">
 							<svg width="22" height="22" viewBox="0 -3 20 20" xmlns="http://www.w3.org/2000/svg"
 								fill="#fff" stroke="#fff">
@@ -300,6 +301,88 @@
 					</div>
 					}
 				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+<button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#birthdayModal"
+	#birthdayButton></button>
+<div class="modal fade" id="birthdayModal" tabindex="-1" aria-labelledby="birthdayModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content bg-custom-shade">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="exampleModalLabel">Born Today</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				@for (item of birthday(); let i = $index; track i) {
+				<div class="font-w-500">
+					Name
+				</div>
+				<div class="text-small">
+					{{item.name}}
+				</div>
+				<div class="font-w-500 mt-2">
+					Message
+				</div>
+				<div class="text-small">
+					{{item.message}}
+				</div>
+				<div class="font-w-500 mt-2">
+					Met Destinantion
+				</div>
+				<div class="text-small">
+					{{item.met_destinantion}}
+				</div>
+
+				<div class="font-w-500 mt-2">
+					Met Year
+				</div>
+				<div class="text-small">
+					{{item.met_year}}
+				</div>
+
+				@for (phone of item.phone_no; track $index) {
+				<div class="input-group my-3">
+					<input type="text" class="form-control bg-custom border-0" placeholder="Mobile Number"
+						aria-label="Mobile Number" aria-describedby="mobile_number" disabled [value]="phone">
+					<button class="btn btn-transparent bg-custom" type="button" id="mobile_number" (click)="wishBirthday(item.message,phone)">
+						<svg width="20px" height="20px" viewBox="0 0 48 48" version="1.1"
+							xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+							fill="#000000">
+							<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+							<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+							<g id="SVGRepo_iconCarrier">
+								<title>Whatsapp-color</title>
+								<desc>Created with Sketch.</desc>
+								<defs> </defs>
+								<g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+									<g id="Color-" transform="translate(-700.000000, -360.000000)" fill="#67C15E">
+										<path
+											d="M723.993033,360 C710.762252,360 700,370.765287 700,383.999801 C700,389.248451 701.692661,394.116025 704.570026,398.066947 L701.579605,406.983798 L710.804449,404.035539 C714.598605,406.546975 719.126434,408 724.006967,408 C737.237748,408 748,397.234315 748,384.000199 C748,370.765685 737.237748,360.000398 724.006967,360.000398 L723.993033,360.000398 L723.993033,360 Z M717.29285,372.190836 C716.827488,371.07628 716.474784,371.034071 715.769774,371.005401 C715.529728,370.991464 715.262214,370.977527 714.96564,370.977527 C714.04845,370.977527 713.089462,371.245514 712.511043,371.838033 C711.806033,372.557577 710.056843,374.23638 710.056843,377.679202 C710.056843,381.122023 712.567571,384.451756 712.905944,384.917648 C713.258648,385.382743 717.800808,392.55031 724.853297,395.471492 C730.368379,397.757149 732.00491,397.545307 733.260074,397.27732 C735.093658,396.882308 737.393002,395.527239 737.971421,393.891043 C738.54984,392.25405 738.54984,390.857171 738.380255,390.560912 C738.211068,390.264652 737.745308,390.095816 737.040298,389.742615 C736.335288,389.389811 732.90737,387.696673 732.25849,387.470894 C731.623543,387.231179 731.017259,387.315995 730.537963,387.99333 C729.860819,388.938653 729.198006,389.89831 728.661785,390.476494 C728.238619,390.928051 727.547144,390.984595 726.969123,390.744481 C726.193254,390.420348 724.021298,389.657798 721.340985,387.273388 C719.267356,385.42535 717.856938,383.125756 717.448104,382.434484 C717.038871,381.729275 717.405907,381.319529 717.729948,380.938852 C718.082653,380.501232 718.421026,380.191036 718.77373,379.781688 C719.126434,379.372738 719.323884,379.160897 719.549599,378.681068 C719.789645,378.215575 719.62006,377.735746 719.450874,377.382942 C719.281687,377.030139 717.871269,373.587317 717.29285,372.190836 Z"
+											id="Whatsapp"> </path>
+									</g>
+								</g>
+							</g>
+						</svg>
+					</button>
+				</div>
+				}
+
+				@for (link of item.social_media; track $index) {
+				<div (click)="openLink(link)" class="bg-custom mb-2 p-2 rounded">
+					{{link}}
+				</div>
+				}
+
+				@if(i!=(birthday.length-1)){
+				<hr />
+				}
+
+				}
 			</div>
 		</div>
 	</div>
