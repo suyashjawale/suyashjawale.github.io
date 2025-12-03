@@ -15,24 +15,39 @@ import { techstack_data } from '../../../data/techstack_data';
 	styleUrl: './s-home.scss'
 })
 export class SHome {
-	switchAgeTab = signal<boolean>(false);
+
 	organizations = signal<organization[]>(experience_data);
 	college = signal<organization[]>(college_data);
 	tech_stack = signal<TechStack[]>(techstack_data);
+
 	age = signal<number[]>([0, 0, 0]);
+	relationship = signal<number[]>([0, 0, 0]);
+	remaining_time = signal<number[]>([0, 0, 0]);
+	timeline = signal<number>(0);
 
 	ngOnInit() {
 		this.age.set(this.calculateDateDifference(new Date("1999-08-03"), new Date()));
+		this.relationship.set(this.calculateDateDifference(new Date("2023-10-14"), new Date()));
+		this.remaining_time.set(this.calculateDateDifference(new Date(), new Date("2029-08-03")));
 	}
 
-	getAge() {
-		return `${this.age()[0]} Years ${this.age()[1]} Months ${this.age()[2]} Days`;
+	getDateString(variable: number[]) {
+		return `${variable[0]} Years ${variable[1]} Months ${variable[2]} Days`;
 	}
 
 	getExperience(date1: Date, date2: Date | string) {
 		let date3 = new Date();
 		let exp = this.calculateDateDifference(date1, date2 == 'Present' ? date3 : date2 as Date)
 		return `${date1.toLocaleString('default', { month: 'short' })} ${date1.getFullYear()}  -  ${date2 == "Present" ? "Present" : date2.toLocaleString('default', { month: 'short' }) + " " + (date2 as Date).getFullYear()}  •  ${exp[0]} yrs ${exp[1]} mos`;
+	}
+
+	updateTimeline(){
+		this.timeline.update(data =>{
+			data = data+1;
+			if(data==4)
+				data = 0;
+			return data;
+		})
 	}
 
 	calculateDateDifference(date1: Date, date2: Date) {

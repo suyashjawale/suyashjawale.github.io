@@ -119,3 +119,20 @@ input[type="range"] { display: block; }
         opacity: 1;
     }
 }
+
+.alert-item {
+    align-items: flex-start;
+}
+
+/* Very important: prevents text from pushing outside */
+.alert-text {
+    min-width: 0;
+}
+
+/* Allow image to stay full size but wrap when needed */
+.alert-img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* prevents flex shrinking issues */
+    object-fit: contain; /* preserves size */
+}

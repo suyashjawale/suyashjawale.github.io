@@ -1,14 +1,14 @@
 import { Component, computed, effect, ElementRef, signal, ViewChild } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { StateService } from '../../../services/state-service';
-import { DecimalPipe, NgStyle } from '@angular/common';
+import { DecimalPipe, NgStyle, NgClass } from '@angular/common';
 import { Highlights } from '../../../interfaces/Highlights';
 import { MusicPlayer } from '../../../services/music-player';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
 	selector: 'app-s-sidebar',
-	imports: [RouterLink, RouterLinkActive, DecimalPipe, NgStyle],
+	imports: [RouterLink, RouterLinkActive, DecimalPipe, NgStyle, NgClass],
 	templateUrl: './s-sidebar.html',
 	styleUrl: './s-sidebar.scss',
 })
@@ -23,14 +23,16 @@ export class SSidebar {
 
 	currentSongTime = signal<number>(0);
 
-	private progressAnimationFrame: number | null = null;
-	private isUserSeeking = false;
-	birthday = signal<any>([]);
 	highLights = signal<Highlights[]>([]);
 
 	sortedHighLights = computed(() => {
 		return this.highLights().sort((a, b) => a.rank - b.rank);
 	});
+
+	private progressAnimationFrame: number | null = null;
+	private isUserSeeking = false;
+	birthday = signal<any>([]);
+
 
 	constructor(public playerState: MusicPlayer, public RootScope: StateService, private http: HttpClient) {
 		effect(() => {
@@ -38,7 +40,15 @@ export class SSidebar {
 				this.playSong();
 			}
 		});
+	}
 
+	strip(html: string) {
+		let doc = new DOMParser().parseFromString(html, 'text/html');
+		return doc.body.textContent || "";
+	}
+
+	ngOnInit() {
+		this.isOpen.set(true);
 		this.http.post<any>('https://dashing-llama-639318.netlify.app/.netlify/functions/getBirthdays', { "password": "" }).subscribe({
 			next: (data: any) => {
 				this.highLights.update((item) => [...item, ...data.map((item: any) => ({
@@ -68,7 +78,8 @@ export class SSidebar {
 						hasImage: true,
 						imageLink: rss.getElementsByTagName('media:content')[0].getAttribute("url"),
 						link: rss.querySelector('link')?.textContent,
-						rank: 2
+						rank: 2,
+						w: 0
 					}))])
 				}
 			});
@@ -87,53 +98,50 @@ export class SSidebar {
 						hasImage: true,
 						imageLink: 'organization_logo/gnews.webp',
 						link: rss.querySelector('link')?.textContent,
-						rank: 3
+						rank: 3,
+						w: 0
 					}))])
 				}
 			});
 
 
-		// this.http.get<any>('https://api.spaceflightnewsapi.net/v4/articles/?limit=5').subscribe({
-		// 	next: data => {
-		// 		this.highLights.update((item) => [...item, ...data.results.map((item: any) => ({
-		// 			uid: item.id,
-		// 			isBirthdayHighlight: false,
-		// 			content: item.title,
-		// 			hasImage: true,
-		// 			imageLink: item.image_url,
-		// 			link: item.url,
-		// 			rank: 4
-		// 		}))])
-		// 	}
-		// });
+		this.http.get<any>('https://api.spaceflightnewsapi.net/v4/articles/?limit=5').subscribe({
+			next: data => {
+				this.highLights.update((item) => [...item, ...data.results.map((item: any) => ({
+					uid: item.id,
+					isBirthdayHighlight: false,
+					content: item.title,
+					hasImage: true,
+					imageLink: item.image_url,
+					link: item.url,
+					rank: 4,
+				}))])
+			}
+		});
 
-		// this.http.get<any>('https://hacker-news.firebaseio.com/v0/topstories.json').subscribe({
-		// 	next: data => {
+		this.http.get<any>('https://hacker-news.firebaseio.com/v0/topstories.json').subscribe({
+			next: data => {
 
-		// 		for (let i = 0; i < 5; i++) {
-		// 			this.http.get<any>(`https://hacker-news.firebaseio.com/v0/item/${data[i]}.json`).subscribe({
-		// 				next: data1 => {
-		// 					this.highLights.update((item) => [...item,
-		// 					{
-		// 						uid: data1.id,
-		// 						isBirthdayHighlight: false,
-		// 						content: `${data1.title} ${data1.text != undefined ? ' - ' + this.strip(data1.text) : ''}`,
-		// 						hasImage: true,
-		// 						imageLink: 'organization_logo/hacker_news.svg',
-		// 						link: data1.url,
-		// 						rank: 5
-		// 					}
-		// 					])
-		// 				}
-		// 			});
-		// 		}
-		// 	}
-		// });
-	}
-
-	strip(html: string) {
-		let doc = new DOMParser().parseFromString(html, 'text/html');
-		return doc.body.textContent || "";
+				for (let i = 0; i < 5; i++) {
+					this.http.get<any>(`https://hacker-news.firebaseio.com/v0/item/${data[i]}.json`).subscribe({
+						next: data1 => {
+							this.highLights.update((item) => [...item,
+							{
+								uid: data1.id,
+								isBirthdayHighlight: false,
+								content: `${data1.title} ${data1.text != undefined ? ' - ' + this.strip(data1.text) : ''}`,
+								hasImage: true,
+								imageLink: 'organization_logo/hacker_news.svg',
+								link: data1.url,
+								rank: 5,
+								w: 0
+							}
+							])
+						}
+					});
+				}
+			}
+		});
 	}
 
 	ngAfterViewInit() {
@@ -246,10 +254,6 @@ export class SSidebar {
 		setTimeout(() => {
 			this.isOpen.set(true);
 		}, 0); // Small delay to ensure the class is removed and re-added
-	}
-
-	ngOnInit() {
-		this.isOpen.set(true);
 	}
 
 	openHighlight(highlight: Highlights) {

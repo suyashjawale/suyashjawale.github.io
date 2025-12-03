@@ -1,5 +1,4 @@
-import { computed, Injectable, signal } from '@angular/core';
-import { Song } from '../interfaces/song';
+import { Injectable, signal } from '@angular/core';
 
 @Injectable({
 	providedIn: 'root'
