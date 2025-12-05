@@ -10,18 +10,25 @@ import { RouterOutlet } from '@angular/router';
 	styleUrl: './app.scss'
 })
 export class App {
-	dummy1 = signal<any>("");
-	dummy2 = signal<any>("");
+	data1 = signal<any>("")
 	constructor(private http: HttpClient) {
-		this.http.get("https://dashing-llama-639318.netlify.app/.netlify/functions/updates").subscribe({
-			next: data => {
-				this.dummy1.set(data);
-				this.http.get("https://dashing-llama-639318.netlify.app/.netlify/functions/updates").subscribe({
-					next: data1 => {
-						this.dummy2.set(data1);
-					}
-				})
-			}
-		})
+		const nav: any = navigator;
+		if (nav.userAgentData) {
+			nav.userAgentData.getHighEntropyValues([
+				"model",
+				"platform",
+				"platformVersion",
+				"uaFullVersion",
+				"architecture",
+				"bitness",
+				"mobile",
+			]).then((hints: any) => {
+				this.data1.set(hints);
+			});
+		} else {
+			console.log("Browser does NOT support userAgentData. Falling back to user-agent.");
+			console.log("UA:", navigator.userAgent);
+		}
 	}
+
 }
