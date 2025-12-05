@@ -34,11 +34,6 @@ export class MusicPlayer {
 	constructor(private http: HttpClient) {
 		this.http.get<Song[]>('https://dashing-llama-639318.netlify.app/.netlify/functions/fetchSongs').subscribe({
 			next: (data) => {
-				this.http.get("https://dashing-llama-639318.netlify.app/.netlify/functions/updates").subscribe({
-					next:data=>{
-						
-					}
-				})
 				this.songs.set(data.sort((a,b)=> a.rank-b.rank));
 			}
 		});
