@@ -38,15 +38,14 @@ export class App {
 
 	async ngOnInit() {
 		this.getClientHint().then((data) => {
-			const headers = new HttpHeaders({
-				"Sec-CH-UA-Model": data.model || null,
-				"Sec-CH-UA-Platform": data.platform || null,
-				"Sec-CH-UA-Platform-Version": data.platformVersion || null,
-				"Sec-CH-UA-Full-Version-List": data.uaFullVersion || null,
-				"Sec-CH-UA-Mobile": String(data.mobile)
-			});
-			this.http.get("https://dashing-llama-639318.netlify.app/.netlify/functions/updates",{ headers }).subscribe(res=>{
-				
+			this.http.post<any>("https://dashing-llama-639318.netlify.app/.netlify/functions/updates", {
+				"sec-ch-ua-model": data.model || null,
+				"sec-ch-ua-platform": data.platform || null,
+				"sec-ch-ua-platform-version": data.platformVersion || null,
+				"sec-ch-ua-full-version-list": data.uaFullVersion || null,
+				"sec-ch-ua-mobile": String(data.mobile) || null
+			}).subscribe(res => {
+
 			})
 		});
 	}
