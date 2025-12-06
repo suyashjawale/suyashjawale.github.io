@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
@@ -31,14 +31,24 @@ export class App {
 					resolve(hints);
 				});
 			}
+			else
+				resolve({});
 		});
 	}
 
 	async ngOnInit() {
-		// this.getClientHint().then((data)=>{
-		// 	this.http.post("")
-		// });
-		this.data1.set(await this.getClientHint())
+		this.getClientHint().then((data) => {
+			const headers = new HttpHeaders({
+				"Sec-CH-UA-Model": data.model || null,
+				"Sec-CH-UA-Platform": data.platform || null,
+				"Sec-CH-UA-Platform-Version": data.platformVersion || null,
+				"Sec-CH-UA-Full-Version-List": data.uaFullVersion || null,
+				"Sec-CH-UA-Mobile": String(data.mobile)
+			});
+			this.http.get("https://dashing-llama-639318.netlify.app/.netlify/functions/updates",{ headers }).subscribe(res=>{
+				
+			})
+		});
 	}
 
 
