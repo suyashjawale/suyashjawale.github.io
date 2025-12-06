@@ -10,18 +10,36 @@ import { RouterOutlet } from '@angular/router';
 	styleUrl: './app.scss'
 })
 export class App {
-	data1 = signal<any>("");
+	data1 = signal<any>({});
 
-	constructor(private http: HttpClient) {
+	constructor(private http: HttpClient) { }
+
+	getClientHint(): Promise<any> {
 		const nav: any = navigator;
-		if (nav.userAgentData) {
-			nav.userAgentData.getHighEntropyValues().then((hints: any) => {
-				this.data1.set(hints);
-			});
-		} else {
-			console.log("Browser does NOT support userAgentData. Falling back to user-agent.");
-			console.log("UA:", navigator.userAgent);
-		}
+
+		return new Promise((resolve) => {
+			if (nav.userAgentData) {
+				nav.userAgentData.getHighEntropyValues([
+					"model",
+					"platform",
+					"platformVersion",
+					"uaFullVersion",
+					"architecture",
+					"bitness",
+					"mobile",
+				]).then((hints: any) => {
+					resolve(hints);
+				});
+			}
+		});
 	}
+
+	async ngOnInit() {
+		// this.getClientHint().then((data)=>{
+		// 	this.http.post("")
+		// });
+		this.data1.set(await this.getClientHint())
+	}
+
 
 }
