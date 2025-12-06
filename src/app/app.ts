@@ -2,6 +2,7 @@ import { JsonPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { UAParser } from 'ua-parser-js';
 
 @Component({
 	selector: 'app-root',
@@ -10,25 +11,21 @@ import { RouterOutlet } from '@angular/router';
 	styleUrl: './app.scss'
 })
 export class App {
-	data1 = signal<any>("")
+	data1 = signal<any>("");
+
 	constructor(private http: HttpClient) {
-		const nav: any = navigator;
-		if (nav.userAgentData) {
-			nav.userAgentData.getHighEntropyValues([
-				"model",
-				"platform",
-				"platformVersion",
-				"uaFullVersion",
-				"architecture",
-				"bitness",
-				"mobile",
-			]).then((hints: any) => {
-				this.data1.set(hints);
-			});
-		} else {
-			console.log("Browser does NOT support userAgentData. Falling back to user-agent.");
-			console.log("UA:", navigator.userAgent);
-		}
+		const uap = new UAParser();
+		this.data1.set(uap.getResult());
+
+		// const nav: any = navigator;
+		// if (nav.userAgentData) {
+		// 	nav.userAgentData.getHighEntropyValues().then((hints: any) => {
+		// 		this.data1.set(hints);
+		// 	});
+		// } else {
+		// 	console.log("Browser does NOT support userAgentData. Falling back to user-agent.");
+		// 	console.log("UA:", navigator.userAgent);
+		// }
 	}
 
 }
