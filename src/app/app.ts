@@ -1,11 +1,10 @@
-import { JsonPipe } from '@angular/common';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
 	selector: 'app-root',
-	imports: [RouterOutlet, JsonPipe],
+	imports: [RouterOutlet],
 	templateUrl: './app.html',
 	styleUrl: './app.scss'
 })
