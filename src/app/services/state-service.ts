@@ -6,4 +6,6 @@ import { Injectable, signal } from '@angular/core';
 
 export class StateService {
 	interaction = signal<number>(1);
+	navHeight = signal<number>(0);
+	searchTab = signal<string>("");
 }

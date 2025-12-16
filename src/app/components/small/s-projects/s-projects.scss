@@ -1,0 +1,26 @@
+.project-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Displays up to 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.h-90{
+    height: 90% !important;
+}
+
+img {
+    opacity: 0;
+    transform: translateY(14px);
+}
+
+img.reveal {
+    animation: reveal 0.6s ease-out forwards;
+}
+
+@keyframes reveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

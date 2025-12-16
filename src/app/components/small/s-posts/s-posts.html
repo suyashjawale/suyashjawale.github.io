@@ -1,7 +1,46 @@
 <app-s-navbar />
-<div class="container-fluid d-flex justify-content-center align-items-center vh-100">
-    <div class="text-center">
-    <div>Coming Soon</div>
-    <div class="text-x-small text-muted">Development in progress</div>
+<div [ngStyle]="{'margin-top': stateService.navHeight()+38+'px'}" class="container-fluid">
+
+    @for (post of posts(); track $index) {
+    <div class="mb-3">
+        @if(post.imageLink!=""){
+        <div class="position-relative">
+            <div class="position-absolute z-1 d-flex justify-content-between w-100 align-items-center">
+                <div class="text-x-small font-w-500 blur-background rounded px-2 py-1 ms-2">
+                    Utah, Switzerland
+                </div>
+                <button class="btn border-0 shadow-none">
+                    <svg fill="#fff" width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                        stroke="#fff" stroke-width="0">
+                        <g />
+                        <g stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M3 20V10h5v11H4a1 1 0 0 1-1-1M21 4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v4h18Zm-1 17a1 1 0 0 0 1-1V10H10v11Z"
+                            stroke="none" />
+                    </svg>
+                </button>
+            </div>
+            <img [src]="post.imageLink" class="img-fluid rounded-top-4 z-0" loading="lazy" [ngStyle]="post.imgClip" #img
+                (load)="applyClip(img, post, 'img')" />
+            <div class="bg-white position-absolute top-50 h-50 w-100 z-n1">a</div>
+        </div>
+        }
+
+        <div class="bg-white text-dark px-3" [ngClass]="{'pt-4 rounded-top-4':post.imageLink==''}" #contentDiv
+            [ngStyle]="post.divClip" style="margin-top: -2px;">
+            <div class="font-w-500">
+                {{post.title}}
+            </div>
+            <div class="text-small">
+                {{post.body}}
+            </div>
+            <div class="text-x-small text-end" style="padding-bottom: 2.8rem;">
+                November 10, 2025 6:39:32 AM
+            </div>
+        </div>
+
     </div>
+    }
+
+
 </div>

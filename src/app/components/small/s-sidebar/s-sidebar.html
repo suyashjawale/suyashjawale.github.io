@@ -314,16 +314,17 @@
 		</div>
 
 
-		<div class="collapse mt-3 bg-custom-shade rounded rounded-4 py-3 position-relative" id="alertsSidebar">
+		<div class="collapse mt-3 bg-custom-shade rounded rounded-2 py-3 position-relative" id="alertsSidebar">
 			<div class="overflow-y-auto" style="max-height: 16rem;">
 				@for (item of sortedHighLights(); let i= $index; track i) {
 				<div [ngClass]="{'border-bottom': i!=(sortedHighLights().length-1)}" (click)="openHighlight(item)">
-					<div class="d-flex gap-3 px-3"
+					<div class="d-flex column-gap-3 row-gap-2 px-3"
 						[ngClass]="{'py-3': i!=0 && i!=(sortedHighLights().length-1), 'pb-3': i==0, 'pt-3 pb-1': i==(sortedHighLights().length-1), 'flex-wrap-reverse': item.w > 150, 'justify-content-between': item.w < 150}">
 						<div class="text-small">
 							{{item.content}}
 						</div>
-						<img [src]="item.imageLink" class="img-fluid rounded-4"
+
+						<img loading="lazy" [src]="item.imageLink" class="img-fluid rounded-2 align-self-start"
 							(load)="item.w = $any($event.target).naturalWidth"
 							(error)="item.imageLink = 'placeholder.webp'" />
 					</div>

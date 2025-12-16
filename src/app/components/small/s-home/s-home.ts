@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { SNavbar } from "../s-navbar/s-navbar";
 import { NgClass, NgStyle } from '@angular/common';
 import { organization } from '../../../interfaces/organization';
@@ -7,6 +7,7 @@ import { TechStack } from '../../../interfaces/tech-stack';
 import { experience_data } from '../../../data/experience_data';
 import { college_data } from '../../../data/education_data';
 import { techstack_data } from '../../../data/techstack_data';
+import { StateService } from '../../../services/state-service';
 
 @Component({
 	selector: 'app-s-home',
@@ -15,7 +16,7 @@ import { techstack_data } from '../../../data/techstack_data';
 	styleUrl: './s-home.scss'
 })
 export class SHome {
-
+	stateService = inject(StateService);
 	organizations = signal<organization[]>(experience_data);
 	college = signal<organization[]>(college_data);
 	tech_stack = signal<TechStack[]>(techstack_data);

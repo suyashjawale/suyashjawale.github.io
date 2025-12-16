@@ -1,7 +1,10 @@
 <app-s-navbar />
-<div class="container-fluid d-flex justify-content-center align-items-center vh-100">
-    <div class="text-center">
-    <div>Coming Soon</div>
-    <div class="text-x-small text-muted">Development in progress</div>
+<div [ngStyle]="{'margin-top': stateService.navHeight()+38+'px'}" class="container-fluid">
+    <div class="masonry pb-3">
+        @for (item of [].constructor(19); let i = $index; track i) {
+        <div class="item">
+            <img [src]="i+'.jpg'" class="img-fluid rounded-2 w-100 d-block" loading="lazy" (load)="onImgLoad($event)"/>
+        </div>
+        }
     </div>
 </div>

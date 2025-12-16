@@ -106,3 +106,11 @@
         opacity: 1;
     }
 }
+
+.song-name {
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* Displays up to 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
