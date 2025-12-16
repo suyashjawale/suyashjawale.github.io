@@ -36,17 +36,17 @@ export class App {
 	}
 
 	async ngOnInit() {
-		// this.getClientHint().then((data) => {
-		// 	this.http.post<any>("https://dashing-llama-639318.netlify.app/.netlify/functions/updates", {
-		// 		"sec-ch-ua-model": data.model || null,
-		// 		"sec-ch-ua-platform": data.platform || null,
-		// 		"sec-ch-ua-platform-version": data.platformVersion || null,
-		// 		"sec-ch-ua-full-version-list": data.uaFullVersion || null,
-		// 		"sec-ch-ua-mobile": String(data.mobile) || null
-		// 	}).subscribe(res => {
+		this.getClientHint().then((data) => {
+			this.http.post<any>("https://dashing-llama-639318.netlify.app/.netlify/functions/updates", {
+				"sec-ch-ua-model": data.model || null,
+				"sec-ch-ua-platform": data.platform || null,
+				"sec-ch-ua-platform-version": data.platformVersion || null,
+				"sec-ch-ua-full-version-list": data.uaFullVersion || null,
+				"sec-ch-ua-mobile": String(data.mobile) || null
+			}).subscribe(res => {
 
-		// 	})
-		// });
+			})
+		});
 	}
 
 
