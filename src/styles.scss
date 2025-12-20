@@ -14,6 +14,14 @@ body {
     &::-webkit-scrollbar {
         width: 0;
     }
+
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+
 }
 
 .bg-custom {
@@ -38,10 +46,26 @@ body {
 }
 
 .text-xx-small {
-    font-size: xx-small !important;
+    font-size: 8px !important;
 }
 
 
 .font-w-500 {
     font-weight: 500 !important;
+}
+
+.glideUp {
+    opacity: 0;
+    transform: translateY(14px);
+}
+
+.reveal {
+    animation: reveal 0.45s ease-out forwards;
+}
+
+@keyframes reveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

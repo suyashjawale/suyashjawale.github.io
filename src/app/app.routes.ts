@@ -70,6 +70,10 @@ export function getRoutes(): Routes {
                     loadComponent: () => import('./components/small/s-projects/s-projects').then(mod => mod.SProjects),
                 },
                 {
+                    path: 'project/:name',
+                    loadComponent: () => import('./components/small/s-project/s-project').then(mod => mod.SProject),
+                },
+                {
                     path: 'snippets',
                     loadComponent: () => import('./components/small/s-snippets/s-snippets').then(mod => mod.SSnippets),
                 },
@@ -84,6 +88,10 @@ export function getRoutes(): Routes {
                 {
                     path: 'search',
                     loadComponent: () => import('./components/small/s-search/s-search').then(mod => mod.SSearch),
+                },
+                {
+                    path: 'collection/:name',
+                    loadComponent: () => import('./components/small/collection-item/collection-item').then(mod => mod.CollectionItem)
                 }
             ]
         }

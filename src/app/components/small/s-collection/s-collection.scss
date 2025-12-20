@@ -7,19 +7,3 @@
     break-inside: avoid;
     margin-bottom: 4px;
 }
-
-img {
-    opacity: 0;
-    transform: translateY(14px);
-}
-
-img.reveal {
-    animation: reveal 0.45s ease-out forwards;
-}
-
-@keyframes reveal {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}

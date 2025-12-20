@@ -4,19 +4,3 @@
   background-color: rgba(255, 255, 255, 0.2);
   transform: translate3d(0, 0, 0);
 }
-
-img {
-    opacity: 0;
-    transform: translateY(14px);
-}
-
-img.reveal {
-    animation: reveal 0.4s ease-out forwards;
-}
-
-@keyframes reveal {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}

@@ -1,1 +1,0 @@
-import{Ha as n,bb as p,cb as s,qb as i}from"./chunk-N7D53LVZ.js";var o=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=n({type:t,selectors:[["app-l-snippets"]],decls:2,vars:0,template:function(e,l){e&1&&(p(0,"p"),i(1,"l-snippets works!"),s())},encapsulation:2})};export{o as LSnippets};

@@ -2,8 +2,8 @@
 <div [ngStyle]="{'margin-top': stateService.navHeight()+38+'px'}">
     <div class="p-3 fixed-bottom text-end">
         <button type="button" class="bg-custom-shade shadow-none border-0 rounded-circle"
-            style="min-width: 3.2rem; min-height: 3.2rem;max-width: 3.2rem; max-height: 3.2rem;" data-bs-toggle="offcanvas"
-			data-bs-target="#projectFilter" aria-controls="projectFilter">
+            style="min-width: 3.2rem; min-height: 3.2rem;max-width: 3.2rem; max-height: 3.2rem;"
+            data-bs-toggle="offcanvas" data-bs-target="#projectFilter" aria-controls="projectFilter">
             <svg width="23" height="23" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -16,20 +16,42 @@
         </button>
     </div>
 
-    @for (item of project_data; track $index) {
+    @for (item of projectData; track $index) {
 
+    @if(item.show){
     <div class="ratio ratio-16x9">
-        @if(item.show){
         <iframe src="https://www.youtube.com/embed/oM_OFNmkt5A?si=gFNPFN1aqP95sDOS" title="YouTube video player"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        }
-        @else {
-        <img src="l7hGtIzGRRM-HD.jpg" loading="lazy" class="img-fluid" (click)="item.show=!item.show" (load)="onImgLoad($event)"/>
-        }
     </div>
-    <div class="p-3 pt-2 mb-3">
+    }
+    @else {
+    <div class="position-relative">
+        <div class="position-absolute z-1 end-0 d-flex gap-2 m-2">
+            @for (stack of item.tech_stack; let i = $index; track i) {
+                <div class="px-2 py-1 bg-white rounded-1 text-xx-small text-dark font-w-500">{{stack}}</div>
+            }
+        </div>
+        <div class="px-2 py-1 bg-white rounded-1 text-xx-small text-dark mx-2 position-absolute z-1 font-w-500" style="top: 88.1%;">{{item.type}}</div>
+        <div class="position-absolute z-1 start-50 top-50 translate-middle">
+            <button class="btn border-0 shadow-none" (click)="item.show=!item.show">
+                <svg width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path
+                            d="M21.4086 9.35258C23.5305 10.5065 23.5305 13.4935 21.4086 14.6474L8.59662 21.6145C6.53435 22.736 4 21.2763 4 18.9671L4 5.0329C4 2.72368 6.53435 1.26402 8.59661 2.38548L21.4086 9.35258Z"
+                            fill="#ffffff"></path>
+                    </g>
+                </svg>
+            </button>
+        </div>
+        <img src="l7hGtIzGRRM-HD.jpg" loading="lazy" class="img-fluid glideUp z-n1" (load)="onImgLoad($event)" />
+    </div>
+    }
+
+    <div class="p-3 pt-2 mb-3" (click)="openProject(item.routeName)">
         <div class="font-w-500 mb-1">
             {{item.project_name}}
         </div>
@@ -41,7 +63,7 @@
 
 </div>
 
-<div class="offcanvas offcanvas-bottom bg-custom rounded-top-4 h-90 text-small" tabindex="-1" id="projectFilter"
+<!-- <div class="offcanvas offcanvas-bottom bg-custom rounded-top-4 h-90 text-small" tabindex="-1" id="projectFilter"
     aria-labelledby="projectFilter">
     <div class="offcanvas-header p-3 border-bottom">
         <div class="font-w-500" id="offcanvasLabel">Filters</div>
@@ -98,4 +120,4 @@
             Show
         </button>
     </div>
-</div>
+</div> -->

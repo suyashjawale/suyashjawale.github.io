@@ -1,0 +1,1 @@
+import{Bb as i,Sa as l,mb as a,nb as s}from"./chunk-7UGOVQRB.js";var n=class e{static \u0275fac=function(t){return new(t||e)};static \u0275cmp=l({type:e,selectors:[["app-l-playlist"]],decls:2,vars:0,template:function(t,p){t&1&&(a(0,"p"),i(1,"l-playlist works!"),s())},encapsulation:2})};export{n as LPlaylist};

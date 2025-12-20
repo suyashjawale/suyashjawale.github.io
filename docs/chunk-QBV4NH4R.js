@@ -1,1 +1,0 @@
-import{Ha as t,bb as n,cb as m,qb as s}from"./chunk-N7D53LVZ.js";var a=class o{static \u0275fac=function(e){return new(e||o)};static \u0275cmp=t({type:o,selectors:[["app-demo3"]],decls:2,vars:0,template:function(e,p){e&1&&(n(0,"p"),s(1,"demo3 works!"),m())},encapsulation:2})};export{a as Demo3};

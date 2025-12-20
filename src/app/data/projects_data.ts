@@ -1,38 +1,20 @@
-export const project_data: any = [
-    {
-        project_name: "Current Stack",
-        project_description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        yt_link: "https://www.youtube.com/embed/zpOULjyy-n8?rel=0",
+export const project_data: any = {
+    "modelx-android-app": {
+        project_name: "ModelX",
+        project_description: "ModelX is an android app used to assign name to the products. A simple way to catalog products. ModelX uses the simple principle of CLICK & EDIT. Just click the product photo, enter the product name, and done. Check out the pic in the gallery.",
+        yt_link: "https://www.youtube.com/embed/nwiqzuOiMeM?si=z3lEUp7tC9ORTpGG",
         tech_stack: [
-            "Java 17",
-            "Angular 17 +"
-        ], show : false
-    },
-    {
-        project_name: "Current Stack",
-        project_description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        yt_link: "https://www.youtube.com/embed/zpOULjyy-n8?rel=0",
-        tech_stack: [
-            "Java 17",
-            "Angular 17 +"
-        ], show : false
-    },
-    {
-        project_name: "Current Stack",
-        project_description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        yt_link: "https://www.youtube.com/embed/zpOULjyy-n8?rel=0",
-        tech_stack: [
-            "Java 17",
-            "Angular 17 +"
-        ], show : false
-    },
-    {
-        project_name: "Current Stack",
-        project_description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        yt_link: "https://www.youtube.com/embed/zpOULjyy-n8?rel=0",
-        tech_stack: [
-            "Java 17",
-            "Angular 17 +"
-        ], show : false
+            "Kotlin"
+        ],
+        keywords: "modelx, android studio, camera, camerax, kotlin, tehcnology, android, android app",
+        show: false,
+        type: "Android App",
+        imgLink: "l7hGtIzGRRM-HD.jpg",
+        routeName: "modelx-android-app",
+        contentType: "Technology",
+        githubLink: "https://github.com/suyashjawale/ModelX",
+        projectLink: "https://play.google.com/store/apps/details?id=com.tech.modelx",
+        publishedDate: "2025-12-20",
+        modifiedDate: "2025-12-20"
     }
-];
+};

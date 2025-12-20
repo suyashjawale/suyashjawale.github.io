@@ -72,9 +72,6 @@ export class SPosts {
 		else {
 			post.divClip = style;
 		}
-
-		img.style.animationDelay = `${Math.random() * 120}ms`;
-		img.classList.add('reveal');
 	}
 
 }
