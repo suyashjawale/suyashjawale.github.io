@@ -1,7 +1,7 @@
 <app-s-navbar />
 <div [ngStyle]="{'margin-top': stateService.navHeight()+'px'}">
     <div class="ratio ratio-16x9">
-        <iframe [src]="sanitizer.bypassSecurityTrustResourceUrl(projectData().yt_link)" title="YouTube video player"
+        <iframe [src]="safeYoutubeUrl()" title="YouTube video player"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -31,7 +31,7 @@
                 <div class="font-w-500 mb-1">
                     Github
                 </div>
-                <button class="btn btn-outline-secondary text-white py-1 text-x-small rounded-1 px-3"><span
+                <button class="btn btn-outline-secondary text-white py-1 text-x-small rounded-1 px-3" (click)="openLink(projectData().githubLink)"><span
                         class="align-bottom">Open Codebase </span> <svg width="16" height="16" viewBox="0 0 24 24"
                         fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -47,7 +47,7 @@
                 <div class="font-w-500 mb-1 mt-3">
                     Project
                 </div>
-                <button class="btn btn-outline-secondary text-white py-1 text-x-small rounded-1 px-3"><span
+                <button class="btn btn-outline-secondary text-white py-1 text-x-small rounded-1 px-3" (click)="openLink(projectData().projectLink)"><span
                         class="align-bottom">Open Project </span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>

@@ -36,7 +36,8 @@
 			</div>
 
 			<div class="d-flex gap-3">
-				@if(this.router.url!='/'){
+				@if(this.router.url!='/' && ['/blogs', '/collection', '/projects', '/snippets', '/posts',
+		'/playlist'].includes(this.router.url)){
 				<button type="button" aria-controls="search" name="search" aria-label="Search"
 					class="btn btn-transparent pe-0 border-0 shadow-none" routerLink="/search"
 					(click)="stateService.searchTab.set(router.url)">

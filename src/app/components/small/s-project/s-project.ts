@@ -15,21 +15,24 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class SProject {
 
-	safeYoutubeUrl!: SafeResourceUrl;
-
 	constructor(public stateService: StateService, private route: ActivatedRoute, private title: Title, private meta: Meta, public sanitizer: DomSanitizer) { }
 
 	projectData = signal<any>({});
+	safeYoutubeUrl = signal<any>(null);
 
 	ngOnInit() {
 		this.route.paramMap.subscribe(params => {
 			const data = project_data[params.get('name') as string];
-			this.applySeo(data.project_name,data.project_description, data.keywords, "https://suyashjawale.github.io/project/"+data.routeName, data.imgLink, data.contentType,data.publishedDate, data.modifiedDate)
+			this.safeYoutubeUrl.set(
+				this.sanitizer.bypassSecurityTrustResourceUrl(data.yt_link)
+			);
+
+			this.applySeo(data.project_name, data.project_description, data.keywords, "https://suyashjawale.github.io/project/" + data.routeName, data.imgLink, data.contentType, data.publishedDate, data.modifiedDate)
 			this.projectData.set(data);
 		});
 	}
 
-	applySeo(title: string, description: string, keywords: string, itemLink: string, imageLink: string, contentType : string, publishedDate:Date, modifiedDate: Date) {
+	applySeo(title: string, description: string, keywords: string, itemLink: string, imageLink: string, contentType: string, publishedDate: Date, modifiedDate: Date) {
 		this.title.setTitle(title);
 
 		this.meta.updateTag({
@@ -130,4 +133,7 @@ export class SProject {
 		scripts.forEach(s => s.remove());
 	}
 
+	openLink(link:string){
+		window.open(link);
+	}
 }

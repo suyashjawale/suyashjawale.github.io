@@ -32,11 +32,11 @@ export class MusicPlayer {
 	canPlayAudio = signal<boolean>(false);
 
 	constructor(private http: HttpClient) {
-		// this.http.get<Song[]>('https://dashing-llama-639318.netlify.app/.netlify/functions/fetchSongs').subscribe({
-		// 	next: (data) => {
-		// 		this.songs.set(data.sort((a,b)=> a.rank-b.rank));
-		// 	}
-		// });
+		this.http.get<Song[]>('https://dashing-llama-639318.netlify.app/.netlify/functions/fetchSongs').subscribe({
+			next: (data) => {
+				this.songs.set(data.sort((a,b)=> a.rank-b.rank));
+			}
+		});
 	}
 
 	/** Play a song by index */
