@@ -1,4 +1,3 @@
-<app-s-navbar />
 <div [ngStyle]="{'margin-top': stateService.navHeight()+38+'px'}" class="container-fluid">
 
     @for (post of posts(); track $index) {
@@ -20,8 +19,8 @@
                     </svg>
                 </button>
             </div>
-            <img [src]="post.imageLink" class="img-fluid rounded-top-4 z-0" loading="lazy" [ngStyle]="post.imgClip" #img
-                (load)="applyClip(img, post, 'img')" />
+            <img [src]="post.imageLink" class="img-fluid rounded-top-4 z-0" loading="lazy" decoding="async"
+                [ngStyle]="post.imgClip" #img (load)="applyClip(img, post, 'img')" />
             <div class="bg-white position-absolute top-50 h-50 w-100 z-n1">a</div>
         </div>
         }

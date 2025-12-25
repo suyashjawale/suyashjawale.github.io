@@ -21,7 +21,6 @@ body {
     -ms-user-select: none;
     -o-user-select: none;
     user-select: none;
-
 }
 
 .bg-custom {
@@ -68,4 +67,12 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+:host {
+  contain: content;
+}
+
+img {
+  content-visibility: auto;
 }

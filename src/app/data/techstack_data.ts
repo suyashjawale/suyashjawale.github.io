@@ -2,17 +2,17 @@ import { TechStack } from "../interfaces/tech-stack";
 
 export const techstack_data: TechStack[] = [
     {
-        stack_name: "Current Stack",
+        stack_name: "Highly Active",
         tech_name: [
-            "Java 17",
-            "Angular 17 +"
+            "Angular 17+"
         ]
     },
     {
-        stack_name: "Previous Stack",
+        stack_name: "Active",
         tech_name: [
-            "Python",
-            "Rust"
+            "Spring Boot",
+            "Java",
+            "Python"
         ]
     }
 ];

@@ -1,9 +1,10 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, signal, ViewChild } from '@angular/core';
 import { SNavbar } from "../s-navbar/s-navbar";
 import { project_data } from '../../../data/projects_data';
 import { StateService } from '../../../services/state-service';
 import { NgStyle } from '@angular/common';
 import { Router } from '@angular/router';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
 	selector: 'app-s-projects',
@@ -13,9 +14,10 @@ import { Router } from '@angular/router';
 })
 
 export class SProjects {
-	projectData : any = Object.values(project_data);
+	projectData = signal<any>([]);
+	safeYoutubeUrls = signal<SafeResourceUrl[]>([]);
 
-	constructor(public stateService: StateService, private router: Router) {}
+	constructor(public stateService: StateService, private router: Router, private sanitizer: DomSanitizer) { }
 
 	onImgLoad(e: Event) {
 		const img = e.target as HTMLImageElement;
@@ -25,5 +27,14 @@ export class SProjects {
 
 	openProject(routeName: string) {
 		this.router.navigate(['/project', routeName])
+	}
+
+	ngOnInit() {
+		setTimeout(() => {
+			this.projectData.set(Object.values(project_data));
+			this.safeYoutubeUrls.set(this.projectData().map((data: any) =>
+				this.sanitizer.bypassSecurityTrustResourceUrl(data.yt_link)
+			));
+		}, 0);
 	}
 }

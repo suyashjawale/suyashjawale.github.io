@@ -1,4 +1,3 @@
-<app-s-navbar />
 <div [ngStyle]="{'margin-top': stateService.navHeight()+'px'}">
     <div class="ratio ratio-16x9">
         <iframe [src]="safeYoutubeUrl()" title="YouTube video player"
@@ -11,11 +10,10 @@
         <div class="font-w-500 mb-1 mt-3">
             {{projectData().project_name}}
         </div>
-        <div class="text-muted text-small">
-            {{projectData().project_description}}
+        <div class="text-muted text-small" [innerHTML]="projectData().project_description">
         </div>
 
-        <div class="d-flex gap-3 mt-3 justify-content-between">
+        <div class="d-flex gap-3 mt-4 justify-content-between mb-4">
             <div class="w-100">
                 <div class="font-w-500 mb-1">
                     Tech Stack

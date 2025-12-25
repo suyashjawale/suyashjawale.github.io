@@ -8,6 +8,11 @@ import { experience_data } from '../../../data/experience_data';
 import { college_data } from '../../../data/education_data';
 import { techstack_data } from '../../../data/techstack_data';
 import { StateService } from '../../../services/state-service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
+interface EventMap {
+	[key: string]: SafeResourceUrl;
+}
 
 @Component({
 	selector: 'app-s-home',
@@ -25,11 +30,31 @@ export class SHome {
 	relationship = signal<number[]>([0, 0, 0]);
 	remaining_time = signal<number[]>([0, 0, 0]);
 	timeline = signal<number>(0);
+	safeUrlFiles = signal<EventMap>({});
+
+	constructor(public sanitizer: DomSanitizer) { }
 
 	ngOnInit() {
 		this.age.set(this.calculateDateDifference(new Date("1999-08-03"), new Date()));
 		this.relationship.set(this.calculateDateDifference(new Date("2023-10-14"), new Date()));
 		this.remaining_time.set(this.calculateDateDifference(new Date(), new Date("2029-08-03")));
+
+		for (let index = 0; index < this.organizations().length; index++) {
+
+			for (let index1 = 0; index1 < this.organizations()[index].roles.length; index1++) {
+
+				for (let index2 = 0; index2 < this.organizations()[index].roles[index1].projects.length; index2++) {
+					
+					if(this.organizations()[index].roles[index1].projects[index2].video_link!=""){
+						this.safeUrlFiles.update(item => ({
+							...item,
+							[this.organizations()[index].roles[index1].projects[index2].project_name] : this.sanitizer.bypassSecurityTrustResourceUrl(this.organizations()[index].roles[index1].projects[index2].video_link)
+						}));
+					}
+				}
+
+			}	
+		}
 	}
 
 	getDateString(variable: number[]) {
@@ -42,10 +67,10 @@ export class SHome {
 		return `${date1.toLocaleString('default', { month: 'short' })} ${date1.getFullYear()}  -  ${date2 == "Present" ? "Present" : date2.toLocaleString('default', { month: 'short' }) + " " + (date2 as Date).getFullYear()}  •  ${exp[0]} yrs ${exp[1]} mos`;
 	}
 
-	updateTimeline(){
-		this.timeline.update(data =>{
-			data = data+1;
-			if(data==4)
+	updateTimeline() {
+		this.timeline.update(data => {
+			data = data + 1;
+			if (data == 4)
 				data = 0;
 			return data;
 		})

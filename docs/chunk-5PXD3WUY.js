@@ -1,0 +1,1 @@
+import{Bb as s,Sa as t,mb as n,nb as m}from"./chunk-T2SLVRIL.js";var a=class o{static \u0275fac=function(e){return new(e||o)};static \u0275cmp=t({type:o,selectors:[["app-demo2"]],decls:2,vars:0,template:function(e,p){e&1&&(n(0,"p"),s(1,"demo2 works!"),m())},encapsulation:2})};export{a as Demo2};

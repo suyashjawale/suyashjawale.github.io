@@ -8,7 +8,7 @@
 			<div style="min-width: 3.4rem;min-height: 3.4rem; height: 3.4rem;max-height: 3.4rem; width: 3.4rem; max-width: 3.4rem;"
 				class="d-flex align-items-center">
 				<img [src]="sortedHighLights()[currentHighlight()].imageLink" class="img-fluid w-100 rounded"
-					(error)="sortedHighLights()[currentHighlight()].imageLink = 'placeholder.webp'" loading="lazy" />
+					(error)="sortedHighLights()[currentHighlight()].imageLink = 'placeholder.webp'" loading="lazy" decoding="async" />
 			</div>
 			}
 			<div class="text-clamp-2 text-small">{{sortedHighLights()[currentHighlight()].content}}</div>
@@ -145,12 +145,12 @@
 		<div class="card rounded-4 mt-4 fade-in" style="height: 10rem;"
 			[ngStyle]="{'visibility': playerState.songs().length>0 ? 'visible' : 'hidden'}">
 			<img [src]="playerState.currentSong().thumbnail" class="card-img rounded-3 blur-filter my-auto"
-				style="height: 8.3rem;" alt="Music" loading="lazy" />
+				style="height: 8.3rem;" alt="Music" loading="lazy" decoding="async" />
 			<div class="card-img-overlay">
 				<div class="row mx-0">
 					<div class="col-3 ps-0">
 						<img [src]="playerState.currentSong().thumbnail" class="img-fluid rounded-4" alt="..."
-							loading="lazy">
+							loading="lazy" decoding="async" >
 					</div>
 					<div class="col ps-1">
 						<div class="font-w-500">{{playerState.currentSong().songName}}</div>
@@ -324,7 +324,7 @@
 							{{item.content}}
 						</div>
 
-						<img loading="lazy" [src]="item.imageLink" class="img-fluid rounded-2 align-self-start"
+						<img loading="lazy" decoding="async" [src]="item.imageLink" class="img-fluid rounded-2 align-self-start"
 							(load)="item.w = $any($event.target).naturalWidth"
 							(error)="item.imageLink = 'placeholder.webp'" />
 					</div>

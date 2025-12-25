@@ -1,1 +1,0 @@
-import{N as n,fa as e}from"./chunk-7UGOVQRB.js";var t=class a{interaction=e(1);navHeight=e(0);searchTab=e("");static \u0275fac=function(r){return new(r||a)};static \u0275prov=n({token:a,factory:a.\u0275fac,providedIn:"root"})};export{t as a};

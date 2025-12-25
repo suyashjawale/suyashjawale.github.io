@@ -136,3 +136,7 @@ input[type="range"] { display: block; }
     display: block; /* prevents flex shrinking issues */
     object-fit: contain; /* preserves size */
 }
+
+.offcanvas.show {
+  will-change: transform;
+}

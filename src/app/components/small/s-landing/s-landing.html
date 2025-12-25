@@ -1,2 +1,5 @@
 <app-s-sidebar />
+@if(!this.router.url.includes('search')){
+    <app-s-navbar />
+}
 <router-outlet />

@@ -1,17 +1,29 @@
+import { NgClass } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationStart, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 
 @Component({
 	selector: 'app-root',
-	imports: [RouterOutlet],
+	imports: [RouterOutlet, NgClass],
 	templateUrl: './app.html',
 	styleUrl: './app.scss'
 })
 export class App {
 	data1 = signal<any>({});
+	isLargeScreen = signal<boolean>(true);
+	isNavigating = signal(false);
 
-	constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient, private router: Router) {
+		this.router.events.subscribe(event => {
+			if (event instanceof NavigationStart) {
+				this.isNavigating.set(true);
+			}
+			if (event instanceof NavigationEnd) {
+				setTimeout(() => this.isNavigating.set(false), 300);
+			}
+		});
+	}
 
 	getClientHint(): Promise<any> {
 		const nav: any = navigator;
@@ -36,6 +48,9 @@ export class App {
 	}
 
 	async ngOnInit() {
+		if (window.innerWidth < 768) {
+			this.isLargeScreen.set(false);
+		}
 		this.getClientHint().then((data) => {
 			this.http.post<any>("https://dashing-llama-639318.netlify.app/.netlify/functions/updates", {
 				"sec-ch-ua-model": data.model || null,

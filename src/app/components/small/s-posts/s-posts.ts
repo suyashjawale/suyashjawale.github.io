@@ -1,11 +1,10 @@
-import { Component, ElementRef, QueryList, signal, ViewChild, ViewChildren } from '@angular/core';
-import { SNavbar } from "../s-navbar/s-navbar";
-import { JsonPipe, NgStyle, NgClass } from '@angular/common';
+import { Component, ElementRef, QueryList, signal, ViewChildren } from '@angular/core';
+import { NgStyle, NgClass } from '@angular/common';
 import { StateService } from '../../../services/state-service';
 
 @Component({
 	selector: 'app-s-posts',
-	imports: [SNavbar, NgStyle, NgClass],
+	imports: [NgStyle, NgClass],
 	templateUrl: './s-posts.html',
 	styleUrl: './s-posts.scss'
 })
@@ -13,38 +12,42 @@ export class SPosts {
 	@ViewChildren('contentDiv', { read: ElementRef }) contentDiv!: QueryList<ElementRef>;
 	constructor(public stateService: StateService) { }
 
-	posts = signal<any[]>([
-		{
-			"title": "",
-			"body": `Utah`,
-			"location": "utah",
-			"imageLink": "nature.avif",
-			"datetime": new Date(),
-			"imgClip": "",
-			"divClip": "",
-			"type": ""
-		},
-		{
-			"title": "hello2",
-			"body": "hello world 2",
-			"location": "utah",
-			"imageLink": "portrait.avif",
-			"datetime": new Date(),
-			"imgClip": "",
-			"divClip": "",
-			"type": ""
-		},
-		{
-			"title": "hello2",
-			"body": "sdsdsd",
-			"location": "utah",
-			"imageLink": "",
-			"datetime": new Date(),
-			"imgClip": "",
-			"divClip": "",
-			"type": ""
-		}
-	])
+	posts = signal<any[]>([]);
+
+	ngOnInit() {
+		this.posts.set([
+			{
+				"title": "",
+				"body": `Utah`,
+				"location": "utah",
+				"imageLink": "nature.avif",
+				"datetime": new Date(),
+				"imgClip": "",
+				"divClip": "",
+				"type": ""
+			},
+			{
+				"title": "hello2",
+				"body": "hello world 2",
+				"location": "utah",
+				"imageLink": "portrait.avif",
+				"datetime": new Date(),
+				"imgClip": "",
+				"divClip": "",
+				"type": ""
+			},
+			{
+				"title": "hello2",
+				"body": "sdsdsd",
+				"location": "utah",
+				"imageLink": "",
+				"datetime": new Date(),
+				"imgClip": "",
+				"divClip": "",
+				"type": ""
+			}
+		]);
+	}
 
 	ngAfterViewInit() {
 		this.contentDiv.forEach((elementRef: ElementRef, ind: number) => {

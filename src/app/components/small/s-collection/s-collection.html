@@ -1,9 +1,9 @@
-<app-s-navbar />
 <div [ngStyle]="{'margin-top': stateService.navHeight()+38+'px'}" class="container-fluid">
     <div class="masonry pb-3">
         @for (item of [].constructor(19); let i = $index; track i) {
         <div class="item">
-            <img [src]="i+'.jpg'" class="img-fluid rounded-2 w-100 d-block glideUp" loading="lazy" (load)="onImgLoad($event)" (click)="openCollectionItem(i)"/>
+            <img [src]="i+'.jpg'" class="img-fluid rounded-2 w-100 d-block glideUp" loading="lazy" decoding="async"
+                (load)="onImgLoad($event)" (click)="openCollectionItem(i)" />
         </div>
         }
     </div>

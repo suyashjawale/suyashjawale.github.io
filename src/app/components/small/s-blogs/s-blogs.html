@@ -1,7 +1,23 @@
-<app-s-navbar />
+@if(blogs().length>0){
+<div [ngStyle]="{'margin-top': stateService.navHeight()+38+'px'}" class="container-fluid">
+    @for (blog of blogs(); let ind=$index; track ind) {
+    <div class="mb-3" (click)="goToBlog(blog.slug)">
+        <img [src]="blog.thumbnail" class="img-fluid rounded-top-4 glideUp" (load)="onImgLoad($event)" loading="lazy"
+            decoding="async" />
+        <div class="bg-white p-3 rounded-bottom-4 text-dark text-small">
+            <div class="font-w-500">{{blog.title}}</div>
+            <div class="mt-1">{{blog.summary}}</div>
+            <div class="text-x-small mt-2 text-end">{{blog.publishedTime | date: 'MMMM d, yyyy h:mm:ss a'}}</div>
+        </div>
+    </div>
+    }
+</div>
+}
+@else {
 <div class="container-fluid d-flex justify-content-center align-items-center vh-100">
     <div class="text-center">
-    <div>Coming Soon</div>
-    <div class="text-x-small text-muted">Development in progress</div>
+        <div>No blogs available</div>
+        <div class="text-x-small text-muted">Check back soon</div>
     </div>
 </div>
+}

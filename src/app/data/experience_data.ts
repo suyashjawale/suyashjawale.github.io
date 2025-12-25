@@ -9,87 +9,134 @@ export const experience_data: organization[] = [
         roles: [
             {
                 role_name: "System Engineer",
-                role_start: new Date("2023-04-01"),
+                role_start: new Date("2024-01-21"),
                 role_end: "Present",
-                tag_line: "ss",
+                tag_line: "Migrating legacy portal systems to a modern tech stack.",
                 projects: [
                     {
-                        project_name: "Migration",
-                        project_content: ["hello", "world"],
+                        project_name: "Enhancements",
+                        project_content: [
+                            "Implementing new features for the newly migrated portal."
+                        ],
                         tech_stack: ["Java", "Angular"],
                         show: false,
+                        video_link: ""
                     },
                     {
                         project_name: "Migration",
-                        project_content: ["hello", "world"],
+                        project_content: [
+                            "Migrated a legacy e-learning portal to Angular 17 and Java 17.",
+                            "Managed dual development across both the legacy and new systems before focusing entirely on the new portal."],
                         tech_stack: ["Java", "Angular"],
-                        show: false
+                        show: false,
+                        video_link: ""
                     },
                 ]
             },
             {
                 role_name: "Assistant System Engineer",
-                role_start: new Date("2023-04-21"),
-                role_end: "Present",
-                tag_line: "ss",
+                role_start: new Date("2023-01-21"),
+                role_end: new Date("2024-01-21"),
+                tag_line: "I was allocated to an internal project at TCS, where I worked on the e-learning platform named iEvolve.",
                 projects: [
                     {
-                        project_name: "Migration",
-                        project_content: ["hello", "world"],
+                        project_name: "Enhancements",
+                        project_content: [
+                            "Developed new features for iEvolve, TCS’s internal e-learning portal.",
+                            "Implemented enhancements for the admin panel, including building several key features from scratch to improve administrative workflows.",
+                            "Primarily utilized AngularJS for frontend development and the Spring Framework for backend logic."
+                        ],
                         tech_stack: ["Java", "Angular"],
                         show: false,
+                        video_link: ""
+                    }
+                ]
+            },
+            {
+                role_name: "Developer",
+                role_start: new Date("2022-01-21"),
+                role_end: new Date("2023-01-21"),
+                tag_line: "I was allocated to an internal project at TCS, where I worked on machine learning and AI Models.",
+                projects: [
+                    {
+                        project_name: "Linkedin Mapping",
+                        project_content: [
+                            "Recommends the top 5 internal courses that are most similar to a given LinkedIn Learning course.",
+                            "Following the success of the previous Recommendation Engine, I was tasked with this cross-platform mapping project.",
+                            "The system takes a single LinkedIn course as input and identifies 5 similar internal courses.",
+                            "Processed data for approximately 5k LinkedIn courses, including titles, descriptions, focus areas, sub-focus areas, geography, and language metadata.",
+                            "Handled multi-language data, including content in Chinese, Mandarin, Japanese, and German.",
+                            "Translated the foreign language data into English using an open-source Google Translate integration.",
+                            "Developed a custom web utility featuring an auto-scroll JavaScript behavior; this allowed the browser to translate table data in real-time, which was then captured and stored in the database.",
+                            "Utilized an ensemble approach by combining outputs from both FastText and Word2Vec algorithms to find the most accurate course matches."
+                        ],
+                        tech_stack: ["Python", "Word2Vec", "Sklearn", "Fast2Text"],
+                        show: false,
+                        video_link: ""
                     },
                     {
-                        project_name: "Migration",
-                        project_content: ["hello", "world"],
-                        tech_stack: ["Java", "Angular"],
-                        show: false
-                    },
+                        project_name: "Learning and Recommendation Engine",
+                        project_content: [
+                            "Recommends courses to users based on their learning history, tower, role, unit, geography, and other parameters.",
+                            "My role was to design an algorithm to generate the top 10 similar courses for every individual course.",
+                            "Data was available for 50k courses, including title, description, focus area, sub-focus area, geography, language, and other metadata.",
+                            "Concatenated the data into strings, tokenized them into words, and fed them into a Word2Vec algorithm for training.",
+                            "The algorithm generates a vector for each course. I then looped through all courses to create a comprehensive vector array.",
+                            "Calculated Cosine Similarity between a specific course vector and all other vectors. This was performed using batch processing to manage high RAM/memory intensity.",
+                            "Designed a custom batch processing technique to handle the multi-dimensional arrays efficiently.",
+                            "Extracted the top 10 most similar vectors (courses) and pushed the resulting data into the database.",
+                            "Completed the core algorithm phase; the project further utilizes stored procedures, ETL processes, and frontend SQL queries to deliver the final recommendations.",
+                            "This project was huge success"
+                        ],
+                        tech_stack: ["Python", "Word2Vec", "Sklearn"],
+                        show: false,
+                        video_link: ""
+                    }
                 ]
             },
             {
                 role_name: "Graduate Trainee",
-                role_start: new Date("2021-06-10"),
-                role_end: new Date("2021-06-10"),
-                tag_line: "Was allocated in TCS Internal Project. Which is e-learning platform named iEvolve",
+                role_start: new Date("2021-01-21"),
+                role_end: new Date("2022-01-21"),
+                tag_line: "Joined TCS as a fresher and got selected for the TCS Ignite training program.",
                 projects: [
                     {
                         project_name: "Attrition Analysis",
-                        project_content: ["Made a python analysis code which predicted when an employee will leave the company", "I used various algorithms from sklearn library to predict if he will leave on not", "Ended up using random forest since it gave accurate results. We had access to all data like experience, his learnings, domain , age, roles", "We had past data of employess who already left also with there reasons for leaving", " The project was good but the salary data was denied due to security restictions", "The project never went to production, since we were collaborating with HR Team. The development was done Jupyter notebook and we shared the notebook with the HR Team."],
+                        project_content: [
+                            "Developed a Python-based Jupyter Notebook to predict employee attrition (whether an employee is likely to leave the company).",
+                            "Evaluated various machine learning algorithms from the Scikit-Learn (sklearn) library to determine the best predictive model.",
+                            "Implemented a Random Forest classifier, which yielded the highest accuracy by analyzing features such as experience, learning history, domain, age, and roles.",
+                            "Utilized historical data from former employees, including their documented reasons for departure, to train the model.",
+                            "Successfully navigated data constraints; while salary data was withheld due to privacy restrictions, the model remained effective using other key metrics.",
+                            "While the project served as a proof-of-concept rather than a production-ready tool, it provided valuable insights into workforce analytics."],
                         tech_stack: ["Python", "Jupyter notebook", "Sklearn"],
                         show: false,
+                        video_link: ""
                     },
-                    {
-                        project_name: "Learning and Recommendation Engine",
-                        project_content: ["This is an recommendation engine which recommends courses to users.", "Its takes a single course and recommends 10 other courses similar to it.", "We had data for around 50k courses. The description title, focus area, sub sub focus area, geography, language and many other things.", "I created a bag of words of all of this put it all in word2vec algorithm", "Now for each course the algo gives me numerical vectors now i put it all in a multidimesinal array and pass it in chunks to cosine similaity from sklearn", " So we get simailar courses", " Each course will have its own 49,999 neighbours lined up", "I pick the top closest", "And this is it", "Further i push this in postgres db though procedure for which the data is formatted as sql proc input", "Now the DB developer will write logic like for each employee he will generate recommendation based on unit,grade and past history and other non neccesaary things which are termed as business requirements.", " This is in production running great.", " Its deployed on linux and a bash script is triggered to run it"],
-                        tech_stack: ["Python", "Word2Vec", "Sklearn"],
-                        show: false
-                    },
-                    {
-                        project_name: "Linkedin Mapping",
-                        project_content: ["This is an recommendation engine which recommends courses to users.", "Its takes a single course and recommends 10 other courses similar to it.", "We had data for around 50k courses. The description title, focus area, sub sub focus area, geography, language and many other things.", "I created a bag of words of all of this put it all in word2vec algorithm", "Now for each course the algo gives me numerical vectors now i put it all in a multidimesinal array and pass it in chunks to cosine similaity from sklearn", " So we get simailar courses", " Each course will have its own 49,999 neighbours lined up", "I pick the top closest", "And this is it", "Further i push this in postgres db though procedure for which the data is formatted as sql proc input", "Now the DB developer will write logic like for each employee he will generate recommendation based on unit,grade and past history and other non neccesaary things which are termed as business requirements.", " This is in production running great.", " Its deployed on linux and a bash script is triggered to run it"],
-                        tech_stack: ["Python", "Word2Vec", "Sklearn"],
-                        show: false
-                    },
-                ]
-            },
-            {
-                role_name: "Graduate Trainee (Ignite Batch B26)",
-                role_start: new Date("2021-01-21"),
-                role_end: new Date("2021-06-6"),
-                tag_line: "Joined TCS as a fresher. Was trained in TCS Ignite Batch where they tought a lot of new things. Some of the projects are listed below.",
-                projects: [
                     {
                         project_name: "Weather and News App",
-                        project_content: ["Made a webapp using flask which used Voice Recognition Showed news and weather", ". Which had two modules Weather forecast for next 10 days and current weather which was fetched from api. The app showed different reference images based on weather condition. Eg. Haze so haze image, sunny so sunny", "News app fetched news on the topic searched thorugh search bar. The search bar was made like google and had voice recongiton. The news also had a sentiment analysis which differentaited good bad and neutral news."],
-                        tech_stack: ["Python Flask", "HtML", "Jquery", "Apis for Data", "Python libraries for sentiment analysis"],
+                        project_content: [
+                            "This Python Flask web application provides a dashboard for real-time weather data and global news updates.",
+                            "It features a search option with voice-based search capabilities for finding news and weather by city.",
+                            "It provides a detailed 14-day forecast for the searched city, accompanied by a visual chart.",
+                            "Google Maps Integration: Displays the exact location of the searched city on an interactive map.",
+                            "Sentiment analysis is performed on news articles to classify them as positive, negative, or neutral."
+                        ],
+                        video_link: "https://www.youtube.com/watch?v=nfEB4iuAqVs",
+                        tech_stack: ["Python", "HtML", "Jquery"],
                         show: false,
                     },
                     {
                         project_name: "Generatives",
-                        project_content: ["This project was building about intricate design patterns", "using code and javascript and html canvas", "It used a bunch of alogoithms like fibonacci and other like bezier curve etc etc", "Its was handloom project which generated mesmerizing patterns for sarees. Tata Product which is named as Taneira"],
+                        project_content: [
+                            "This project is all about creating complex, detailed design patterns.",
+                            "I used a handful of algorithms like Fibonacci and Bézier curves to get the logic right.",
+                            "The final designs were part Tata Taneira’s saree collections.",
+                            "The animation above. That’s generative animation in action."
+                        ],
                         tech_stack: ["Javascript", "HTML"],
-                        show: false
+                        show: false,
+                        video_link: ""
                     },
                 ]
             }

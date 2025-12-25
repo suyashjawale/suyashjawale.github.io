@@ -1,4 +1,3 @@
-<app-s-navbar />
 <div class="container-fluid" [ngStyle]="{'margin-top': stateService.navHeight()+'px'}">
     <div class="py-2">
         <app-linear-equilibrium />
@@ -122,10 +121,10 @@
 
             <div class="d-flex">
                 <div class="border-start border-top ps-3 align-self-end"
-                    style="margin-left: 0.473rem; margin-bottom: -0.8rem; height: 3.25rem;">
+                    style="margin-left: 0.473rem; margin-bottom: -0.8rem; height: 3.25rem; border-radius: 10px 0px 0px 0px;">
                 </div>
                 <div class="rounded-2 d-flex bg-white align-items-center justify-content-center org-logos mb-3">
-                    <img [src]="org.logo_name" class="img-fluid p-1" alt="Company" loading="lazy" />
+                    <img [src]="org.logo_name" class="img-fluid p-1" alt="Company" loading="lazy"/>
                 </div>
                 <div class="ms-2">
                     <div class="font-w-500">
@@ -170,8 +169,36 @@
                                 </div>
                                 }
                                 }
+                                @if(proj.video_link){
+                                <div
+                                    class="my-3 w-100 rounded-3 border py-2 px-3 d-flex justify-content-between align-items-center" (click)="openLink(proj.video_link)">
+                                    <div>
+                                        <div class="text-small font-w-500">{{proj.project_name}}</div>
+                                        <div class="text-x-small text-muted">www.youtube.com</div>
+                                    </div>
+                                    <div>
+                                        <svg width="35" height="35" viewBox="-3.68 -3.68 23.36 23.36"
+                                            xmlns="http://www.w3.org/2000/svg" fill="none">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0">
+                                                <rect x="-3.68" y="-3.68" width="23.36" height="23.36" rx="11.68"
+                                                    fill="#ffffff" strokewidth="0"></rect>
+                                            </g>
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                stroke-linejoin="round"></g>
+                                            <g id="SVGRepo_iconCarrier">
+                                                <path fill="red"
+                                                    d="M14.712 4.633a1.754 1.754 0 00-1.234-1.234C12.382 3.11 8 3.11 8 3.11s-4.382 0-5.478.289c-.6.161-1.072.634-1.234 1.234C1 5.728 1 8 1 8s0 2.283.288 3.367c.162.6.635 1.073 1.234 1.234C3.618 12.89 8 12.89 8 12.89s4.382 0 5.478-.289a1.754 1.754 0 001.234-1.234C15 10.272 15 8 15 8s0-2.272-.288-3.367z">
+                                                </path>
+                                                <path fill="#ffffff" d="M6.593 10.11l3.644-2.098-3.644-2.11v4.208z">
+                                                </path>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                </div>
+                                }
                             </div>
                         </div>
+                        @if(proj.project_content.length>1){
                         <span data-bs-toggle="collapse" name="expProject" aria-label="Click to expand project details"
                             role="button" [attr.data-bs-target]="'#expProjectContent'+i+j+k" aria-expanded="false"
                             [attr.aria-controls]="'expProjectContent'+i+j+k" (click)="proj.show=!proj.show"
@@ -197,19 +224,14 @@
                             </svg>
                             }
                         </span>
+                        }
                     </div>
                     }
-
-
                 </div>
-
             </div>
             }
         </div>
         }
-
-
-
     </div>
 
 
@@ -272,10 +294,10 @@
 
                 <div class="d-flex">
                     <div class="border-start border-top ps-3 align-self-end"
-                        style="margin-left: 0.473rem; margin-bottom: -0.8rem; height: 3.25rem;">
+                        style="margin-left: 0.473rem; margin-bottom: -0.8rem; height: 3.25rem; border-radius: 10px 0px 0px 0px;">
                     </div>
                     <div class="rounded-2 d-flex bg-white align-items-center justify-content-center org-logos mb-3">
-                        <img [src]="org.logo_name" class="img-fluid p-1" alt="College" loading="lazy" />
+                        <img [src]="org.logo_name" class="img-fluid p-1" alt="College" loading="lazy"/>
                     </div>
                     <div class="ms-2">
                         <div class="font-w-500">
@@ -323,6 +345,7 @@
                                     }
                                 </div>
                             </div>
+                            @if(proj.project_content.length>1){
                             <span data-bs-toggle="collapse" name="eduProject"
                                 aria-label="Click to expand college project details" role="button"
                                 [attr.data-bs-target]="'#eduProjectContent'+i+j+k" aria-expanded="false"
@@ -349,6 +372,7 @@
                                 </svg>
                                 }
                             </span>
+                            }
                         </div>
                         }
 
@@ -410,6 +434,20 @@
     </div>
 </div>
 <footer class="border-top p-3 text-center">
-    <div class="text-small">Made with <span class="text-nowrap">&nbsp;<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5C13 20.5 14 19.7294 15.0383 18.9109C17.9806 16.5914 22 14 22 9.1371C22 4.27416 16.4998 0.825464 12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371Z" fill="#ff0000"></path> </g></svg>&nbsp; </span> by ChatGPT and Gemini</div>
-    <div class="mt-2 text-muted text-x-small">Special Thanks to SVGRepo, Angular v20, Unicode, Bloomberg, Google, Firebase, Gnews, Hacker-News, Space Flight News, The Guardian, Netlify</div>
+    <div class="text-small d-flex align-items-center justify-content-center">
+        <span>Made with</span>
+        <span class="text-nowrap">&nbsp;<svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <path
+                        d="M2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5C13 20.5 14 19.7294 15.0383 18.9109C17.9806 16.5914 22 14 22 9.1371C22 4.27416 16.4998 0.825464 12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371Z"
+                        fill="#ff0000"></path>
+                </g>
+            </svg>&nbsp; </span>
+        <span>by help of ChatGPT and Gemini</span>
+    </div>
+    <div class="mt-2 text-muted text-x-small">Special Thanks to SVGRepo, Angular v20, Unicode, Bloomberg, Google,
+        Firebase, Gnews, Hacker-News, Space Flight News, The Guardian, Netlify</div>
 </footer>
