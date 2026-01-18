@@ -20,7 +20,7 @@ export const project_data: any = {
     "instagramcli-for-python": {
         project_name: "InstagramCLI",
         project_description: `<p>Python-based command-line tool designed to interact with Instagram by leveraging reverse-engineered API calls. It allows users to scrape and automate data retrieval directly from the terminal without using the official Instagram Graph API.</p><div class="font-w-500">Key Features:</div><ul><li>Data Scraping: Extract lists of followers and following for any public account.</li><li>Media Downloads: Fetch and save posts (photos/videos), Reels, and Stories along with their metadata.</li><li>Comment Extraction: Scrape comments from specific posts using their shortcodes.</li><li>Automation-Friendly: Outputs data in JSON format, making it easy to integrate with other scripts or for data analysis.</li><li>Optimization Options: Includes customizable parameters for "nerds," such as controlling the count of items fetched and organizing downloads into timestamped folders.</li>`,
-        yt_link: "https://www.youtube.com/embed/p3F-1QyvHnY?si=9rfiOhP2ixOEB_2L",
+        yt_link: "",
         tech_stack: [
             "Python", "Selenium"
         ],

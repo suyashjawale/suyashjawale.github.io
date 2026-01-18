@@ -1,61 +1,70 @@
 import { Component, ElementRef, QueryList, signal, ViewChildren } from '@angular/core';
-import { NgStyle, NgClass } from '@angular/common';
+import { NgStyle, NgClass, DatePipe } from '@angular/common';
 import { StateService } from '../../../services/state-service';
+import { HttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-s-posts',
-	imports: [NgStyle, NgClass],
+	imports: [NgStyle, NgClass, DatePipe, FormsModule],
 	templateUrl: './s-posts.html',
 	styleUrl: './s-posts.scss'
 })
 export class SPosts {
 	@ViewChildren('contentDiv', { read: ElementRef }) contentDiv!: QueryList<ElementRef>;
-	constructor(public stateService: StateService) { }
+	constructor(public stateService: StateService, private http: HttpClient, private router: Router) { }
 
+	loadingData = signal<string>('loading');
 	posts = signal<any[]>([]);
+	imageCount = signal<number>(0);
+	currentStatus = signal<string>('Fetching Data');
+	numberField = signal<string>('');
 
-	ngOnInit() {
-		this.posts.set([
-			{
-				"title": "",
-				"body": `Utah`,
-				"location": "utah",
-				"imageLink": "nature.avif",
-				"datetime": new Date(),
-				"imgClip": "",
-				"divClip": "",
-				"type": ""
-			},
-			{
-				"title": "hello2",
-				"body": "hello world 2",
-				"location": "utah",
-				"imageLink": "portrait.avif",
-				"datetime": new Date(),
-				"imgClip": "",
-				"divClip": "",
-				"type": ""
-			},
-			{
-				"title": "hello2",
-				"body": "sdsdsd",
-				"location": "utah",
-				"imageLink": "",
-				"datetime": new Date(),
-				"imgClip": "",
-				"divClip": "",
-				"type": ""
-			}
-		]);
+	validateUser() {
+		if (this.numberField().trim().length == 10 && /^\d+$/.test(this.numberField())) {
+			this.loadingData.set('loading');
+			this.getPosts(this.numberField().trim());
+		}
 	}
 
-	ngAfterViewInit() {
-		this.contentDiv.forEach((elementRef: ElementRef, ind: number) => {
-			this.applyClip(elementRef.nativeElement, this.posts()[ind], "div");
+	ngOnInit() {
+		if (localStorage.getItem('number') != undefined && localStorage.getItem('number') != null && localStorage.getItem('number') != '') {
+			this.getPosts(localStorage.getItem('number') || '');
+		}
+		else {
+			this.loadingData.set('validation');
+		}
+	}
+
+	getPosts(number: string) {
+		this.http.post<any>('https://dashing-llama-639318.netlify.app/.netlify/functions/getPosts', { "number": number }).subscribe({
+			next: data => {
+				localStorage.setItem('number', number);
+				data['posts'].forEach((item: any) => {
+					item.divClip = '';
+					item.imgClip = '';
+				});
+				data['posts'].sort((a:any, b:any) => {
+					return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
+				});
+				this.posts.set(data['posts'])
+				setTimeout(() => {
+					this.contentDiv.forEach((elementRef: ElementRef, ind: number) => {
+						if (this.posts()[ind].imageLink != "") {
+							this.imageCount.update(cnt => cnt + 1);
+						}
+						this.applyClip(elementRef.nativeElement, this.posts()[ind], "div", 0);
+					});
+				}, 2);
+			},
+			error: err => {
+				this.loadingData.set(err.error['status']);
+			}
 		});
 	}
 
-	applyClip(img: any, post: any, elemType: string) {
+	applyClip(img: any, post: any, elemType: string, ind: number) {
 		const rect = img.getBoundingClientRect();
 		const w = rect.width;
 		const h = rect.height;
@@ -75,6 +84,16 @@ export class SPosts {
 		else {
 			post.divClip = style;
 		}
+		this.currentStatus.set('Hydrating Images');
+		if (elemType == 'img' && ind == this.imageCount() - 1) {
+			setTimeout(() => {
+				this.loadingData.set('loaded');
+			}, 3000);
+		}
+	}
+
+	openCollectionItem(identifier:string){
+		this.router.navigate(["/collection", identifier])
 	}
 
 }

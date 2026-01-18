@@ -49,99 +49,99 @@ export class SSidebar {
 
 	ngOnInit() {
 		this.isOpen.set(true);
-		this.http.post<any>('https://dashing-llama-639318.netlify.app/.netlify/functions/getBirthdays', { "password": "" }).subscribe({
-			next: (data: any) => {
-				this.highLights.update((item) => [...item, ...data.map((item: any) => ({
-					uid: '',
-					isBirthdayHighlight: true,
-					content: `🥳🎉 ${item.message}`,
-					imageLink: '',
-					hasImage: false,
-					link: '',
-					rank: 1
-				}))]);
-			}
-		});
+		// this.http.post<any>('https://dashing-llama-639318.netlify.app/.netlify/functions/getBirthdays', { "password": "" }).subscribe({
+		// 	next: (data: any) => {
+		// 		this.highLights.update((item) => [...item, ...data.map((item: any) => ({
+		// 			uid: '',
+		// 			isBirthdayHighlight: true,
+		// 			content: `🥳🎉 ${item.message}`,
+		// 			imageLink: '',
+		// 			hasImage: false,
+		// 			link: '',
+		// 			rank: 1
+		// 		}))]);
+		// 	}
+		// });
 
 
-		this.http.post('https://dashing-llama-639318.netlify.app/.netlify/functions/getRssNews', { "url": "https://www.theguardian.com/uk/technology/rss" }, { responseType: 'text' })
-			.subscribe({
-				next: xml => {
-					const parser = new DOMParser();
-					const xmlDoc = parser.parseFromString(xml.toString(), 'text/xml');
-					const items = Array.from(xmlDoc.querySelectorAll('item'));
+		// this.http.post('https://dashing-llama-639318.netlify.app/.netlify/functions/getRssNews', { "url": "https://www.theguardian.com/uk/technology/rss" }, { responseType: 'text' })
+		// 	.subscribe({
+		// 		next: xml => {
+		// 			const parser = new DOMParser();
+		// 			const xmlDoc = parser.parseFromString(xml.toString(), 'text/xml');
+		// 			const items = Array.from(xmlDoc.querySelectorAll('item'));
 
-					this.highLights.update((item) => [...item, ...items.slice(0, 5).map((rss: any) => ({
-						uid: '',
-						isBirthdayHighlight: false,
-						content: rss.querySelector('title')?.textContent,
-						hasImage: true,
-						imageLink: rss.getElementsByTagName('media:content')[0].getAttribute("url"),
-						link: rss.querySelector('link')?.textContent,
-						rank: 2,
-						w: 0
-					}))])
-				}
-			});
+		// 			this.highLights.update((item) => [...item, ...items.slice(0, 5).map((rss: any) => ({
+		// 				uid: '',
+		// 				isBirthdayHighlight: false,
+		// 				content: rss.querySelector('title')?.textContent,
+		// 				hasImage: true,
+		// 				imageLink: rss.getElementsByTagName('media:content')[0].getAttribute("url"),
+		// 				link: rss.querySelector('link')?.textContent,
+		// 				rank: 2,
+		// 				w: 0
+		// 			}))])
+		// 		}
+		// 	});
 
-		this.http.post('https://dashing-llama-639318.netlify.app/.netlify/functions/getRssNews', { "url": "https://news.google.com/rss/search?q=technology&hl=en-IN&gl=IN&ceid=IN:en" }, { responseType: 'text' })
-			.subscribe({
-				next: xml => {
-					const parser = new DOMParser();
-					const xmlDoc = parser.parseFromString(xml.toString(), 'text/xml');
-					const items = Array.from(xmlDoc.querySelectorAll('item'));
+		// this.http.post('https://dashing-llama-639318.netlify.app/.netlify/functions/getRssNews', { "url": "https://news.google.com/rss/search?q=technology&hl=en-IN&gl=IN&ceid=IN:en" }, { responseType: 'text' })
+		// 	.subscribe({
+		// 		next: xml => {
+		// 			const parser = new DOMParser();
+		// 			const xmlDoc = parser.parseFromString(xml.toString(), 'text/xml');
+		// 			const items = Array.from(xmlDoc.querySelectorAll('item'));
 
-					this.highLights.update((item) => [...item, ...items.slice(0, 5).map((rss: any) => ({
-						uid: '',
-						isBirthdayHighlight: false,
-						content: rss.querySelector('title')?.textContent,
-						hasImage: true,
-						imageLink: 'organization_logo/gnews.webp',
-						link: rss.querySelector('link')?.textContent,
-						rank: 3,
-						w: 0
-					}))])
-				}
-			});
+		// 			this.highLights.update((item) => [...item, ...items.slice(0, 5).map((rss: any) => ({
+		// 				uid: '',
+		// 				isBirthdayHighlight: false,
+		// 				content: rss.querySelector('title')?.textContent,
+		// 				hasImage: true,
+		// 				imageLink: 'organization_logo/gnews.webp',
+		// 				link: rss.querySelector('link')?.textContent,
+		// 				rank: 3,
+		// 				w: 0
+		// 			}))])
+		// 		}
+		// 	});
 
 
-		this.http.get<any>('https://api.spaceflightnewsapi.net/v4/articles/?limit=5').subscribe({
-			next: data => {
-				this.highLights.update((item) => [...item, ...data.results.map((item: any) => ({
-					uid: item.id,
-					isBirthdayHighlight: false,
-					content: item.title,
-					hasImage: true,
-					imageLink: item.image_url,
-					link: item.url,
-					rank: 4,
-				}))])
-			}
-		});
+		// this.http.get<any>('https://api.spaceflightnewsapi.net/v4/articles/?limit=5').subscribe({
+		// 	next: data => {
+		// 		this.highLights.update((item) => [...item, ...data.results.map((item: any) => ({
+		// 			uid: item.id,
+		// 			isBirthdayHighlight: false,
+		// 			content: item.title,
+		// 			hasImage: true,
+		// 			imageLink: item.image_url,
+		// 			link: item.url,
+		// 			rank: 4,
+		// 		}))])
+		// 	}
+		// });
 
-		this.http.get<any>('https://hacker-news.firebaseio.com/v0/topstories.json').subscribe({
-			next: data => {
+		// this.http.get<any>('https://hacker-news.firebaseio.com/v0/topstories.json').subscribe({
+		// 	next: data => {
 
-				for (let i = 0; i < 5; i++) {
-					this.http.get<any>(`https://hacker-news.firebaseio.com/v0/item/${data[i]}.json`).subscribe({
-						next: data1 => {
-							this.highLights.update((item) => [...item,
-							{
-								uid: data1.id,
-								isBirthdayHighlight: false,
-								content: `${data1.title} ${data1.text != undefined ? ' - ' + this.strip(data1.text) : ''}`,
-								hasImage: true,
-								imageLink: 'organization_logo/hacker_news.svg',
-								link: data1.url,
-								rank: 5,
-								w: 0
-							}
-							])
-						}
-					});
-				}
-			}
-		});
+		// 		for (let i = 0; i < 5; i++) {
+		// 			this.http.get<any>(`https://hacker-news.firebaseio.com/v0/item/${data[i]}.json`).subscribe({
+		// 				next: data1 => {
+		// 					this.highLights.update((item) => [...item,
+		// 					{
+		// 						uid: data1.id,
+		// 						isBirthdayHighlight: false,
+		// 						content: `${data1.title} ${data1.text != undefined ? ' - ' + this.strip(data1.text) : ''}`,
+		// 						hasImage: true,
+		// 						imageLink: 'organization_logo/hacker_news.svg',
+		// 						link: data1.url,
+		// 						rank: 5,
+		// 						w: 0
+		// 					}
+		// 					])
+		// 				}
+		// 			});
+		// 		}
+		// 	}
+		// });
 	}
 
 	ngAfterViewInit() {

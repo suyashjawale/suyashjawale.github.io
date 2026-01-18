@@ -1,15 +1,14 @@
 import { NgStyle } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { SNavbar } from '../s-navbar/s-navbar';
 import { StateService } from '../../../services/state-service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { project_data } from '../../../data/projects_data';
 import { Meta, Title } from '@angular/platform-browser';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
 	selector: 'app-s-project',
-	imports: [NgStyle, SNavbar],
+	imports: [NgStyle],
 	templateUrl: './s-project.html',
 	styleUrl: './s-project.scss',
 })

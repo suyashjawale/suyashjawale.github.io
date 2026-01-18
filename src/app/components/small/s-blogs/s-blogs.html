@@ -2,8 +2,10 @@
 <div [ngStyle]="{'margin-top': stateService.navHeight()+38+'px'}" class="container-fluid">
     @for (blog of blogs(); let ind=$index; track ind) {
     <div class="mb-3" (click)="goToBlog(blog.slug)">
-        <img [src]="blog.thumbnail" class="img-fluid rounded-top-4 glideUp" (load)="onImgLoad($event)" loading="lazy"
-            decoding="async" />
+        <div class="ratio ratio-16x9">
+            <img [src]="blog.thumbnail" class="img-fluid rounded-top-4 glideUp" (load)="onImgLoad($event)"
+                loading="lazy" />
+        </div>
         <div class="bg-white p-3 rounded-bottom-4 text-dark text-small">
             <div class="font-w-500">{{blog.title}}</div>
             <div class="mt-1">{{blog.summary}}</div>
@@ -17,7 +19,7 @@
 <div class="container-fluid d-flex justify-content-center align-items-center vh-100">
     <div class="text-center">
         <div>No blogs available</div>
-        <div class="text-x-small text-muted">Check back soon</div>
+        <div class="text-x-small opacity-75">Check back soon</div>
     </div>
 </div>
 }

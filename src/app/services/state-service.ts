@@ -8,4 +8,5 @@ export class StateService {
 	interaction = signal<number>(1);
 	navHeight = signal<number>(0);
 	searchTab = signal<string>("");
+	collectionList = signal<any>([]);
 }

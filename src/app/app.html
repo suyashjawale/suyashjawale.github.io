@@ -16,6 +16,6 @@
 @if(isNavigating()){
 <div class="top-loader"></div>
 }
-<main [ngClass]="{'blur-background':isLargeScreen()}">
+<main [ngClass]="{'hidden-background':isLargeScreen()}">
     <router-outlet />
 </main>

@@ -8,7 +8,8 @@
 			<div style="min-width: 3.4rem;min-height: 3.4rem; height: 3.4rem;max-height: 3.4rem; width: 3.4rem; max-width: 3.4rem;"
 				class="d-flex align-items-center">
 				<img [src]="sortedHighLights()[currentHighlight()].imageLink" class="img-fluid w-100 rounded"
-					(error)="sortedHighLights()[currentHighlight()].imageLink = 'placeholder.webp'" loading="lazy" decoding="async" />
+					(error)="sortedHighLights()[currentHighlight()].imageLink = 'placeholder.webp'" loading="lazy"
+					 />
 			</div>
 			}
 			<div class="text-clamp-2 text-small">{{sortedHighLights()[currentHighlight()].content}}</div>
@@ -36,7 +37,7 @@
 					style="border-top-left-radius: 1rem;" routerLink="/" routerLinkActive="bg-custom-selected"
 					[routerLinkActiveOptions]={exact:true} ariaCurrentWhenActive="page">
 					<div class="mt-2">
-						<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<g stroke-width="0" />
 							<g stroke-linecap="round" stroke-linejoin="round" />
 							<path fill-rule="evenodd" clip-rule="evenodd"
@@ -51,7 +52,7 @@
 				<div class="bg-custom-shade p-2" data-bs-dismiss="offcanvas" aria-label="Close" routerLink="/projects"
 					routerLinkActive="bg-custom-selected" ariaCurrentWhenActive="page">
 					<div class="mt-2">
-						<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+						<svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
 							stroke="#fff">
 							<g stroke-width="0" />
 							<g stroke-linecap="round" stroke-linejoin="round" />
@@ -68,22 +69,7 @@
 					style="border-top-right-radius: 1rem;" routerLink="/blogs" routerLinkActive="bg-custom-selected"
 					ariaCurrentWhenActive="page">
 					<div class="mt-2">
-						<svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-							viewBox="-30.72 -30.72 573.44 573.44" xml:space="preserve" fill="#fff">
-							<g id="SVGRepo_bgCarrier" stroke-width="0" />
-							<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
-							<g id="SVGRepo_iconCarrier">
-								<style>
-									.st0 {
-										fill: #fff
-									}
-								</style>
-								<path class="st0"
-									d="M421.073 221.719c-.578 11.719-9.469 26.188-23.797 40.094v183.25c-.016 4.719-1.875 8.719-5.016 11.844-3.156 3.063-7.25 4.875-12.063 4.906H81.558c-4.781-.031-8.891-1.844-12.047-4.906-3.141-3.125-4.984-7.125-5-11.844V152.219c.016-4.703 1.859-8.719 5-11.844 3.156-3.063 7.266-4.875 12.047-4.906h158.609c12.828-16.844 27.781-34.094 44.719-49.906.078-.094.141-.188.219-.281H81.558c-18.75-.016-35.984 7.531-48.25 19.594-12.328 12.063-20.016 28.938-20 47.344v292.844c-.016 18.406 7.672 35.313 20 47.344C45.573 504.469 62.808 512 81.558 512h298.641c18.781 0 36.016-7.531 48.281-19.594 12.297-12.031 20-28.938 19.984-47.344V203.469s-.125-.156-.328-.313c-7.766 6.657-16.813 13-27.063 18.563" />
-								<path class="st0"
-									d="M498.058 0S482.37 23.438 379.902 58.109c-104.485 35.36-168.798 179.204-168.798 179.204-15.484 29.469-76.688 151.906-76.688 151.906-16.859 31.625 14.031 50.313 32.156 17.656 34.734-62.688 57.156-119.969 109.969-121.594 77.047-2.375 129.734-69.656 113.156-66.531-21.813 9.5-69.906.719-41.578-3.656 68-5.453 109.906-56.563 96.25-60.031-24.109 9.281-46.594.469-51-2.188C513.386 138.281 498.058 0 498.058 0" />
-							</g>
-						</svg>
+						<svg fill="#ffffff" width="22" height="22" viewBox="0 0 32 32" id="icon" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff" stroke-width="0.00032"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><defs><style>.cls-1{fill:none;}</style></defs><title>blog</title><rect x="4" y="24" width="10" height="2"></rect><rect x="4" y="18" width="10" height="2"></rect><path d="M26,14H6a2,2,0,0,1-2-2V6A2,2,0,0,1,6,4H26a2,2,0,0,1,2,2v6A2,2,0,0,1,26,14ZM6,6v6H26V6Z" transform="translate(0 0)"></path><path d="M26,28H20a2,2,0,0,1-2-2V20a2,2,0,0,1,2-2h6a2,2,0,0,1,2,2v6A2,2,0,0,1,26,28Zm-6-8v6h6V20Z" transform="translate(0 0)"></path><rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"></rect></g></svg>
 					</div>
 					<div class="mt-2 mb-1 text-small">Blogs</div>
 				</div>
@@ -93,7 +79,7 @@
 					routerLinkActive="bg-custom-selected" ariaCurrentWhenActive="page"
 					style="border-bottom-left-radius: 1rem;">
 					<div class="mt-2">
-						<svg fill="#fff" width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+						<svg fill="#fff" width="21" height="21" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
 							stroke="#fff" stroke-width="0">
 							<g />
 							<g stroke-linecap="round" stroke-linejoin="round" />
@@ -109,7 +95,7 @@
 				<div class="bg-custom-shade p-2" data-bs-dismiss="offcanvas" aria-label="Close" routerLink="/posts"
 					routerLinkActive="bg-custom-selected" ariaCurrentWhenActive="page">
 					<div class="mt-2">
-						<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<g stroke-width="0" />
 							<g stroke-linecap="round" stroke-linejoin="round" />
 							<path
@@ -125,7 +111,7 @@
 					routerLinkActive="bg-custom-selected" ariaCurrentWhenActive="page"
 					style="border-bottom-right-radius: 1rem;">
 					<div class="mt-2">
-						<svg fill="#fff" width="22" height="22" viewBox="0 0 24 24" data-name="Flat Color"
+						<svg fill="#fff" width="21" height="21" viewBox="0 0 24 24" data-name="Flat Color"
 							xmlns="http://www.w3.org/2000/svg" class="icon flat-color">
 							<g stroke-width="0" />
 							<g stroke-linecap="round" stroke-linejoin="round" />
@@ -145,12 +131,12 @@
 		<div class="card rounded-4 mt-4 fade-in" style="height: 10rem;"
 			[ngStyle]="{'visibility': playerState.songs().length>0 ? 'visible' : 'hidden'}">
 			<img [src]="playerState.currentSong().thumbnail" class="card-img rounded-3 blur-filter my-auto"
-				style="height: 8.3rem;" alt="Music" loading="lazy" decoding="async" />
+				style="height: 8.3rem;" alt="Music" loading="lazy" />
 			<div class="card-img-overlay">
 				<div class="row mx-0">
 					<div class="col-3 ps-0">
 						<img [src]="playerState.currentSong().thumbnail" class="img-fluid rounded-4" alt="..."
-							loading="lazy" decoding="async" >
+							loading="lazy">
 					</div>
 					<div class="col ps-1">
 						<div class="font-w-500">{{playerState.currentSong().songName}}</div>
@@ -160,7 +146,7 @@
 						<button aria-labelledby="openYoutubeLink" aria-label="openYoutubeLink"
 							class="btn btn-transparent p-0 border-0 shadow-none"
 							(click)="openLink(playerState.currentSong().yt_link)">
-							<svg width="22" height="22" viewBox="0 -3 20 20" xmlns="http://www.w3.org/2000/svg"
+							<svg width="21" height="21" viewBox="0 -3 20 20" xmlns="http://www.w3.org/2000/svg"
 								fill="#fff" stroke="#fff">
 								<g stroke-width="0" />
 								<g stroke-linecap="round" stroke-linejoin="round" />
@@ -199,7 +185,7 @@
 					</button>
 					<button class="btn btn-transparent border-0 shadow-none">
 						@if(playerState.currentSong().playingSong){
-						<svg (click)="pauseSong()" fill="#fff" width="22" height="22" viewBox="0 0 32 32"
+						<svg (click)="pauseSong()" fill="#fff" width="21" height="21" viewBox="0 0 32 32"
 							xmlns="http://www.w3.org/2000/svg" stroke="#fff" stroke-width="0">
 							<g />
 							<g stroke-linecap="round" stroke-linejoin="round" />
@@ -247,7 +233,7 @@
 					aria-expanded="false" aria-controls="alertsSidebar"
 					style="border-top-left-radius: 0.5rem; border-bottom-left-radius: 0.5rem;">
 					<div class="mt-2">
-						<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
 							<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
 							<g id="SVGRepo_iconCarrier">
@@ -264,7 +250,7 @@
 			<div class="col-4 text-center">
 				<div class="bg-custom-shade px-2 py-1" data-bs-dismiss="offcanvas" aria-label="Close">
 					<div class="mt-2">
-						<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+						<svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
 							stroke="#fff">
 							<g stroke-width="0" />
 							<g stroke-linecap="round" stroke-linejoin="round" />
@@ -324,7 +310,8 @@
 							{{item.content}}
 						</div>
 
-						<img loading="lazy" decoding="async" [src]="item.imageLink" class="img-fluid rounded-2 align-self-start"
+						<img loading="lazy" [src]="item.imageLink"
+							class="img-fluid rounded-2 align-self-start"
 							(load)="item.w = $any($event.target).naturalWidth"
 							(error)="item.imageLink = 'placeholder.webp'" />
 					</div>

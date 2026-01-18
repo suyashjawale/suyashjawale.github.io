@@ -10,6 +10,7 @@ body {
     font-family: 'Poppins', sans-serif !important;
     background-color: #15202b !important;
     color: rgb(255, 255, 255);
+    font-size: 0.87rem !important;
 
     &::-webkit-scrollbar {
         width: 0;
@@ -37,17 +38,16 @@ body {
 }
 
 .text-small {
-    font-size: small !important;
+    font-size: 0.77rem !important;
 }
 
 .text-x-small {
-    font-size: x-small !important;
+    font-size: 0.67rem !important;
 }
 
 .text-xx-small {
-    font-size: 8px !important;
+    font-size: 0.50rem !important;
 }
-
 
 .font-w-500 {
     font-weight: 500 !important;
@@ -55,11 +55,11 @@ body {
 
 .glideUp {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(30px);
 }
 
 .reveal {
-    animation: reveal 0.45s ease-out forwards;
+    animation: reveal 0.56s ease-out forwards;
 }
 
 @keyframes reveal {
@@ -70,9 +70,43 @@ body {
 }
 
 :host {
-  contain: content;
+    contain: content;
 }
 
 img {
-  content-visibility: auto;
+    content-visibility: auto;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  --s: 15px;
+  
+  --_d: calc(0.303*var(--s));
+  width: calc(var(--s) + var(--_d));
+  aspect-ratio: 1;
+  display: grid;
+}
+.loader:before,
+.loader:after {
+  content: "";
+  grid-area: 1/1;
+  clip-path: polygon(var(--_d) 0,100% 0,100% calc(100% - var(--_d)),calc(100% - var(--_d)) 100%,0 100%,0 var(--_d));
+  background:
+    conic-gradient(from -90deg at calc(100% - var(--_d)) var(--_d),
+     #00ff9d 135deg,#00945b 0 270deg,#fff 0);
+  animation: l6 2s infinite;
+}
+.loader:after {
+  animation-delay:-1s;
+}
+@keyframes l6{
+  0%  {transform:translate(0,0)}
+  25% {transform:translate(25px,0)}
+  50% {transform:translate(25px,25px)}
+  75% {transform:translate(0,25px)}
+  100%{transform:translate(0,0)}
+}
+
+.hidden-background {
+    visibility: hidden;
 }

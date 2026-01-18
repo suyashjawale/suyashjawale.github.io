@@ -18,6 +18,7 @@
         </div>
         <div class="px-2 py-1 bg-white rounded-1 text-xx-small text-dark mx-2 position-absolute z-1 font-w-500"
             style="top: 88.1%;">{{item.type}}</div>
+        @if(item.yt_link!="" && !item.hide){
         <div class="position-absolute z-1 start-50 top-50 translate-middle">
             <button class="btn border-0 shadow-none" (click)="item.show=!item.show">
                 <svg width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -31,8 +32,11 @@
                 </svg>
             </button>
         </div>
-        <img [src]="item.imgLink" loading="lazy" decoding="async" class="img-fluid glideUp z-n1"
-            (load)="onImgLoad($event)" />
+        }
+        <div class="ratio ratio-16x9">
+            <img [src]="'projects\\'+item.imgLink" loading="lazy" class="img-fluid glideUp z-n1"
+            (load)="onImgLoad($event, ind)" />
+        </div>
     </div>
     }
 
@@ -40,12 +44,12 @@
         <div class="font-w-500 mb-1">
             {{item.project_name}}
         </div>
-        <div class="text-muted text-small project-desc" [innerHTML]="item.project_description">
+        <div class="opacity-75 text-small project-desc" [innerHTML]="item.project_description">
         </div>
     </div>
     }
 
-    <button type="button" class="bg-custom-shade shadow-none border-0 rounded-circle position-fixed bottom-0 end-0 m-3"
+    <!-- <button type="button" class="bg-custom-shade shadow-none border-0 rounded-circle position-fixed bottom-0 end-0 m-3"
         style="min-width: 3.2rem; min-height: 3.2rem;max-width: 3.2rem; max-height: 3.2rem;" data-bs-toggle="offcanvas"
         data-bs-target="#projectFilter" aria-controls="projectFilter">
         <svg width="23" height="23" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -57,7 +61,7 @@
                     stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
             </g>
         </svg>
-    </button>
+    </button> -->
 
 </div>
 

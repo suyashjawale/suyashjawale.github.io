@@ -1,5 +1,4 @@
 import { Component, inject, signal } from '@angular/core';
-import { SNavbar } from "../s-navbar/s-navbar";
 import { NgClass, NgStyle } from '@angular/common';
 import { organization } from '../../../interfaces/organization';
 import { LinearEquilibrium } from "../../common/linear-equilibrium/linear-equilibrium";
@@ -16,7 +15,7 @@ interface EventMap {
 
 @Component({
 	selector: 'app-s-home',
-	imports: [SNavbar, NgStyle, NgClass, LinearEquilibrium],
+	imports: [NgStyle, NgClass, LinearEquilibrium],
 	templateUrl: './s-home.html',
 	styleUrl: './s-home.scss'
 })
@@ -36,7 +35,7 @@ export class SHome {
 
 	ngOnInit() {
 		this.age.set(this.calculateDateDifference(new Date("1999-08-03"), new Date()));
-		this.relationship.set(this.calculateDateDifference(new Date("2023-10-14"), new Date()));
+		this.relationship.set(this.calculateDateDifference(new Date("2023-10-14"), new Date("2026-01-16")));
 		this.remaining_time.set(this.calculateDateDifference(new Date(), new Date("2029-08-03")));
 
 		for (let index = 0; index < this.organizations().length; index++) {

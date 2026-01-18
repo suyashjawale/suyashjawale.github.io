@@ -1,29 +1,77 @@
-import { Component, signal } from '@angular/core';
-import { SNavbar } from "../s-navbar/s-navbar";
-import { NgStyle } from '@angular/common';
+import { Component, ElementRef, QueryList, signal, ViewChild, ViewChildren } from '@angular/core';
+import { NgClass, NgStyle } from '@angular/common';
 import { StateService } from '../../../services/state-service';
 import { Router } from '@angular/router';
-import { collection_data } from '../../../data/collection_data';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
 	selector: 'app-s-collection',
-	imports: [NgStyle],
+	imports: [NgStyle, NgClass],
 	templateUrl: './s-collection.html',
 	styleUrl: './s-collection.scss'
 })
 export class SCollection {
-	constructor(public stateService: StateService, private router: Router) { }
-	images = signal<any>([]);
+
+	left = signal<any>([]);
+	right = signal<any>([]);
+	loadingData = signal<string>('loading');
+	currentStatus = signal<string>('Fetching Data');
+	@ViewChildren('images', { read: ElementRef }) images!: QueryList<ElementRef>;
+
+	constructor(public stateService: StateService, private router: Router, private http: HttpClient) { }
+
 	ngOnInit() {
 		setTimeout(() => {
-			this.images.set(Object.values(collection_data));
+			if (this.stateService.collectionList().length == 0) {
+				this.http.get<any>('https://dashing-llama-639318.netlify.app/.netlify/functions/getCollection').subscribe({
+					next: data => {
+						data.sort((a:any, b:any) => a.priority-b.priority);
+						this.stateService.collectionList.set(data);
+						this.hydrate(data);
+					},
+					error: err => {
+						this.loadingData.set('failed');
+					}
+				});
+			}
+			else{
+				this.hydrate(this.stateService.collectionList());
+			}
 		}, 0);
 	}
 
-	onImgLoad(e: Event) {
-		const img = e.target as HTMLImageElement;
-		img.style.animationDelay = `${Math.random() * 120}ms`;
-		img.classList.add('reveal');
+	hydrate(data:any) {
+		let arr1: any[] = [];
+		let arr2: any[] = [];
+		let leftH = 0;
+		let rightH = 0;
+		this.currentStatus.set('Arranging Images')
+		data.forEach((img: any) => {
+			if (leftH <= rightH) {
+				leftH += img.height;
+				arr1.push(img);
+			} else {
+				rightH += img.height;
+				arr2.push(img);
+			}
+		});
+
+		this.left.set(arr1);
+		this.right.set(arr2);
+		this.currentStatus.set('Hydrating Images')
+	}
+
+	lastImageLoad(ind: number) {
+		if (ind == this.right().length - 1) {
+			this.loadingData.set('loaded');
+			setTimeout(() => {
+				this.images.forEach((elementRef: ElementRef, ind: number) => {
+					const img = elementRef.nativeElement as HTMLImageElement;
+					img.style.animationDelay = `${Math.random() * 150}ms`;
+					img.classList.add('reveal');
+				});
+			}, 15);
+		}
 	}
 
 	openCollectionItem(collectionName: number) {

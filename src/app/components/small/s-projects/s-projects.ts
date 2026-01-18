@@ -1,5 +1,4 @@
-import { Component, ElementRef, signal, ViewChild } from '@angular/core';
-import { SNavbar } from "../s-navbar/s-navbar";
+import { Component, signal } from '@angular/core';
 import { project_data } from '../../../data/projects_data';
 import { StateService } from '../../../services/state-service';
 import { NgStyle } from '@angular/common';
@@ -8,7 +7,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
 	selector: 'app-s-projects',
-	imports: [SNavbar, NgStyle],
+	imports: [NgStyle],
 	templateUrl: './s-projects.html',
 	styleUrl: './s-projects.scss'
 })
@@ -19,7 +18,7 @@ export class SProjects {
 
 	constructor(public stateService: StateService, private router: Router, private sanitizer: DomSanitizer) { }
 
-	onImgLoad(e: Event) {
+	onImgLoad(e: Event, ind: number) {
 		const img = e.target as HTMLImageElement;
 		img.style.animationDelay = `${Math.random() * 120}ms`;
 		img.classList.add('reveal');

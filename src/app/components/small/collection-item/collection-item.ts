@@ -1,23 +1,45 @@
 import { Component, signal } from '@angular/core';
-import { SNavbar } from '../s-navbar/s-navbar';
-import { NgStyle } from '@angular/common';
+import { NgClass, NgStyle } from '@angular/common';
 import { StateService } from '../../../services/state-service';
 import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
 	selector: 'app-collection-item',
-	imports: [SNavbar, NgStyle],
+	imports: [NgStyle, NgClass],
 	templateUrl: './collection-item.html',
 	styleUrl: './collection-item.scss',
 })
 export class CollectionItem {
-	constructor(public stateService: StateService, private route: ActivatedRoute) { }
+	constructor(public stateService: StateService, private route: ActivatedRoute, private http: HttpClient) { }
 
-	img_name = signal<any>("");
+	selected = signal<any>({
+		location: ''
+	});
+	currentStatus = signal<string>('Fetching Data');
+	loadingData = signal<string>('loading');
+	
 	ngOnInit() {
 		this.route.paramMap.subscribe(params => {
 			const productID = params.get('name');
-			this.img_name.set(productID);
+			this.http.get<any>(`https://dashing-llama-639318.netlify.app/.netlify/functions/getCollection?name=${productID}`).subscribe({
+				next: data => {
+					this.selected.set(data);
+				}
+			});
+		});
+	}
+
+	downloadImage(item: any) {
+		this.http.get(item.url, { responseType: 'blob' }).subscribe((blob: Blob) => {
+			const a = document.createElement('a');
+			const objectUrl = URL.createObjectURL(blob);
+			a.href = objectUrl;
+			a.download = `${item.identifier}.jpg`;
+			document.body.appendChild(a);
+			a.click();
+			URL.revokeObjectURL(objectUrl);
+			document.body.removeChild(a);
 		});
 	}
 }

@@ -1,11 +1,11 @@
-<div class="container-fluid border-bottom navbar-background fixed-top" #navDiv>
-	<div class="position-relative py-2">
+<div class="border-bottom navbar-background fixed-top" #navDiv>
+	<div class="position-relative py-2 ps-2 ms-1">
 		<div class="d-flex justify-content-between">
-			<div class="d-flex">
-				<img class="rounded-circle me-2" src="images/suyash.webp" width="44" height="44" alt="Banner Photo"
-					loading="lazy"/>
+			<div class="d-flex gap-2 align-items-center">
+				<img class="rounded-circle" src="images/suyash.webp" width="44" height="44" alt="Banner Photo"
+					loading="lazy" />
 				<div class="d-flex flex-column">
-					<div class="avatar-name">
+					<div class="font-w-500">
 						Suyash Jawale
 					</div>
 					<div class="d-flex align-items-center fade-in">
@@ -35,13 +35,13 @@
 				</div>
 			</div>
 
-			<div class="d-flex gap-3">
-				@if(this.router.url!='/' && ['/blogs', '/collection', '/projects', '/snippets', '/posts',
-		'/playlist'].includes(this.router.url)){
+			<div class="d-flex gap-2">
+				<!-- @if(this.router.url!='/' && ['/blogs', '/collection', '/projects', '/snippets', '/posts',
+				'/playlist'].includes(this.router.url)){
 				<button type="button" aria-controls="search" name="search" aria-label="Search"
-					class="btn btn-transparent pe-0 border-0 shadow-none" routerLink="/search"
+					class="btn btn-transparent border-0 pe-0 shadow-none" routerLink="/search"
 					(click)="stateService.searchTab.set(router.url)">
-					<svg width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
 						<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
 						<g id="SVGRepo_iconCarrier">
@@ -51,11 +51,11 @@
 						</g>
 					</svg>
 				</button>
-				}
-				<button class="btn btn-transparent px-0 border-0 shadow-none" type="button" data-bs-toggle="offcanvas"
+				} -->
+				<button class="btn shadow-none border-0" type="button" data-bs-toggle="offcanvas"
 					data-bs-target="#menu" aria-controls="menu" name="menu"
 					aria-label="Open Sidebar Menu for other page links">
-					<svg fill="#fff" width="30" height="30" viewBox="0 0 64 64" data-name="Layer 1"
+					<svg fill="#fff" width="24" height="24" viewBox="0 0 64 64" data-name="Layer 1"
 						xmlns="http://www.w3.org/2000/svg">
 						<g stroke-width="0" />
 						<g stroke-linecap="round" stroke-linejoin="round" />
@@ -68,29 +68,8 @@
 		</div>
 		@if(this.router.url!='/' && ['/blogs', '/collection', '/projects', '/snippets', '/posts',
 		'/playlist'].includes(this.router.url)){
-		<div class="position-absolute top-100 bg-success text-success font-w-500 text-small py-1 px-4"
-			style="clip-path: polygon(0% 0%, 100% 0%, 85% 100%, 15% 100%);">
-			@if(this.router.url.includes('blogs')){
-			&nbsp;&nbsp;Blogs&nbsp;&nbsp;
-			}
-			@else if(this.router.url.includes('collection')){
-			Collection
-			}
-			@else if(this.router.url.includes('projects')){
-			Projects
-			}
-			@else if(this.router.url.includes('snippets')){
-			Snippets
-			}
-			@else if(this.router.url.includes('posts')){
-			&nbsp;&nbsp;Posts&nbsp;&nbsp;
-			}
-			@else if(this.router.url.includes('playlist')){
-			Playlist
-			}
-		</div>
 
-		<div class="position-absolute top-100  bg-white text-dark font-w-500 text-x-small py-1 px-4"
+		<div class="position-absolute top-100 bg-white text-dark font-w-500 text-x-small px-4 py-1"
 			style="clip-path: polygon(0% 0%, 100% 0%, 85% 100%, 15% 100%);">
 			@if(this.router.url.includes('blogs')){
 			&nbsp;&nbsp;Blogs&nbsp;&nbsp;
