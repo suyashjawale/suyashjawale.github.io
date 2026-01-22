@@ -5,6 +5,10 @@ export interface Highlights {
 	hasImage : boolean,
 	link : string,
 	imageLink : string,
+	bigBanner : string,
+	description : string,
+	publishedTime : string,
+	source : string,
 	rank : number,
 	w:number
 }

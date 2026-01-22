@@ -90,6 +90,10 @@ export function getRoutes(): Routes {
                     loadComponent: () => import('./components/small/s-search/s-search').then(mod => mod.SSearch),
                 },
                 {
+                    path: 'updates',
+                    loadComponent: () => import('./components/small/s-updates/s-updates').then(mod => mod.SUpdates),
+                },
+                {
                     path: 'collection/:name',
                     loadComponent: () => import('./components/small/collection-item/collection-item').then(mod => mod.CollectionItem)
                 }

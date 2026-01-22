@@ -1,12 +1,11 @@
 import { Component, signal } from '@angular/core';
-import { SNavbar } from "../s-navbar/s-navbar";
 import { BLOG_LIST } from '../../blogs/blogs.index';
 import { DatePipe, NgStyle } from '@angular/common';
 import { StateService } from '../../../services/state-service';
 import { Router } from '@angular/router';
 @Component({
 	selector: 'app-s-blogs',
-	imports: [SNavbar, NgStyle, DatePipe],
+	imports: [NgStyle, DatePipe],
 	templateUrl: './s-blogs.html',
 	styleUrl: './s-blogs.scss',
 })

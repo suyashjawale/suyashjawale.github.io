@@ -2,17 +2,17 @@
 	<div class="d-flex justify-content-between align-items-center ps-3 gap-2 bg-custom-shade rounded-end-5 mt-3 mb-4 me-2"
 		style="height: 4rem; max-height: 4rem;">
 		<div [class.highlight-animation]="isOpen()" (animationend)="animationDone()"
-			class="d-flex align-items-center gap-2" (click)="openHighlight(sortedHighLights()[currentHighlight()])">
-			@if(isOpen() && sortedHighLights().length>0){
-			@if(sortedHighLights()[currentHighlight()].hasImage){
+			class="d-flex align-items-center gap-2" (click)="openHighlight(RootScope.sortedHighLights()[currentHighlight()])">
+			@if(isOpen() && RootScope.sortedHighLights().length>0){
+			@if(RootScope.sortedHighLights()[currentHighlight()].hasImage){
 			<div style="min-width: 3.4rem;min-height: 3.4rem; height: 3.4rem;max-height: 3.4rem; width: 3.4rem; max-width: 3.4rem;"
 				class="d-flex align-items-center">
-				<img [src]="sortedHighLights()[currentHighlight()].imageLink" class="img-fluid w-100 rounded"
-					(error)="sortedHighLights()[currentHighlight()].imageLink = 'placeholder.webp'" loading="lazy"
+				<img [src]="RootScope.sortedHighLights()[currentHighlight()].imageLink" class="img-fluid w-100 rounded"
+					(error)="RootScope.sortedHighLights()[currentHighlight()].imageLink = 'placeholder.webp'" loading="lazy"
 					 />
 			</div>
 			}
-			<div class="text-clamp-2 text-small">{{sortedHighLights()[currentHighlight()].content}}</div>
+			<div class="text-clamp-2 text-small">{{RootScope.sortedHighLights()[currentHighlight()].content}}</div>
 			}
 		</div>
 
@@ -229,9 +229,9 @@
 
 		<div class="row g-1 mt-4">
 			<div class="col-4 text-center">
-				<div class="bg-custom-shade px-2 py-1" data-bs-toggle="collapse" data-bs-target="#alertsSidebar"
-					aria-expanded="false" aria-controls="alertsSidebar"
-					style="border-top-left-radius: 0.5rem; border-bottom-left-radius: 0.5rem;">
+				<div class="bg-custom-shade px-2 py-1" routerLink="/updates"
+					routerLinkActive="bg-custom-selected" ariaCurrentWhenActive="page"
+					style="border-top-left-radius: 0.5rem; border-bottom-left-radius: 0.5rem;" data-bs-dismiss="offcanvas" >
 					<div class="mt-2">
 						<svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -300,7 +300,7 @@
 		</div>
 
 
-		<div class="collapse mt-3 bg-custom-shade rounded rounded-2 py-3 position-relative" id="alertsSidebar">
+		<!-- <div class="collapse mt-3 bg-custom-shade rounded rounded-2 py-3 position-relative" id="alertsSidebar">
 			<div class="overflow-y-auto" style="max-height: 16rem;">
 				@for (item of sortedHighLights(); let i= $index; track i) {
 				<div [ngClass]="{'border-bottom': i!=(sortedHighLights().length-1)}" (click)="openHighlight(item)">
@@ -323,7 +323,7 @@
 					<path d="m12 7 10 9H2Z" fill="#233547" />
 				</svg>
 			</div>
-		</div>
+		</div> -->
 
 
 	</div>

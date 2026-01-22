@@ -1,0 +1,30 @@
+@if(RootScope.sortedHighLights().length>0){
+<div [ngStyle]="{'margin-top': RootScope.navHeight()+38+'px'}" class="container-fluid">
+    @for (item of RootScope.sortedHighLights(); let ind=$index; track ind) {
+    <div class="mb-3" (click)="openLink(item.link)">
+        @if(item.bigBanner!=''){
+        <img [src]="item.bigBanner" class="img-fluid rounded-top-4 w-100" loading="lazy" />
+        }
+
+        <div class="bg-custom-shade p-3 rounded-bottom-4" [ngClass]="{'rounded-4':item.bigBanner==''}">
+            <div class="font-w-500">{{item.content}}</div>
+            <div class="text-small" [innerHTML]="item.description" [ngClass]="{'mt-3':item.description!=''}"></div>
+            @if(item.source!=''){
+            <div class="text-x-small mt-3 text-end">
+                {{item.publishedTime | date: 'MMMM d, yyyy h:mm:ss a'}}<br/>
+                <span class="opacity-75">{{item.source}}</span>
+            </div>
+            }
+        </div>
+    </div>
+    }
+</div>
+}
+@else {
+<div class="container-fluid d-flex justify-content-center align-items-center vh-100">
+    <div class="text-center">
+        <div>No updates available</div>
+        <div class="text-x-small opacity-75">Check back soon</div>
+    </div>
+</div>
+}

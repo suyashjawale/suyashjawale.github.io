@@ -67,7 +67,7 @@
 
 		</div>
 		@if(this.router.url!='/' && ['/blogs', '/collection', '/projects', '/snippets', '/posts',
-		'/playlist'].includes(this.router.url)){
+		'/playlist','/updates'].includes(this.router.url)){
 
 		<div class="position-absolute top-100 bg-white text-dark font-w-500 text-x-small px-4 py-1"
 			style="clip-path: polygon(0% 0%, 100% 0%, 85% 100%, 15% 100%);">
@@ -88,6 +88,9 @@
 			}
 			@else if(this.router.url.includes('playlist')){
 			Playlist
+			}
+			@else if(this.router.url.includes('updates')){
+			Updates
 			}
 		</div>
 

@@ -2,10 +2,8 @@ import { Component, inject, signal } from '@angular/core';
 import { NgClass, NgStyle } from '@angular/common';
 import { organization } from '../../../interfaces/organization';
 import { LinearEquilibrium } from "../../common/linear-equilibrium/linear-equilibrium";
-import { TechStack } from '../../../interfaces/tech-stack';
 import { experience_data } from '../../../data/experience_data';
 import { college_data } from '../../../data/education_data';
-import { techstack_data } from '../../../data/techstack_data';
 import { StateService } from '../../../services/state-service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
@@ -23,7 +21,6 @@ export class SHome {
 	stateService = inject(StateService);
 	organizations = signal<organization[]>(experience_data);
 	college = signal<organization[]>(college_data);
-	tech_stack = signal<TechStack[]>(techstack_data);
 
 	age = signal<number[]>([0, 0, 0]);
 	relationship = signal<number[]>([0, 0, 0]);
@@ -35,7 +32,7 @@ export class SHome {
 
 	ngOnInit() {
 		this.age.set(this.calculateDateDifference(new Date("1999-08-03"), new Date()));
-		this.relationship.set(this.calculateDateDifference(new Date("2023-10-14"), new Date("2026-01-16")));
+		this.relationship.set(this.calculateDateDifference(new Date("2023-10-14"), new Date()));
 		this.remaining_time.set(this.calculateDateDifference(new Date(), new Date("2029-08-03")));
 
 		for (let index = 0; index < this.organizations().length; index++) {

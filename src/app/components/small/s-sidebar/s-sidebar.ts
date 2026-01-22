@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
 	selector: 'app-s-sidebar',
-	imports: [RouterLink, RouterLinkActive, DecimalPipe, NgStyle, NgClass],
+	imports: [RouterLink, RouterLinkActive, DecimalPipe, NgStyle],
 	templateUrl: './s-sidebar.html',
 	styleUrl: './s-sidebar.scss',
 })
@@ -23,11 +23,6 @@ export class SSidebar {
 
 	currentSongTime = signal<number>(0);
 
-	highLights = signal<Highlights[]>([]);
-
-	sortedHighLights = computed(() => {
-		return this.highLights().sort((a, b) => a.rank - b.rank);
-	});
 
 	private progressAnimationFrame: number | null = null;
 	private isUserSeeking = false;
@@ -49,99 +44,119 @@ export class SSidebar {
 
 	ngOnInit() {
 		this.isOpen.set(true);
-		// this.http.post<any>('https://dashing-llama-639318.netlify.app/.netlify/functions/getBirthdays', { "password": "" }).subscribe({
-		// 	next: (data: any) => {
-		// 		this.highLights.update((item) => [...item, ...data.map((item: any) => ({
-		// 			uid: '',
-		// 			isBirthdayHighlight: true,
-		// 			content: `🥳🎉 ${item.message}`,
-		// 			imageLink: '',
-		// 			hasImage: false,
-		// 			link: '',
-		// 			rank: 1
-		// 		}))]);
-		// 	}
-		// });
+		this.http.post<any>('https://dashing-llama-639318.netlify.app/.netlify/functions/getBirthdays', { "password": "" }).subscribe({
+			next: (data: any) => {
+				this.RootScope.highLights.update((item) => [...item, ...data.map((item: any) => ({
+					uid: '',
+					isBirthdayHighlight: true,
+					content: `🥳🎉 ${item.message}`,
+					imageLink: '',
+					bigBanner : '',
+					description : '',
+					hasImage: false,
+					link: '',
+					publishedTime : '',
+					source : '',
+					rank: 1
+				}))]);
+			}
+		});
 
 
-		// this.http.post('https://dashing-llama-639318.netlify.app/.netlify/functions/getRssNews', { "url": "https://www.theguardian.com/uk/technology/rss" }, { responseType: 'text' })
-		// 	.subscribe({
-		// 		next: xml => {
-		// 			const parser = new DOMParser();
-		// 			const xmlDoc = parser.parseFromString(xml.toString(), 'text/xml');
-		// 			const items = Array.from(xmlDoc.querySelectorAll('item'));
+		this.http.post('https://dashing-llama-639318.netlify.app/.netlify/functions/getRssNews', { "url": "https://www.theguardian.com/uk/technology/rss" }, { responseType: 'text' })
+			.subscribe({
+				next: xml => {
+					const parser = new DOMParser();
+					const xmlDoc = parser.parseFromString(xml.toString(), 'text/xml');
+					const items = Array.from(xmlDoc.querySelectorAll('item'));
 
-		// 			this.highLights.update((item) => [...item, ...items.slice(0, 5).map((rss: any) => ({
-		// 				uid: '',
-		// 				isBirthdayHighlight: false,
-		// 				content: rss.querySelector('title')?.textContent,
-		// 				hasImage: true,
-		// 				imageLink: rss.getElementsByTagName('media:content')[0].getAttribute("url"),
-		// 				link: rss.querySelector('link')?.textContent,
-		// 				rank: 2,
-		// 				w: 0
-		// 			}))])
-		// 		}
-		// 	});
+					this.RootScope.highLights.update((item) => [...item, ...items.slice(0, 5).map((rss: any) => ({
+						uid: '',
+						isBirthdayHighlight: false,
+						content: rss.querySelector('title')?.textContent,
+						hasImage: true,
+						description : rss.querySelector('description')?.textContent,
+						imageLink: rss.getElementsByTagName('media:content')[0].getAttribute("url"),
+						bigBanner : rss.getElementsByTagName('media:content')[2].getAttribute("url"),
+						publishedTime : rss.querySelector('pubDate')?.textContent,
+						source: 'www.theguardian.com',
+						link: rss.querySelector('link')?.textContent,
+						rank: 2,
+						w: 0
+					}))])
+				}
+			});
 
-		// this.http.post('https://dashing-llama-639318.netlify.app/.netlify/functions/getRssNews', { "url": "https://news.google.com/rss/search?q=technology&hl=en-IN&gl=IN&ceid=IN:en" }, { responseType: 'text' })
-		// 	.subscribe({
-		// 		next: xml => {
-		// 			const parser = new DOMParser();
-		// 			const xmlDoc = parser.parseFromString(xml.toString(), 'text/xml');
-		// 			const items = Array.from(xmlDoc.querySelectorAll('item'));
+		this.http.post('https://dashing-llama-639318.netlify.app/.netlify/functions/getRssNews', { "url": "https://news.google.com/rss/search?q=technology&hl=en-IN&gl=IN&ceid=IN:en" }, { responseType: 'text' })
+			.subscribe({
+				next: xml => {
+					const parser = new DOMParser();
+					const xmlDoc = parser.parseFromString(xml.toString(), 'text/xml');
+					const items = Array.from(xmlDoc.querySelectorAll('item'));
 
-		// 			this.highLights.update((item) => [...item, ...items.slice(0, 5).map((rss: any) => ({
-		// 				uid: '',
-		// 				isBirthdayHighlight: false,
-		// 				content: rss.querySelector('title')?.textContent,
-		// 				hasImage: true,
-		// 				imageLink: 'organization_logo/gnews.webp',
-		// 				link: rss.querySelector('link')?.textContent,
-		// 				rank: 3,
-		// 				w: 0
-		// 			}))])
-		// 		}
-		// 	});
+					this.RootScope.highLights.update((item) => [...item, ...items.slice(0, 5).map((rss: any) => ({
+						uid: '',
+						isBirthdayHighlight: false,
+						content: rss.querySelector('title')?.textContent,
+						description : rss.querySelector('description')?.textContent,
+						hasImage: true,
+						imageLink: 'organization_logo/gnews.webp',
+						bigBanner : '',
+						publishedTime : rss.querySelector('pubDate')?.textContent,
+						source : 'news.google.com',
+						link: rss.querySelector('link')?.textContent,
+						rank: 3,
+						w: 0
+					}))])
+				}
+			});
 
 
-		// this.http.get<any>('https://api.spaceflightnewsapi.net/v4/articles/?limit=5').subscribe({
-		// 	next: data => {
-		// 		this.highLights.update((item) => [...item, ...data.results.map((item: any) => ({
-		// 			uid: item.id,
-		// 			isBirthdayHighlight: false,
-		// 			content: item.title,
-		// 			hasImage: true,
-		// 			imageLink: item.image_url,
-		// 			link: item.url,
-		// 			rank: 4,
-		// 		}))])
-		// 	}
-		// });
+		this.http.get<any>('https://api.spaceflightnewsapi.net/v4/articles/?limit=5').subscribe({
+			next: data => {
+				this.RootScope.highLights.update((item) => [...item, ...data.results.map((item: any) => ({
+					uid: item.id,
+					isBirthdayHighlight: false,
+					content: item.title,
+					hasImage: true,
+					bigBanner: item.image_url,
+					publishedTime : item.updated_at,
+					source : 'api.spaceflightnewsapi.net',
+					description : item.summary,
+					imageLink: item.image_url,
+					link: item.url,
+					rank: 4,
+				}))])
+			}
+		});
 
-		// this.http.get<any>('https://hacker-news.firebaseio.com/v0/topstories.json').subscribe({
-		// 	next: data => {
+		this.http.get<any>('https://hacker-news.firebaseio.com/v0/topstories.json').subscribe({
+			next: data => {
 
-		// 		for (let i = 0; i < 5; i++) {
-		// 			this.http.get<any>(`https://hacker-news.firebaseio.com/v0/item/${data[i]}.json`).subscribe({
-		// 				next: data1 => {
-		// 					this.highLights.update((item) => [...item,
-		// 					{
-		// 						uid: data1.id,
-		// 						isBirthdayHighlight: false,
-		// 						content: `${data1.title} ${data1.text != undefined ? ' - ' + this.strip(data1.text) : ''}`,
-		// 						hasImage: true,
-		// 						imageLink: 'organization_logo/hacker_news.svg',
-		// 						link: data1.url,
-		// 						rank: 5,
-		// 						w: 0
-		// 					}
-		// 					])
-		// 				}
-		// 			});
-		// 		}
-		// 	}
-		// });
+				for (let i = 0; i < 5; i++) {
+					this.http.get<any>(`https://hacker-news.firebaseio.com/v0/item/${data[i]}.json`).subscribe({
+						next: data1 => {
+							this.RootScope.highLights.update((item) => [...item,
+							{
+								uid: data1.id,
+								isBirthdayHighlight: false,
+								content: `${data1.title} ${data1.text != undefined ? ' - ' + this.strip(data1.text) : ''}`,
+								hasImage: true,
+								bigBanner : '',
+								publishedTime : data1.time,
+								source : 'hacker-news.firebaseio.com',
+								description : '',
+								imageLink: 'organization_logo/hacker_news.svg',
+								link: data1.url,
+								rank: 5,
+								w: 0
+							}
+							])
+						}
+					});
+				}
+			}
+		});
 	}
 
 	ngAfterViewInit() {
@@ -247,8 +262,8 @@ export class SSidebar {
 
 	animationDone() {
 		// The animation has completed, so we advance to the next highlight
-		if (this.highLights().length > 1)
-			this.currentHighlight.update(val => (val + 1) % this.highLights().length);
+		if (this.RootScope.highLights().length > 1)
+			this.currentHighlight.update(val => (val + 1) % this.RootScope.highLights().length);
 		this.isOpen.set(false);
 		// Toggle isOpen to restart the animation for the next highlight
 		setTimeout(() => {
