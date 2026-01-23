@@ -1,1 +1,0 @@
-var e=[{slug:"blog-a",title:"My First Blog",thumbnail:"projects/instagramcli.webp",publishedTime:new Date("2025-08-12"),summary:"This is the summary of first blog.",loadComponent:()=>import("./chunk-6CZQYYFY.js").then(t=>t.Demo1)}];export{e as a};

@@ -1,12 +1,12 @@
-import { NgClass, NgStyle } from '@angular/common';
-import { Component, ElementRef, inject, signal, ViewChild } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { StateService } from '../../../services/state-service';
 import { MusicPlayer } from '../../../services/music-player';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-s-navbar',
-	imports: [NgClass,RouterLink],
+	imports: [NgClass],
 	templateUrl: './s-navbar.html',
 	styleUrl: './s-navbar.scss'
 })

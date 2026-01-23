@@ -1,4 +1,7 @@
-<div class="d-flex flex-column justify-content-center align-items-center" [ngStyle]="{'height': loadingData()=='loaded'? '0vh' : '100vh' }">
+<div class="position-relative" [ngClass]="{'dvh-100 overflow-hidden':loadingData()!='loaded'}">
+
+    <div class="d-flex flex-column justify-content-center align-items-center position-absolute bg-custom z-2 w-100"
+        style="transition: height 1s" [ngStyle]="{'height': loadingData()=='loaded'? '0dvh' : '100dvh' }">
         @if(loadingData()=='failed'){
         <div>OOPS !!</div>
         <div class="text-x-small opacity-75">Stay tuned</div>
@@ -8,22 +11,24 @@
             <div class="loader"></div>
         </div>
         <div class="opacity-75 text-small">{{currentStatus()}}</div>
-        }    
-</div>
-<div [ngStyle]="{'margin-top': stateService.navHeight()+38+'px'}" class="container-fluid" [ngClass]="{'hidden-background':loadingData()!='loaded'}">
-    <div class="row g-2 mb-1">
-        <div class="col-6">
-            @for (item of left(); track $index) {
-            <img [src]="item.url" class="img-fluid rounded-3 mb-2 glideUp" #images loading="lazy"
-                (click)="openCollectionItem(item.identifier)"/>
-            }
-        </div>
+        }
+    </div>
 
-        <div class="col-6">
-            @for (item of right(); track $index) {
-            <img [src]="item.url" class="img-fluid rounded-3 mb-2 glideUp" #images loading="lazy"
-                (click)="openCollectionItem(item.identifier)" (load)="lastImageLoad($index)" />
-            }
+    <div [ngStyle]="{'margin-top': stateService.navHeight()+38+'px'}" class="container-fluid">
+        <div class="row g-2 mb-1">
+            <div class="col-6">
+                @for (item of left(); track $index) {
+                <img [src]="item.url" class="img-fluid rounded-3 mb-2 glideUp" #images loading="lazy"
+                    (click)="openCollectionItem(item.identifier)" />
+                }
+            </div>
+
+            <div class="col-6">
+                @for (item of right(); track $index) {
+                <img [src]="item.url" class="img-fluid rounded-3 mb-2 glideUp" #images loading="lazy"
+                    (click)="openCollectionItem(item.identifier)" (load)="lastImageLoad($index)" />
+                }
+            </div>
         </div>
     </div>
 </div>

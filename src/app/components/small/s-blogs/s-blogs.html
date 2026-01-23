@@ -6,10 +6,10 @@
             <img [src]="blog.thumbnail" class="img-fluid rounded-top-4 glideUp" (load)="onImgLoad($event)"
                 loading="lazy" />
         </div>
-        <div class="bg-white p-3 rounded-bottom-4 text-dark text-small">
+        <div class="bg-white p-3 rounded-bottom-4 text-dark">
             <div class="font-w-500">{{blog.title}}</div>
-            <div class="mt-1">{{blog.summary}}</div>
-            <div class="text-x-small mt-2 text-end">{{blog.publishedTime | date: 'MMMM d, yyyy h:mm:ss a'}}</div>
+            <div class="mt-1 text-small">{{blog.summary}}</div>
+            <div class="text-x-small mt-2 text-end text-secondary">{{blog.publishedTime | date: 'MMMM d, yyyy h:mm:ss a'}}</div>
         </div>
     </div>
     }

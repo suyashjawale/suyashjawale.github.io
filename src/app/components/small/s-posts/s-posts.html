@@ -1,69 +1,73 @@
-<div class="d-flex flex-column justify-content-center align-items-center" style="transition: height 1s" [ngStyle]="{'height': loadingData()=='loaded'? '0vh' : '100vh' }">
+<div class="position-relative" [ngClass]="{'dvh-100 overflow-hidden':loadingData()!='loaded'}">
+    
+    <div class="d-flex flex-column justify-content-center align-items-center position-absolute bg-custom z-2 w-100"
+        style="transition: height 0.5s" [ngStyle]="{'height': loadingData()=='loaded'? '0dvh' : '100dvh' }">
         @if(loadingData()=='failed'){
-        <div>No Posts Yet</div>
-        <div class="text-x-small opacity-75">Stay tuned</div>
-        }
-        @else if(loadingData()=='loading'){
-        <div style="width: 47px; height: 62px;">
-            <div class="loader"></div>
-        </div>
-        <div class="opacity-75 text-small">{{currentStatus()}}</div>
-        }    
-        @else if(loadingData()=='validation'){
-            <div class="border border-secondary rounded border-opacity-50">
-                <input type="text" class="text-center border-0 bg-transparent shadow-none px-3 py-2" style="outline: none;" [(ngModel)]="numberField" placeholder="My Number" maxlength="10" (input)="validateUser()"/>
+            <div>No Posts Yet</div>
+            <div class="text-x-small opacity-75">Stay tuned</div>
+            }
+            @else if(loadingData()=='loading'){
+            <div style="width: 47px; height: 62px;">
+                <div class="loader"></div>
             </div>
-        }
-        @else if(loadingData()=='Access Restricted'){
-            <img src="artifact/no-nooo-circle.gif" class="img-fluid w-25"/>
-            <div class="py-3">Access Restricted</div>
-        }
-</div>
-
-<div [ngStyle]="{'margin-top': stateService.navHeight()+38+'px'}" class="container-fluid"
-    [ngClass]="{'hidden-background':loadingData()!='loaded'}">
-    @for (post of posts(); let i = $index; track i) {
-    <div class="mb-3">
-        @if(post.imageUrl!=""){
-        <div class="position-relative">
-            <div class="position-absolute z-1 d-flex justify-content-between w-100 align-items-center">
-                @if(post.location!=''){
-                <div class="text-x-small font-w-500 blur-background rounded px-2 py-1 m-2">
-                    {{post.location}}
+            <div class="opacity-75 text-small">{{currentStatus()}}</div>
+            }    
+            @else if(loadingData()=='validation'){
+                <div class="border border-secondary rounded border-opacity-50">
+                    <input type="text" class="text-center border-0 bg-transparent shadow-none px-3 py-2" style="outline: none;" [(ngModel)]="numberField" placeholder="My Number" maxlength="10" (input)="validateUser()"/>
                 </div>
-                }
-                @if(post.isCollection){
-                <button class="btn border-0 shadow-none p-2" (click)="openCollectionItem(post.identifier)">
-                    <svg fill="#fff" width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
-                        stroke="#fff" stroke-width="0">
-                        <g />
-                        <g stroke-linecap="round" stroke-linejoin="round" />
-                        <path
-                            d="M3 20V10h5v11H4a1 1 0 0 1-1-1M21 4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v4h18Zm-1 17a1 1 0 0 0 1-1V10H10v11Z"
-                            stroke="none" />
-                    </svg>
-                </button>
-                }
+            }
+            @else if(loadingData()=='Access Restricted'){
+                <img src="artifact/no-nooo-circle.gif" class="img-fluid w-25"/>
+                <div class="py-3">Access Restricted</div>
+            }
+    </div>
+
+    <div [ngStyle]="{'margin-top': stateService.navHeight()+38+'px'}" class="container-fluid">
+        @for (post of posts(); let i = $index; track i) {
+        <div class="mb-3">
+            @if(post.imageUrl!=""){
+            <div class="position-relative">
+                <div class="position-absolute z-1 d-flex justify-content-between w-100 align-items-center">
+                    @if(post.location!=''){
+                    <div class="text-x-small font-w-500 blur-background rounded px-2 py-1 m-2">
+                        {{post.location}}
+                    </div>
+                    }
+                    @if(post.isCollection){
+                    <button class="btn border-0 shadow-none p-2" (click)="openCollectionItem(post.identifier)">
+                        <svg fill="#fff" width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                            stroke="#fff" stroke-width="0">
+                            <g />
+                            <g stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M3 20V10h5v11H4a1 1 0 0 1-1-1M21 4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v4h18Zm-1 17a1 1 0 0 0 1-1V10H10v11Z"
+                                stroke="none" />
+                        </svg>
+                    </button>
+                    }
+                </div>
+                <img [src]="post.imageUrl" class="img-fluid rounded-top-4 z-0" loading="lazy" [ngStyle]="post.imgClip"
+                    #img (load)="applyClip(img, post, 'img', i)" />
+                <div class="bg-white position-absolute top-50 h-50 w-100 z-n1">a</div>
             </div>
-            <img [src]="post.imageUrl" class="img-fluid rounded-top-4 z-0" loading="lazy"
-                [ngStyle]="post.imgClip" #img (load)="applyClip(img, post, 'img', i)" />
-            <div class="bg-white position-absolute top-50 h-50 w-100 z-n1">a</div>
+            }
+
+            <div class="bg-white text-dark px-3" [ngClass]="{'pt-4 rounded-top-4':post.imageUrl==''}" #contentDiv
+                [ngStyle]="post.divClip" style="margin-top: -2px;">
+                <div class="font-w-500">
+                    {{post.title}}
+                </div>
+                <div class="text-small">
+                    {{post.postBody}}
+                </div>
+                <div class="text-x-small text-end" style="padding-bottom: 2.8rem;">
+                    {{ post.timestamp | date: 'MMMM d, yyyy h:mm:ss a'}}
+                </div>
+            </div>
+
         </div>
         }
-
-        <div class="bg-white text-dark px-3" [ngClass]="{'pt-4 rounded-top-4':post.imageUrl==''}" #contentDiv
-            [ngStyle]="post.divClip" style="margin-top: -2px;">
-            <div class="font-w-500">
-                {{post.title}}
-            </div>
-            <div class="text-small">
-                {{post.postBody}}
-            </div>
-            <div class="text-x-small text-end" style="padding-bottom: 2.8rem;">
-                {{ post.timestamp | date: 'MMMM d, yyyy h:mm:ss a'}}
-            </div>
-        </div>
-
     </div>
-    }
+
 </div>

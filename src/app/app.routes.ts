@@ -94,6 +94,10 @@ export function getRoutes(): Routes {
                     loadComponent: () => import('./components/small/s-updates/s-updates').then(mod => mod.SUpdates),
                 },
                 {
+                    path: 'resume',
+                    loadComponent: () => import('./components/common/resume/resume').then(mod => mod.Resume),
+                },
+                {
                     path: 'collection/:name',
                     loadComponent: () => import('./components/small/collection-item/collection-item').then(mod => mod.CollectionItem)
                 }

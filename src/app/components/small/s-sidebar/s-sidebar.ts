@@ -1,5 +1,5 @@
 import { Component, computed, effect, ElementRef, signal, ViewChild } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { StateService } from '../../../services/state-service';
 import { DecimalPipe, NgStyle, NgClass } from '@angular/common';
 import { Highlights } from '../../../interfaces/Highlights';
@@ -19,17 +19,13 @@ export class SSidebar {
 	isOpen = signal(false);
 	@ViewChild('audioPlayer') audioPlayerRef!: ElementRef<HTMLAudioElement>;
 	@ViewChild('progressBar') progressBarRef!: ElementRef<HTMLInputElement>;
-	@ViewChild('birthdayButton') birthdayButton!: ElementRef<HTMLInputElement>;
 
 	currentSongTime = signal<number>(0);
 
-
 	private progressAnimationFrame: number | null = null;
 	private isUserSeeking = false;
-	birthday = signal<any>([]);
 
-
-	constructor(public playerState: MusicPlayer, public RootScope: StateService, private http: HttpClient) {
+	constructor(public playerState: MusicPlayer, public RootScope: StateService, private http: HttpClient, private router : Router) {
 		effect(() => {
 			if (this.RootScope.interaction() != 0) {
 				this.playSong();
@@ -51,12 +47,12 @@ export class SSidebar {
 					isBirthdayHighlight: true,
 					content: `🥳🎉 ${item.message}`,
 					imageLink: '',
-					bigBanner : '',
-					description : '',
+					bigBanner: '',
+					description: '',
 					hasImage: false,
 					link: '',
-					publishedTime : '',
-					source : '',
+					publishedTime: '',
+					source: '',
 					rank: 1
 				}))]);
 			}
@@ -75,10 +71,10 @@ export class SSidebar {
 						isBirthdayHighlight: false,
 						content: rss.querySelector('title')?.textContent,
 						hasImage: true,
-						description : rss.querySelector('description')?.textContent,
+						description: rss.querySelector('description')?.textContent,
 						imageLink: rss.getElementsByTagName('media:content')[0].getAttribute("url"),
-						bigBanner : rss.getElementsByTagName('media:content')[2].getAttribute("url"),
-						publishedTime : rss.querySelector('pubDate')?.textContent,
+						bigBanner: rss.getElementsByTagName('media:content')[2].getAttribute("url"),
+						publishedTime: rss.querySelector('pubDate')?.textContent,
 						source: 'www.theguardian.com',
 						link: rss.querySelector('link')?.textContent,
 						rank: 2,
@@ -98,12 +94,12 @@ export class SSidebar {
 						uid: '',
 						isBirthdayHighlight: false,
 						content: rss.querySelector('title')?.textContent,
-						description : rss.querySelector('description')?.textContent,
+						description: rss.querySelector('description')?.textContent,
 						hasImage: true,
-						imageLink: 'organization_logo/gnews.webp',
-						bigBanner : '',
-						publishedTime : rss.querySelector('pubDate')?.textContent,
-						source : 'news.google.com',
+						imageLink: '/artifact/google.svg',
+						bigBanner: '',
+						publishedTime: rss.querySelector('pubDate')?.textContent,
+						source: 'news.google.com',
 						link: rss.querySelector('link')?.textContent,
 						rank: 3,
 						w: 0
@@ -120,9 +116,9 @@ export class SSidebar {
 					content: item.title,
 					hasImage: true,
 					bigBanner: item.image_url,
-					publishedTime : item.updated_at,
-					source : 'api.spaceflightnewsapi.net',
-					description : item.summary,
+					publishedTime: item.updated_at,
+					source: 'api.spaceflightnewsapi.net',
+					description: item.summary,
 					imageLink: item.image_url,
 					link: item.url,
 					rank: 4,
@@ -142,10 +138,10 @@ export class SSidebar {
 								isBirthdayHighlight: false,
 								content: `${data1.title} ${data1.text != undefined ? ' - ' + this.strip(data1.text) : ''}`,
 								hasImage: true,
-								bigBanner : '',
-								publishedTime : data1.time,
-								source : 'hacker-news.firebaseio.com',
-								description : '',
+								bigBanner: '',
+								publishedTime: data1.time,
+								source: 'hacker-news.firebaseio.com',
+								description: '',
 								imageLink: 'organization_logo/hacker_news.svg',
 								link: data1.url,
 								rank: 5,
@@ -272,27 +268,12 @@ export class SSidebar {
 	}
 
 	openHighlight(highlight: Highlights) {
-		if (highlight.isBirthdayHighlight) {
-			let result = prompt("Please enter password before proceeding");
-			this.http.post<any>('https://dashing-llama-639318.netlify.app/.netlify/functions/getBirthdays', {
-				password: result
-			}).subscribe({
-				next: (data) => {
-					this.birthday.set(data);
-					this.birthdayButton.nativeElement.click();
-				},
-				error: err => {
-					alert("OOPs, something went wrong")
-				}
-			});
+		if(highlight.isBirthdayHighlight) {
+			this.router.navigate(['/updates']);
 		}
-		else {
+		else{
 			this.openLink(highlight.link);
 		}
-	}
-
-	wishBirthday(message: string, mob: string) {
-		window.open(`https://api.whatsapp.com/send?phone=${mob}&text=${message}`)
 	}
 
 	openLink(link: string) {
