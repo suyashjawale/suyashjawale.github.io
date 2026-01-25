@@ -17,6 +17,7 @@ export class SSidebar {
 	isFullScreen = signal(false);
 	currentHighlight = signal(0);
 	isOpen = signal(false);
+	isLightMode = signal<boolean>(false);
 	@ViewChild('audioPlayer') audioPlayerRef!: ElementRef<HTMLAudioElement>;
 	@ViewChild('progressBar') progressBarRef!: ElementRef<HTMLInputElement>;
 
@@ -36,6 +37,10 @@ export class SSidebar {
 	strip(html: string) {
 		let doc = new DOMParser().parseFromString(html, 'text/html');
 		return doc.body.textContent || "";
+	}
+
+	toggleMode(){
+		
 	}
 
 	ngOnInit() {

@@ -75,7 +75,11 @@ export function getRoutes(): Routes {
                 },
                 {
                     path: 'snippets',
-                    loadComponent: () => import('./components/small/s-snippets/s-snippets').then(mod => mod.SSnippets),
+                    loadComponent: () => import('./components/common/snippets/snippets').then(mod => mod.Snippets),
+                },
+                {
+                    path: 'wisdom',
+                    loadComponent: () => import('./components/common/wisdom/wisdom').then(mod => mod.Wisdom),
                 },
                 {
                     path: 'posts',

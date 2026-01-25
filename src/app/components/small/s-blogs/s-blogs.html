@@ -3,6 +3,7 @@
     @for (blog of blogs(); let ind=$index; track ind) {
     <div class="mb-3" (click)="goToBlog(blog.slug)">
         <div class="ratio ratio-16x9">
+            <div class="bg-custom-shade rounded-top-4 placeholder-wave"></div>
             <img [src]="blog.thumbnail" class="img-fluid rounded-top-4 glideUp" (load)="onImgLoad($event)"
                 loading="lazy" />
         </div>

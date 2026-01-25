@@ -52,9 +52,8 @@
 					</svg>
 				</button>
 				} -->
-				<button class="btn shadow-none border-0" type="button" data-bs-toggle="offcanvas"
-					data-bs-target="#menu" aria-controls="menu" name="menu"
-					aria-label="Open Sidebar Menu for other page links">
+				<button class="btn shadow-none border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#menu"
+					aria-controls="menu" name="menu" aria-label="Open Sidebar Menu for other page links">
 					<svg fill="#fff" width="24" height="24" viewBox="0 0 64 64" data-name="Layer 1"
 						xmlns="http://www.w3.org/2000/svg">
 						<g stroke-width="0" />
@@ -67,7 +66,7 @@
 
 		</div>
 		@if(this.router.url!='/' && ['/blogs', '/collection', '/projects', '/snippets', '/posts',
-		'/playlist','/updates'].includes(this.router.url)){
+		'/playlist','/updates','/wisdom','/resume'].includes(this.router.url)){
 
 		<div class="position-absolute top-100 bg-white text-dark font-w-500 text-x-small px-4 py-1"
 			style="clip-path: polygon(0% 0%, 100% 0%, 85% 100%, 15% 100%);">
@@ -91,6 +90,12 @@
 			}
 			@else if(this.router.url.includes('updates')){
 			Updates
+			}
+			@else if(this.router.url.includes('wisdom')){
+			Wisdom
+			}
+			@else if(this.router.url.includes('resume')){
+			Resume
 			}
 		</div>
 
