@@ -77,40 +77,28 @@ img {
     content-visibility: auto;
 }
 
-/* HTML: <div class="loader"></div> */
-.loader {
-  --s: 15px;
-  
-  --_d: calc(0.303*var(--s));
-  width: calc(var(--s) + var(--_d));
-  aspect-ratio: 1;
-  display: grid;
-}
-.loader:before,
-.loader:after {
-  content: "";
-  grid-area: 1/1;
-  clip-path: polygon(var(--_d) 0,100% 0,100% calc(100% - var(--_d)),calc(100% - var(--_d)) 100%,0 100%,0 var(--_d));
-  background:
-    conic-gradient(from -90deg at calc(100% - var(--_d)) var(--_d),
-     #00ff9d 135deg,#00945b 0 270deg,#fff 0);
-  animation: l6 2s infinite;
-}
-.loader:after {
-  animation-delay:-1s;
-}
-@keyframes l6{
-  0%  {transform:translate(0,0)}
-  25% {transform:translate(25px,0)}
-  50% {transform:translate(25px,25px)}
-  75% {transform:translate(0,25px)}
-  100%{transform:translate(0,0)}
-}
-
 .hidden-background {
     visibility: hidden;
 }
 
 .dvh-100{
     height : 100dvh;
+}
+
+.loader {
+  width: 22px;
+  aspect-ratio: 2;
+  --_g: no-repeat radial-gradient(circle closest-side,var(--loaderColor) 90%,#0000);
+  background: 
+    var(--_g) 0%   50%,
+    var(--_g) 50%  50%,
+    var(--_g) 100% 50%;
+  background-size: calc(100%/3) 50%;
+  animation: l3 1s infinite linear;
+}
+@keyframes l3 {
+    20%{background-position:0%   0%, 50%  50%,100%  50%}
+    40%{background-position:0% 100%, 50%   0%,100%  50%}
+    60%{background-position:0%  50%, 50% 100%,100%   0%}
+    80%{background-position:0%  50%, 50%  50%,100% 100%}
 }

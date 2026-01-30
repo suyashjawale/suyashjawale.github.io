@@ -3,7 +3,7 @@
     @for (item of RootScope.sortedHighLights(); let ind=$index; track ind) {
     <div class="mb-3" (click)="openHighlight(item)">
         @if(item.bigBanner!=''){
-        <img [src]="item.bigBanner" class="img-fluid rounded-top-4 w-100" loading="lazy" />
+        <img [src]="item.bigBanner" class="img-fluid rounded-top-4 w-100" loading="lazy" (error)="item.bigBanner = '/artifact/placeholder.svg'" />
         }
 
         <div class="bg-custom-shade p-3 rounded-bottom-4" [ngClass]="{'rounded-4':item.bigBanner==''}">

@@ -144,7 +144,7 @@ export class SSidebar {
 								content: `${data1.title} ${data1.text != undefined ? ' - ' + this.strip(data1.text) : ''}`,
 								hasImage: true,
 								bigBanner: '',
-								publishedTime: data1.time,
+								publishedTime: new Date(data1.time * 1000).toUTCString(),
 								source: 'hacker-news.firebaseio.com',
 								description: '',
 								imageLink: 'organization_logo/hacker_news.svg',

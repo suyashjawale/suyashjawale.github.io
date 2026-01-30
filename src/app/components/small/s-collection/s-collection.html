@@ -1,16 +1,13 @@
 <div class="position-relative" [ngClass]="{'dvh-100 overflow-hidden':loadingData()!='loaded'}">
 
     <div class="d-flex flex-column justify-content-center align-items-center position-absolute bg-custom z-2 w-100"
-        style="transition: height 1s" [ngStyle]="{'height': loadingData()=='loaded'? '0dvh' : '100dvh' }">
+        style="transition: height 0.3s" [ngStyle]="{'height': loadingData()=='loaded'? '0dvh' : '100dvh' }">
         @if(loadingData()=='failed'){
-        <div>OOPS !!</div>
+        <div>No Posts Yet</div>
         <div class="text-x-small opacity-75">Stay tuned</div>
         }
         @else if(loadingData()=='loading'){
-        <div style="width: 47px; height: 62px;">
-            <div class="loader"></div>
-        </div>
-        <div class="opacity-75 text-small">{{currentStatus()}}</div>
+        <div class="loader" [ngStyle]="{'--loaderColor':'#fff'}"></div>
         }
     </div>
 
@@ -18,17 +15,28 @@
         <div class="row g-2 mb-1">
             <div class="col-6">
                 @for (item of left(); track $index) {
-                <img [src]="item.url" class="img-fluid rounded-3 mb-2 glideUp" #images loading="lazy"
-                    (click)="openCollectionItem(item.identifier)" />
+                <div class="ratio mb-2" [style]="'aspect-ratio:'+ item.width/item.height">
+                    <div class="placeholder-glow">
+                        <div class="placeholder bg-custom-shade h-100 w-100 rounded-3"></div>
+                    </div>
+                    <img [src]="item.url" class="img-fluid rounded-3 glideUp" loading="lazy"
+                        (click)="openCollectionItem(item.identifier)" (load)="onImgLoad($event)" />
+                </div>
                 }
             </div>
 
             <div class="col-6">
                 @for (item of right(); track $index) {
-                <img [src]="item.url" class="img-fluid rounded-3 mb-2 glideUp" #images loading="lazy"
-                    (click)="openCollectionItem(item.identifier)" (load)="lastImageLoad($index)" />
+                <div class="ratio mb-2" [style]="'aspect-ratio:'+ item.width/item.height">
+                    <div class="placeholder-glow">
+                        <div class="placeholder bg-custom-shade h-100 w-100 rounded-3"></div>
+                    </div>
+                    <img [src]="item.url" class="img-fluid rounded-3 glideUp" loading="lazy"
+                        (click)="openCollectionItem(item.identifier)" (load)="onImgLoad($event)" />
+                </div>
                 }
             </div>
         </div>
     </div>
+
 </div>

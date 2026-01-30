@@ -45,7 +45,7 @@ export class SPosts {
 					item.divClip = '';
 					item.imgClip = '';
 				});
-				data['posts'].sort((a:any, b:any) => {
+				data['posts'].sort((a: any, b: any) => {
 					return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
 				});
 				this.posts.set(data['posts'])
@@ -54,7 +54,7 @@ export class SPosts {
 						if (this.posts()[ind].imageLink != "") {
 							this.imageCount.update(cnt => cnt + 1);
 						}
-						this.applyClip(elementRef.nativeElement, this.posts()[ind], "div", 0);
+						this.applyClip(elementRef.nativeElement, this.posts()[ind], "div", ind);
 					});
 				}, 2);
 			},
@@ -80,19 +80,19 @@ export class SPosts {
 
 		if (elemType == 'img') {
 			post.imgClip = style;
+			img.style.animationDelay = `${Math.random() * 120}ms`;
+			img.classList.add('reveal');
 		}
 		else {
 			post.divClip = style;
 		}
-		this.currentStatus.set('Hydrating Images');
-		if (elemType == 'img' && ind == this.imageCount() - 1) {
-			setTimeout(() => {
-				this.loadingData.set('loaded');
-			}, 3000);
+
+		if (ind == this.posts().length - 1) {
+			this.loadingData.set('loaded');
 		}
 	}
 
-	openCollectionItem(identifier:string){
+	openCollectionItem(identifier: string) {
 		this.router.navigate(["/collection", identifier])
 	}
 

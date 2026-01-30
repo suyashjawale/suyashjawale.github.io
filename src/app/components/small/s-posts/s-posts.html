@@ -1,26 +1,24 @@
 <div class="position-relative" [ngClass]="{'dvh-100 overflow-hidden':loadingData()!='loaded'}">
-    
+
     <div class="d-flex flex-column justify-content-center align-items-center position-absolute bg-custom z-2 w-100"
-        style="transition: height 0.5s" [ngStyle]="{'height': loadingData()=='loaded'? '0dvh' : '100dvh' }">
+        style="transition: height 0.3s" [ngStyle]="{'height': loadingData()=='loaded'? '0dvh' : '100dvh' }">
         @if(loadingData()=='failed'){
-            <div>No Posts Yet</div>
-            <div class="text-x-small opacity-75">Stay tuned</div>
-            }
-            @else if(loadingData()=='loading'){
-            <div style="width: 47px; height: 62px;">
-                <div class="loader"></div>
-            </div>
-            <div class="opacity-75 text-small">{{currentStatus()}}</div>
-            }    
-            @else if(loadingData()=='validation'){
-                <div class="border border-secondary rounded border-opacity-50">
-                    <input type="text" class="text-center border-0 bg-transparent shadow-none px-3 py-2" style="outline: none;" [(ngModel)]="numberField" placeholder="My Number" maxlength="10" (input)="validateUser()"/>
-                </div>
-            }
-            @else if(loadingData()=='Access Restricted'){
-                <img src="artifact/no-nooo-circle.gif" class="img-fluid w-25"/>
-                <div class="py-3">Access Restricted</div>
-            }
+        <div>No Posts Yet</div>
+        <div class="text-x-small opacity-75">Stay tuned</div>
+        }
+        @else if(loadingData()=='loading'){
+        <div class="loader" [ngStyle]="{'--loaderColor':'#fff'}"></div>
+        }
+        @else if(loadingData()=='validation'){
+        <div class="border border-secondary rounded border-opacity-50">
+            <input type="text" class="text-center border-0 bg-transparent shadow-none px-3 py-2" style="outline: none;"
+                [(ngModel)]="numberField" placeholder="My Number" maxlength="10" (input)="validateUser()" />
+        </div>
+        }
+        @else if(loadingData()=='Access Restricted'){
+        <img src="artifact/no-nooo-circle.gif" class="img-fluid w-25" />
+        <div class="py-3">Access Restricted</div>
+        }
     </div>
 
     <div [ngStyle]="{'margin-top': stateService.navHeight()+38+'px'}" class="container-fluid">
@@ -47,8 +45,14 @@
                     </button>
                     }
                 </div>
-                <img [src]="post.imageUrl" class="img-fluid rounded-top-4 z-0" loading="lazy" [ngStyle]="post.imgClip"
-                    #img (load)="applyClip(img, post, 'img', i)" />
+                <div class="ratio bg-white rounded-top-4 text-dark" [style]="'aspect-ratio:'+ post.width/post.height">
+                    <div class="d-flex align-items-center">
+                        <div class="loader mx-auto" [ngStyle]="{'--loaderColor':'#000'}"></div>
+                    </div>
+                    <img [src]="post.imageUrl" class="img-fluid rounded-top-4 z-0 glideUp" loading="lazy"
+                        [ngStyle]="post.imgClip" #img (load)="applyClip(img, post, 'img', i)" />
+                </div>
+
                 <div class="bg-white position-absolute top-50 h-50 w-100 z-n1">a</div>
             </div>
             }
