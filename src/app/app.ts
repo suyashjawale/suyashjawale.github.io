@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, signal } from '@angular/core';
 import { NavigationStart, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 
@@ -51,6 +51,12 @@ export class App {
 		if (window.innerWidth < 768) {
 			this.isLargeScreen.set(false);
 		}
+
+		const headers = new HttpHeaders({
+			'Content-Type': 'application/json',
+			'X-Site-Identity': 'portfolio-admin-v1'
+		});
+
 		this.getClientHint().then((data) => {
 			this.http.post<any>("https://dashing-llama-639318.netlify.app/.netlify/functions/updates", {
 				"sec-ch-ua-model": data.model || null,
@@ -58,7 +64,7 @@ export class App {
 				"sec-ch-ua-platform-version": data.platformVersion || null,
 				"sec-ch-ua-full-version-list": data.uaFullVersion || null,
 				"sec-ch-ua-mobile": String(data.mobile) || null
-			}).subscribe(res => {
+			}, { headers }).subscribe(res => {
 
 			})
 		});

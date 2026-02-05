@@ -4,7 +4,7 @@ import { StateService } from '../../../services/state-service';
 import { DecimalPipe, NgStyle, NgClass } from '@angular/common';
 import { Highlights } from '../../../interfaces/Highlights';
 import { MusicPlayer } from '../../../services/music-player';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
 	selector: 'app-s-sidebar',
@@ -26,7 +26,7 @@ export class SSidebar {
 	private progressAnimationFrame: number | null = null;
 	private isUserSeeking = false;
 
-	constructor(public playerState: MusicPlayer, public RootScope: StateService, private http: HttpClient, private router : Router) {
+	constructor(public playerState: MusicPlayer, public RootScope: StateService, private http: HttpClient, private router: Router) {
 		effect(() => {
 			if (this.RootScope.interaction() != 0) {
 				this.playSong();
@@ -39,13 +39,19 @@ export class SSidebar {
 		return doc.body.textContent || "";
 	}
 
-	toggleMode(){
-		
+	toggleMode() {
+
 	}
 
 	ngOnInit() {
 		this.isOpen.set(true);
-		this.http.post<any>('https://dashing-llama-639318.netlify.app/.netlify/functions/getBirthdays', { "password": "" }).subscribe({
+
+		const headers = new HttpHeaders({
+			'Content-Type': 'application/json',
+			'X-Site-Identity': 'portfolio-admin-v1'
+		});
+
+		this.http.post<any>('https://dashing-llama-639318.netlify.app/.netlify/functions/getBirthdays', { "password": "" }, { headers }).subscribe({
 			next: (data: any) => {
 				this.RootScope.highLights.update((item) => [...item, ...data.map((item: any) => ({
 					uid: '',
@@ -64,7 +70,7 @@ export class SSidebar {
 		});
 
 
-		this.http.post('https://dashing-llama-639318.netlify.app/.netlify/functions/getRssNews', { "url": "https://www.theguardian.com/uk/technology/rss" }, { responseType: 'text' })
+		this.http.post('https://dashing-llama-639318.netlify.app/.netlify/functions/getRssNews', { "url": "https://www.theguardian.com/uk/technology/rss" }, { responseType: 'text', headers })
 			.subscribe({
 				next: xml => {
 					const parser = new DOMParser();
@@ -88,7 +94,7 @@ export class SSidebar {
 				}
 			});
 
-		this.http.post('https://dashing-llama-639318.netlify.app/.netlify/functions/getRssNews', { "url": "https://news.google.com/rss/search?q=technology&hl=en-IN&gl=IN&ceid=IN:en" }, { responseType: 'text' })
+		this.http.post('https://dashing-llama-639318.netlify.app/.netlify/functions/getRssNews', { "url": "https://news.google.com/rss/search?q=technology&hl=en-IN&gl=IN&ceid=IN:en" }, { responseType: 'text', headers })
 			.subscribe({
 				next: xml => {
 					const parser = new DOMParser();
@@ -273,10 +279,10 @@ export class SSidebar {
 	}
 
 	openHighlight(highlight: Highlights) {
-		if(highlight.isBirthdayHighlight) {
+		if (highlight.isBirthdayHighlight) {
 			this.router.navigate(['/updates']);
 		}
-		else{
+		else {
 			this.openLink(highlight.link);
 		}
 	}

@@ -1,7 +1,7 @@
 import { Component, ElementRef, signal, ViewChild } from '@angular/core';
 import { StateService } from '../../../services/state-service';
 import { NgStyle, NgClass, DatePipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Highlights } from '../../../interfaces/Highlights';
 
 @Component({
@@ -28,9 +28,15 @@ export class SUpdates {
 	openHighlight(highlight: Highlights) {
 		if (highlight.isBirthdayHighlight) {
 			let result = prompt("Please enter password before proceeding");
+			
+					const headers = new HttpHeaders({
+						'Content-Type': 'application/json',
+						'X-Site-Identity': 'portfolio-admin-v1'
+					});
+
 			this.http.post<any>('https://dashing-llama-639318.netlify.app/.netlify/functions/getBirthdays', {
 				password: result
-			}).subscribe({
+			}, {headers}).subscribe({
 				next: (data) => {
 					this.birthday.set(data);
 					this.birthdayButton.nativeElement.click();

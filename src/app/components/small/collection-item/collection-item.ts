@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 import { NgClass, NgStyle } from '@angular/common';
 import { StateService } from '../../../services/state-service';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
 	selector: 'app-collection-item',
@@ -18,11 +18,17 @@ export class CollectionItem {
 	});
 	currentStatus = signal<string>('Fetching Data');
 	loadingData = signal<string>('loading');
-	
+
 	ngOnInit() {
 		this.route.paramMap.subscribe(params => {
 			const productID = params.get('name');
-			this.http.get<any>(`https://dashing-llama-639318.netlify.app/.netlify/functions/getCollection?name=${productID}`).subscribe({
+
+			const headers = new HttpHeaders({
+				'Content-Type': 'application/json',
+				'X-Site-Identity': 'portfolio-admin-v1'
+			});
+
+			this.http.get<any>(`https://dashing-llama-639318.netlify.app/.netlify/functions/getCollection?name=${productID}`, { headers }).subscribe({
 				next: data => {
 					this.selected.set(data);
 				}

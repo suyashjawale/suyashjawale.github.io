@@ -1,7 +1,7 @@
 import { Component, ElementRef, QueryList, signal, ViewChildren } from '@angular/core';
 import { NgStyle, NgClass, DatePipe } from '@angular/common';
 import { StateService } from '../../../services/state-service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -38,7 +38,13 @@ export class SPosts {
 	}
 
 	getPosts(number: string) {
-		this.http.post<any>('https://dashing-llama-639318.netlify.app/.netlify/functions/getPosts', { "number": number }).subscribe({
+
+		const headers = new HttpHeaders({
+			'Content-Type': 'application/json',
+			'X-Site-Identity': 'portfolio-admin-v1'
+		});
+
+		this.http.post<any>('https://dashing-llama-639318.netlify.app/.netlify/functions/getPosts', { "number": number }, { headers }).subscribe({
 			next: data => {
 				localStorage.setItem('number', number);
 				data['posts'].forEach((item: any) => {
@@ -59,7 +65,7 @@ export class SPosts {
 				}, 2);
 			},
 			error: err => {
-				this.loadingData.set(err.error['status']);
+				this.loadingData.set('failed');
 			}
 		});
 	}

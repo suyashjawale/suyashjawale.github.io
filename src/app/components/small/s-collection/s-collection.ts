@@ -2,11 +2,11 @@ import { Component, ElementRef, QueryList, signal, ViewChild, ViewChildren } fro
 import { NgClass, NgStyle } from '@angular/common';
 import { StateService } from '../../../services/state-service';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
 	selector: 'app-s-collection',
-	imports: [NgStyle,NgClass],
+	imports: [NgStyle, NgClass],
 	templateUrl: './s-collection.html',
 	styleUrl: './s-collection.scss'
 })
@@ -15,13 +15,19 @@ export class SCollection {
 	left = signal<any>([]);
 	right = signal<any>([]);
 	loadingData = signal<string>('loading');
-	
+
 	constructor(public stateService: StateService, private router: Router, private http: HttpClient) { }
 
 	ngOnInit() {
 		setTimeout(() => {
 			if (this.stateService.collectionList().length == 0) {
-				this.http.get<any>('https://dashing-llama-639318.netlify.app/.netlify/functions/getCollection').subscribe({
+
+				const headers = new HttpHeaders({
+					'Content-Type': 'application/json',
+					'X-Site-Identity': 'portfolio-admin-v1'
+				});
+
+				this.http.get<any>('https://dashing-llama-639318.netlify.app/.netlify/functions/getCollection', { headers }).subscribe({
 					next: data => {
 						data.sort((a: any, b: any) => a.priority - b.priority);
 						this.stateService.collectionList.set(data);
