@@ -1,6 +1,6 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { Song } from '../interfaces/song';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
 	providedIn: 'root'
@@ -8,14 +8,14 @@ import { HttpClient } from '@angular/common/http';
 export class MusicPlayer {
 	songs = signal<Song[]>([]);
 	blankSong = signal<Song>({
-		artist:'',
-		fileName:'',
-		playingSong:false,
-		queueNumber:0,
-		rank:0,
-		songName:'',
-		thumbnail:'',
-		yt_link:''
+		artist: '',
+		fileName: '',
+		playingSong: false,
+		queueNumber: 0,
+		rank: 0,
+		songName: '',
+		thumbnail: '',
+		yt_link: ''
 	});
 	// Index of the currently playing song
 	currentSongIdx = signal<number>(0);
@@ -32,9 +32,14 @@ export class MusicPlayer {
 	canPlayAudio = signal<boolean>(false);
 
 	constructor(private http: HttpClient) {
-		this.http.get<Song[]>('https://dashing-llama-639318.netlify.app/.netlify/functions/fetchSongs').subscribe({
+		const headers = new HttpHeaders({
+			'Content-Type': 'application/json',
+			'X-Site-Identity': 'portfolio-admin-v1'
+		});
+
+		this.http.get<Song[]>('https://dashing-llama-639318.netlify.app/.netlify/functions/fetchSongs', { headers }).subscribe({
 			next: (data) => {
-				this.songs.set(data.sort((a,b)=> a.rank-b.rank));
+				this.songs.set(data.sort((a, b) => a.rank - b.rank));
 			}
 		});
 	}
