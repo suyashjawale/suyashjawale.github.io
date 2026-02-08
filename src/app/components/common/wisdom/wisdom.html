@@ -1,17 +1,27 @@
 @if(wisdom().length>0){
 <div [ngStyle]="{'margin-top': stateService.navHeight()+38+'px'}" class="container-fluid">
     @for (blog of wisdom(); let ind=$index; track ind) {
-    <div class="mb-3" (click)="goToBlog(blog.slug)">
+    <div class="mb-3">
         <div class="ratio" [style]="'aspect-ratio:'+ blog.width/blog.height">
             <div class="bg-custom-shade rounded-top-4 placeholder-wave"></div>
             <img [src]="blog.imageurl" class="img-fluid rounded-top-4 glideUp" (load)="onImgLoad($event)"
                 loading="lazy" />
+            <div style="top: 89.5%; left: 2%">
+                <button class="btn blur-background btn-sm me-1" (click)="goToBlog(blog.ogLink)">
+                    <svg width="17" height="17" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>icon/20/icon-open-in-new</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Output-svg" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="out" transform="translate(-838.000000, -29.000000)" fill="#ffffff"> <path d="M855,46 L841,46 L841,32 L848,32 L848,30 L841,30 C839.89,30 839,30.9 839,32 L839,46 C839,47.1 839.89,48 841,48 L855,48 C856.1,48 857,47.1 857,46 L857,39 L855,39 L855,46 L855,46 Z M850,30 L850,32 L853.59,32 L843.76,41.83 L845.17,43.24 L855,33.41 L855,37 L857,37 L857,30 L850,30 L850,30 Z" id="path"> </path> </g> </g> </g></svg>
+                </button>
+                @if(blog.freediumlink!=""){
+                    <button class="btn blur-background btn-sm me-1" (click)="goToBlog(blog.freediumlink)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 5C10.3431 5 9 6.34315 9 8V11H16C17.6569 11 19 12.3431 19 14V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V14C5 12.6938 5.83481 11.5825 7 11.1707V8C7 5.23858 9.23858 3 12 3C14.7614 3 17 5.23858 17 8V8.1C17 8.65228 16.5523 9.1 16 9.1C15.4477 9.1 15 8.65228 15 8.1V8C15 6.34315 13.6569 5 12 5ZM8 13C7.44772 13 7 13.4477 7 14V18C7 18.5523 7.44772 19 8 19H16C16.5523 19 17 18.5523 17 18V14C17 13.4477 16.5523 13 16 13H8Z" fill="#ffffff"></path> </g></svg></button>
+                }
+                <button class="btn blur-background btn-sm" (click)="goToBlog(blog.zipLink)">
+                    <svg width="17" height="17" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M18.1716 1C18.702 1 19.2107 1.21071 19.5858 1.58579L22.4142 4.41421C22.7893 4.78929 23 5.29799 23 5.82843V20C23 21.6569 21.6569 23 20 23H4C2.34315 23 1 21.6569 1 20V4C1 2.34315 2.34315 1 4 1H18.1716ZM4 3C3.44772 3 3 3.44772 3 4V20C3 20.5523 3.44772 21 4 21L5 21L5 15C5 13.3431 6.34315 12 8 12L16 12C17.6569 12 19 13.3431 19 15V21H20C20.5523 21 21 20.5523 21 20V6.82843C21 6.29799 20.7893 5.78929 20.4142 5.41421L18.5858 3.58579C18.2107 3.21071 17.702 3 17.1716 3H17V5C17 6.65685 15.6569 8 14 8H10C8.34315 8 7 6.65685 7 5V3H4ZM17 21V15C17 14.4477 16.5523 14 16 14L8 14C7.44772 14 7 14.4477 7 15L7 21L17 21ZM9 3H15V5C15 5.55228 14.5523 6 14 6H10C9.44772 6 9 5.55228 9 5V3Z" fill="#ffffff"></path> </g></svg>
+                </button>
+            </div>
         </div>
-        <div class="bg-white p-3 rounded-bottom-4 text-dark">
+        <div class="bg-white p-3 rounded-bottom-4 text-dark" (click)="goToBlog(blog.ogLink)" role="button">
             <div class="font-w-500">{{blog.title}}</div>
             <div class="mt-1 text-small">{{blog.description}}</div>
-            <div class="text-x-small mt-2 text-end text-secondary">{{blog.publishedDate | date: 'MMMM d, yyyy h:mm:ss
-                a'}}</div>
+            <div class="text-x-small mt-2 text-end text-secondary">{{blog.publishedDate | date: 'MMMM d, yyyy h:mm:ss a'}}</div>
         </div>
     </div>
     }
