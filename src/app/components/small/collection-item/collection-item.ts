@@ -28,7 +28,7 @@ export class CollectionItem {
 				'X-Site-Identity': 'portfolio-admin-v1'
 			});
 
-			this.http.get<any>(`https://dashing-llama-639318.netlify.app/.netlify/functions/getCollection?name=${productID}`, { headers }).subscribe({
+			this.http.get<any>(this.stateService.apiGateway() + `.netlify/functions/getCollection?name=${productID}`, { headers }).subscribe({
 				next: data => {
 					this.selected.set(data);
 				}

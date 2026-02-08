@@ -12,6 +12,7 @@ import { DatePipe, NgStyle } from '@angular/common';
 export class Wisdom {
 
 	wisdom = signal<any>([]);
+	loadingStatus = signal<string>('loading');
 
 	constructor(private http: HttpClient, public stateService: StateService) { }
 
@@ -26,12 +27,13 @@ export class Wisdom {
 			'X-Site-Identity': 'portfolio-admin-v1'
 		});
 
-		this.http.get<any>('https://dashing-llama-639318.netlify.app/.netlify/functions/getWisdom', { headers }).subscribe({
+		this.http.get<any>(this.stateService.apiGateway() + '.netlify/functions/getWisdom', { headers }).subscribe({
 			next: data => {
 				this.wisdom.set(data);
+				this.loadingStatus.set('loaded');
 			},
 			error: err => {
-				console.log("error")
+				this.loadingStatus.set('failed')
 			}
 		});
 	}

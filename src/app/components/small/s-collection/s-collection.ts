@@ -27,7 +27,7 @@ export class SCollection {
 					'X-Site-Identity': 'portfolio-admin-v1'
 				});
 
-				this.http.get<any>('https://dashing-llama-639318.netlify.app/.netlify/functions/getCollection', { headers }).subscribe({
+				this.http.get<any>(this.stateService.apiGateway() + '.netlify/functions/getCollection', { headers }).subscribe({
 					next: data => {
 						data.sort((a: any, b: any) => a.priority - b.priority);
 						this.stateService.collectionList.set(data);

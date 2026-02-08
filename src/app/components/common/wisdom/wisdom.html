@@ -2,7 +2,7 @@
 <div [ngStyle]="{'margin-top': stateService.navHeight()+38+'px'}" class="container-fluid">
     @for (blog of wisdom(); let ind=$index; track ind) {
     <div class="mb-3" (click)="goToBlog(blog.slug)">
-        <div class="ratio ratio-16x9">
+        <div class="ratio" [style]="'aspect-ratio:'+ blog.width/blog.height">
             <div class="bg-custom-shade rounded-top-4 placeholder-wave"></div>
             <img [src]="blog.imageurl" class="img-fluid rounded-top-4 glideUp" (load)="onImgLoad($event)"
                 loading="lazy" />
@@ -10,7 +10,8 @@
         <div class="bg-white p-3 rounded-bottom-4 text-dark">
             <div class="font-w-500">{{blog.title}}</div>
             <div class="mt-1 text-small">{{blog.description}}</div>
-            <div class="text-x-small mt-2 text-end text-secondary">{{blog.publishedDate | date: 'MMMM d, yyyy h:mm:ss a'}}</div>
+            <div class="text-x-small mt-2 text-end text-secondary">{{blog.publishedDate | date: 'MMMM d, yyyy h:mm:ss
+                a'}}</div>
         </div>
     </div>
     }
@@ -18,9 +19,14 @@
 }
 @else {
 <div class="container-fluid d-flex justify-content-center align-items-center vh-100">
+    @if(loadingStatus()=='failed'){
     <div class="text-center">
         <div>No wisdom available</div>
         <div class="text-x-small opacity-75">Check back soon</div>
     </div>
+    }
+    @else if(loadingStatus()=='loading'){
+    <div class="loader" [ngStyle]="{'--loaderColor':'#fff'}"></div>
+    }
 </div>
 }

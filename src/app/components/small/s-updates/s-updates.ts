@@ -34,7 +34,7 @@ export class SUpdates {
 						'X-Site-Identity': 'portfolio-admin-v1'
 					});
 
-			this.http.post<any>('https://dashing-llama-639318.netlify.app/.netlify/functions/getBirthdays', {
+			this.http.post<any>(this.RootScope.apiGateway() + '.netlify/functions/getBirthdays', {
 				password: result
 			}, {headers}).subscribe({
 				next: (data) => {

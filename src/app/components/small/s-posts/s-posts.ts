@@ -44,7 +44,7 @@ export class SPosts {
 			'X-Site-Identity': 'portfolio-admin-v1'
 		});
 
-		this.http.post<any>('https://dashing-llama-639318.netlify.app/.netlify/functions/getPosts', { "number": number }, { headers }).subscribe({
+		this.http.post<any>(this.stateService.apiGateway() + '.netlify/functions/getPosts', { "number": number }, { headers }).subscribe({
 			next: data => {
 				localStorage.setItem('number', number);
 				data['posts'].forEach((item: any) => {

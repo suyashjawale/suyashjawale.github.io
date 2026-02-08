@@ -51,7 +51,7 @@ export class SSidebar {
 			'X-Site-Identity': 'portfolio-admin-v1'
 		});
 
-		this.http.post<any>('https://dashing-llama-639318.netlify.app/.netlify/functions/getBirthdays', { "password": "" }, { headers }).subscribe({
+		this.http.post<any>(this.RootScope.apiGateway() + '.netlify/functions/getBirthdays', { "password": "" }, { headers }).subscribe({
 			next: (data: any) => {
 				this.RootScope.highLights.update((item) => [...item, ...data.map((item: any) => ({
 					uid: '',
@@ -70,7 +70,7 @@ export class SSidebar {
 		});
 
 
-		this.http.post('https://dashing-llama-639318.netlify.app/.netlify/functions/getRssNews', { "url": "https://www.theguardian.com/uk/technology/rss" }, { responseType: 'text', headers })
+		this.http.post(this.RootScope.apiGateway() + '.netlify/functions/getRssNews', { "url": "https://www.theguardian.com/uk/technology/rss" }, { responseType: 'text', headers })
 			.subscribe({
 				next: xml => {
 					const parser = new DOMParser();
@@ -94,7 +94,7 @@ export class SSidebar {
 				}
 			});
 
-		this.http.post('https://dashing-llama-639318.netlify.app/.netlify/functions/getRssNews', { "url": "https://news.google.com/rss/search?q=technology&hl=en-IN&gl=IN&ceid=IN:en" }, { responseType: 'text', headers })
+		this.http.post(this.RootScope.apiGateway() + '.netlify/functions/getRssNews', { "url": "https://news.google.com/rss/search?q=technology&hl=en-IN&gl=IN&ceid=IN:en" }, { responseType: 'text', headers })
 			.subscribe({
 				next: xml => {
 					const parser = new DOMParser();
