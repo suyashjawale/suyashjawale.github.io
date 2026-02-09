@@ -29,13 +29,17 @@ export class Wisdom {
 
 		this.http.get<any>(this.stateService.apiGateway() + '.netlify/functions/getWisdom', { headers }).subscribe({
 			next: data => {
-				this.wisdom.set(data);
+				this.wisdom.set(data.sort((a:any, b:any) => b.uploadIndex - a.uploadIndex));
 				this.loadingStatus.set('loaded');
 			},
 			error: err => {
 				this.loadingStatus.set('failed')
 			}
 		});
+	}
+
+	getHostName(link:string){
+		return new URL(link).hostname;
 	}
 
 	onImgLoad(e: Event) {
