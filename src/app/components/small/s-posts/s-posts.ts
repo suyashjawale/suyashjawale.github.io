@@ -51,10 +51,10 @@ export class SPosts {
 					item.divClip = '';
 					item.imgClip = '';
 				});
-				data['posts'].sort((a: any, b: any) => {
+				
+				this.posts.set(data['posts'].sort((a: any, b: any) => {
 					return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
-				});
-				this.posts.set(data['posts'])
+				}))
 				setTimeout(() => {
 					this.contentDiv.forEach((elementRef: ElementRef, ind: number) => {
 						if (this.posts()[ind].imageLink != "") {

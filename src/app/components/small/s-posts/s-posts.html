@@ -62,10 +62,8 @@
                 <div class="font-w-500">
                     {{post.title}}
                 </div>
-                <div class="text-small">
-                    {{post.postBody}}
-                </div>
-                <div class="text-x-small text-end" style="padding-bottom: 2.8rem;">
+                <div class="text-small pt-2" style="white-space: pre-wrap;">{{post.postBody}}</div>
+                <div class="text-x-small text-end pt-2 opacity-75" style="padding-bottom: 2.8rem;">
                     {{ post.timestamp | date: 'MMMM d, yyyy h:mm:ss a'}}
                 </div>
             </div>
