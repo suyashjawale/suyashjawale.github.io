@@ -4,6 +4,7 @@ import { StateService } from '../../../services/state-service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { environment } from '../../../../environment/environment';
 
 @Component({
 	selector: 'app-s-posts',
@@ -22,7 +23,7 @@ export class SPosts {
 	numberField = signal<string>('');
 
 	validateUser() {
-		if (this.numberField().trim().length == 10 && /^\d+$/.test(this.numberField())) {
+		if (this.numberField().trim().length == 10) {
 			this.loadingData.set('loading');
 			this.getPosts(this.numberField().trim());
 		}
@@ -44,7 +45,7 @@ export class SPosts {
 			'X-Site-Identity': 'portfolio-admin-v1'
 		});
 
-		this.http.post<any>(this.stateService.apiGateway() + '.netlify/functions/getPosts', { "number": number }, { headers }).subscribe({
+		this.http.post<any>(environment.domain + '.netlify/functions/getPosts', { "number": number }, { headers }).subscribe({
 			next: data => {
 				localStorage.setItem('number', number);
 				data['posts'].forEach((item: any) => {
@@ -64,7 +65,10 @@ export class SPosts {
 					});
 				}, 2);
 			},
-			error: err => {
+			error: err => {	
+				if('status' in err.error)
+				this.loadingData.set(err.error.status);
+				else
 				this.loadingData.set('failed');
 			}
 		});

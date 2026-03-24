@@ -3,6 +3,7 @@ import { NgClass, NgStyle } from '@angular/common';
 import { StateService } from '../../../services/state-service';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../../environment/environment';
 
 @Component({
 	selector: 'app-s-collection',
@@ -27,7 +28,7 @@ export class SCollection {
 					'X-Site-Identity': 'portfolio-admin-v1'
 				});
 
-				this.http.get<any>(this.stateService.apiGateway() + '.netlify/functions/getCollection', { headers }).subscribe({
+				this.http.get<any>(environment.domain + '.netlify/functions/getCollection', { headers }).subscribe({
 					next: data => {
 						data.sort((a: any, b: any) => a.priority - b.priority);
 						this.stateService.collectionList.set(data);

@@ -5,6 +5,7 @@ import { DecimalPipe, NgStyle, NgClass } from '@angular/common';
 import { Highlights } from '../../../interfaces/Highlights';
 import { MusicPlayer } from '../../../services/music-player';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../../environment/environment';
 
 @Component({
 	selector: 'app-s-sidebar',
@@ -51,7 +52,7 @@ export class SSidebar {
 			'X-Site-Identity': 'portfolio-admin-v1'
 		});
 
-		this.http.post<any>(this.RootScope.apiGateway() + '.netlify/functions/getBirthdays', { "password": "" }, { headers }).subscribe({
+		this.http.post<any>(environment.domain + '.netlify/functions/getBirthdays', { "password": "" }, { headers }).subscribe({
 			next: (data: any) => {
 				this.RootScope.highLights.update((item) => [...item, ...data.map((item: any) => ({
 					uid: '',
@@ -70,7 +71,7 @@ export class SSidebar {
 		});
 
 
-		this.http.post(this.RootScope.apiGateway() + '.netlify/functions/getRssNews', { "url": "https://www.theguardian.com/uk/technology/rss" }, { responseType: 'text', headers })
+		this.http.post(environment.domain + '.netlify/functions/getRssNews', { "url": "https://www.theguardian.com/uk/technology/rss" }, { responseType: 'text', headers })
 			.subscribe({
 				next: xml => {
 					const parser = new DOMParser();
@@ -94,7 +95,7 @@ export class SSidebar {
 				}
 			});
 
-		this.http.post(this.RootScope.apiGateway() + '.netlify/functions/getRssNews', { "url": "https://news.google.com/rss/search?q=technology&hl=en-IN&gl=IN&ceid=IN:en" }, { responseType: 'text', headers })
+		this.http.post(environment.domain + '.netlify/functions/getRssNews', { "url": "https://news.google.com/rss/search?q=technology&hl=en-IN&gl=IN&ceid=IN:en" }, { responseType: 'text', headers })
 			.subscribe({
 				next: xml => {
 					const parser = new DOMParser();

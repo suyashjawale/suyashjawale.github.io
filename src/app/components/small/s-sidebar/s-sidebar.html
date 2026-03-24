@@ -150,103 +150,108 @@
 			</div>
 		</div>
 
-		<div class="card rounded-4 mt-4 fade-in" style="height: 10rem;"
-			[ngStyle]="{'visibility': playerState.songs().length>0 ? 'visible' : 'hidden'}">
-			<img [src]="playerState.currentSong().thumbnail" class="card-img rounded-3 blur-filter my-auto"
-				style="height: 8.3rem;" alt="Music" loading="lazy" />
-			<div class="card-img-overlay">
-				<div class="row mx-0">
-					<div class="col-3 ps-0">
-						<img [src]="playerState.currentSong().thumbnail" class="img-fluid rounded-4" alt="..."
-							loading="lazy">
+		<div class="position-relative" style="height: 10rem;">
+			<div class="card rounded-4 mt-4 fade-in" style="height: 10rem;"
+				[ngStyle]="{'visibility': playerState.songs().length>0 ? 'visible' : 'hidden'}">
+				<img [src]="playerState.currentSong().thumbnail" class="card-img rounded-3 blur-filter my-auto"
+					style="height: 8.3rem;" alt="Music" loading="lazy" />
+				<div class="card-img-overlay">
+					<div class="row mx-0">
+						<div class="col-3 ps-0">
+							<img [src]="playerState.currentSong().thumbnail" class="img-fluid rounded-4" alt="..."
+								loading="lazy">
+						</div>
+						<div class="col ps-1">
+							<div class="font-w-500">{{playerState.currentSong().songName}}</div>
+							<div class="text-small">{{playerState.currentSong().artist}}</div>
+						</div>
+						<div class="col-auto p-0">
+							<button aria-labelledby="openYoutubeLink" aria-label="openYoutubeLink"
+								class="btn btn-transparent p-0 border-0 shadow-none"
+								(click)="openLink(playerState.currentSong().yt_link)">
+								<svg width="21" height="21" viewBox="0 -3 20 20" xmlns="http://www.w3.org/2000/svg"
+									fill="#fff" stroke="#fff">
+									<g stroke-width="0" />
+									<g stroke-linecap="round" stroke-linejoin="round" />
+									<path
+										d="M7.988 9.586V3.974c1.993.938 3.536 1.843 5.36 2.82-1.505.834-3.367 1.77-5.36 2.792m11.103-8.403c-.344-.453-.93-.805-1.553-.922-1.833-.348-13.267-.349-15.099 0q-.752.142-1.328.673C-.5 2.429.005 10.452.393 11.751c.164.562.375.968.64 1.235.343.352.812.594 1.351.703 1.51.312 9.284.486 15.122.047a2.6 2.6 0 0 0 1.39-.712c1.49-1.49 1.388-9.962.195-11.841"
+										fill-rule="evenodd" stroke="none" />
+								</svg>
+							</button>
+						</div>
 					</div>
-					<div class="col ps-1">
-						<div class="font-w-500">{{playerState.currentSong().songName}}</div>
-						<div class="text-small">{{playerState.currentSong().artist}}</div>
+					<div class="d-flex align-items-center my-1">
+						<audio #audioPlayer class="d-none" [src]="playerState.currentSong().fileName" preload="none"
+							(ended)="onAudioEnded();playerState.canPlayAudio.set(false)" (pause)="onAudioPaused()"
+							(play)="onAudioPlayed()" (canplay)="playerState.canPlayAudio.set(true)">
+						</audio>
+						<input #progressBar type="range" class="w-100" min="0" aria-label="Progress Bar"
+							[max]="audioPlayer!=undefined?audioPlayer?.duration || 0: 0" step="0.001"
+							(input)="seekAudio($event)" (mousedown)="onSeekStart()" (mouseup)="onSeekEnd()"
+							(touchstart)="onSeekStart()" (touchend)="onSeekEnd()">
+
+						<div class="ms-1 text-small time-display">
+							{{ (currentSongTime()/60) | number:'1.2-2' }}
+						</div>
 					</div>
-					<div class="col-auto p-0">
-						<button aria-labelledby="openYoutubeLink" aria-label="openYoutubeLink"
-							class="btn btn-transparent p-0 border-0 shadow-none"
-							(click)="openLink(playerState.currentSong().yt_link)">
-							<svg width="21" height="21" viewBox="0 -3 20 20" xmlns="http://www.w3.org/2000/svg"
-								fill="#fff" stroke="#fff">
+					<div class="d-flex justify-content-around pb-1 align-items-center">
+						@if(playerState.canPlayAudio()){
+						<button class="btn btn-transparent border-0 shadow-none"
+							(click)="playerState.canPlayAudio.set(false);previousSong()">
+							<svg width="19" height="19" viewBox="0 -2 12 12" xmlns="http://www.w3.org/2000/svg" fill="#fff">
 								<g stroke-width="0" />
 								<g stroke-linecap="round" stroke-linejoin="round" />
 								<path
-									d="M7.988 9.586V3.974c1.993.938 3.536 1.843 5.36 2.82-1.505.834-3.367 1.77-5.36 2.792m11.103-8.403c-.344-.453-.93-.805-1.553-.922-1.833-.348-13.267-.349-15.099 0q-.752.142-1.328.673C-.5 2.429.005 10.452.393 11.751c.164.562.375.968.64 1.235.343.352.812.594 1.351.703 1.51.312 9.284.486 15.122.047a2.6 2.6 0 0 0 1.39-.712c1.49-1.49 1.388-9.962.195-11.841"
-									fill-rule="evenodd" stroke="none" />
+									d="M11.999.868v6.263c0 .714-1.145 1.122-1.781.694L5.999 5.14v1.991c0 .714-.573 1.122-1.209.694L.479 4.693c-.514-.347-.681-1.04-.167-1.387L4.79.176c.636-.43 1.209-.022 1.209.692v1.991L10.218.175c.636-.429 1.781-.02 1.781.693"
+									fill-rule="evenodd" />
 							</svg>
 						</button>
-					</div>
-				</div>
-				<div class="d-flex align-items-center my-1">
-					<audio #audioPlayer class="d-none" [src]="playerState.currentSong().fileName" preload="none"
-						(ended)="onAudioEnded();playerState.canPlayAudio.set(false)" (pause)="onAudioPaused()"
-						(play)="onAudioPlayed()" (canplay)="playerState.canPlayAudio.set(true)">
-					</audio>
-					<input #progressBar type="range" class="w-100" min="0" aria-label="Progress Bar"
-						[max]="audioPlayer!=undefined?audioPlayer?.duration || 0: 0" step="0.001"
-						(input)="seekAudio($event)" (mousedown)="onSeekStart()" (mouseup)="onSeekEnd()"
-						(touchstart)="onSeekStart()" (touchend)="onSeekEnd()">
-
-					<div class="ms-1 text-small time-display">
-						{{ (currentSongTime()/60) | number:'1.2-2' }}
-					</div>
-				</div>
-				<div class="d-flex justify-content-around pb-1 align-items-center">
-					@if(playerState.canPlayAudio()){
-					<button class="btn btn-transparent border-0 shadow-none"
-						(click)="playerState.canPlayAudio.set(false);previousSong()">
-						<svg width="19" height="19" viewBox="0 -2 12 12" xmlns="http://www.w3.org/2000/svg" fill="#fff">
-							<g stroke-width="0" />
-							<g stroke-linecap="round" stroke-linejoin="round" />
-							<path
-								d="M11.999.868v6.263c0 .714-1.145 1.122-1.781.694L5.999 5.14v1.991c0 .714-.573 1.122-1.209.694L.479 4.693c-.514-.347-.681-1.04-.167-1.387L4.79.176c.636-.43 1.209-.022 1.209.692v1.991L10.218.175c.636-.429 1.781-.02 1.781.693"
-								fill-rule="evenodd" />
-						</svg>
-					</button>
-					<button class="btn btn-transparent border-0 shadow-none">
-						@if(playerState.currentSong().playingSong){
-						<svg (click)="pauseSong()" fill="#fff" width="21" height="21" viewBox="0 0 32 32"
-							xmlns="http://www.w3.org/2000/svg" stroke="#fff" stroke-width="0">
-							<g />
-							<g stroke-linecap="round" stroke-linejoin="round" />
-							<path
-								d="M5.92 24.096q0 .832.576 1.408t1.44.608h4.032q.832 0 1.44-.608t.576-1.408V7.936q0-.832-.576-1.44t-1.44-.576H7.936q-.832 0-1.44.576t-.576 1.44zm12.096 0q0 .832.608 1.408t1.408.608h4.032q.832 0 1.44-.608t.576-1.408V7.936q0-.832-.576-1.44t-1.44-.576h-4.032q-.832 0-1.408.576t-.608 1.44z"
-								stroke="none" />
-						</svg>
+						<button class="btn btn-transparent border-0 shadow-none">
+							@if(playerState.currentSong().playingSong){
+							<svg (click)="pauseSong()" fill="#fff" width="21" height="21" viewBox="0 0 32 32"
+								xmlns="http://www.w3.org/2000/svg" stroke="#fff" stroke-width="0">
+								<g />
+								<g stroke-linecap="round" stroke-linejoin="round" />
+								<path
+									d="M5.92 24.096q0 .832.576 1.408t1.44.608h4.032q.832 0 1.44-.608t.576-1.408V7.936q0-.832-.576-1.44t-1.44-.576H7.936q-.832 0-1.44.576t-.576 1.44zm12.096 0q0 .832.608 1.408t1.408.608h4.032q.832 0 1.44-.608t.576-1.408V7.936q0-.832-.576-1.44t-1.44-.576h-4.032q-.832 0-1.408.576t-.608 1.44z"
+									stroke="none" />
+							</svg>
+							}
+							@else {
+							<svg (click)="playSong()" width="19" height="19" viewBox="0 0 24 24" fill="none"
+								xmlns="http://www.w3.org/2000/svg">
+								<g stroke-width="0" />
+								<g stroke-linecap="round" stroke-linejoin="round" />
+								<path
+									d="M21.409 9.353a2.998 2.998 0 0 1 0 5.294L8.597 21.614C6.534 22.737 4 21.277 4 18.968V5.033c0-2.31 2.534-3.769 4.597-2.648z"
+									fill="#fff" />
+							</svg>
+							}
+						</button>
+						<button class="btn btn-transparent border-0 shadow-none"
+							(click)="playerState.canPlayAudio.set(false);nextSong()">
+							<svg width="19" height="19" viewBox="0 -2 12 12" xmlns="http://www.w3.org/2000/svg" fill="#fff">
+								<g stroke-width="0" />
+								<g stroke-linecap="round" stroke-linejoin="round" />
+								<path
+									d="m11.684 4.694-4.477 3.13C6.571 8.254 6 7.846 6 7.132V5.141L1.78 7.825c-.635.429-1.78.02-1.78-.693V.869C0 .155 1.145-.253 1.78.175L6 2.86V.869c0-.714.571-1.122 1.207-.694l4.309 3.132c.514.347.682 1.04.168 1.387"
+									fill-rule="evenodd" />
+							</svg>
+						</button>
 						}
 						@else {
-						<svg (click)="playSong()" width="19" height="19" viewBox="0 0 24 24" fill="none"
-							xmlns="http://www.w3.org/2000/svg">
-							<g stroke-width="0" />
-							<g stroke-linecap="round" stroke-linejoin="round" />
-							<path
-								d="M21.409 9.353a2.998 2.998 0 0 1 0 5.294L8.597 21.614C6.534 22.737 4 21.277 4 18.968V5.033c0-2.31 2.534-3.769 4.597-2.648z"
-								fill="#fff" />
-						</svg>
-						}
-					</button>
-					<button class="btn btn-transparent border-0 shadow-none"
-						(click)="playerState.canPlayAudio.set(false);nextSong()">
-						<svg width="19" height="19" viewBox="0 -2 12 12" xmlns="http://www.w3.org/2000/svg" fill="#fff">
-							<g stroke-width="0" />
-							<g stroke-linecap="round" stroke-linejoin="round" />
-							<path
-								d="m11.684 4.694-4.477 3.13C6.571 8.254 6 7.846 6 7.132V5.141L1.78 7.825c-.635.429-1.78.02-1.78-.693V.869C0 .155 1.145-.253 1.78.175L6 2.86V.869c0-.714.571-1.122 1.207-.694l4.309 3.132c.514.347.682 1.04.168 1.387"
-								fill-rule="evenodd" />
-						</svg>
-					</button>
-					}
-					@else {
-					<div class="px-1 py-2">
-						<div class="spinner-border spinner-border-sm" role="status">
-							<span class="visually-hidden">Loading...</span>
+						<div class="px-1 py-2">
+							<div class="spinner-border spinner-border-sm" role="status">
+								<span class="visually-hidden">Loading...</span>
+							</div>
 						</div>
+						}
 					</div>
-					}
 				</div>
 			</div>
+			<span class="position-absolute top-50 start-50 translate-middle-x fade-in" [ngStyle]="{'visibility': playerState.songs().length>0 ? 'hidden' : 'visible'}">
+				<div class="loader" [ngStyle]="{'--loaderColor':'#fff'}"></div>
+			</span>
 		</div>
 
 		<div class="row g-1 mt-4">
@@ -321,7 +326,7 @@
 
 			<div class="col-4 text-center">
 				<div class="bg-custom-shade px-2 py-1" routerLink="/snippets" routerLinkActive="bg-custom-selected"
-					ariaCurrentWhenActive="page" data-bs-dismiss="offcanvas">
+					ariaCurrentWhenActive="page" data-bs-dismiss="offcanvas" style="border-bottom-left-radius: 0.5rem;">
 					<div class="mt-2">
 						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -355,7 +360,7 @@
 					<div class="mt-2 mb-1 text-small">Wisdom</div>
 				</div>
 			</div>
-			<div class="col-4 text-center">
+			<!-- <div class="col-4 text-center">
 				<div class="bg-custom-shade opacity-50 px-2 py-1"
 					aria-label="Close" (click)="toggleMode()">
 					<div class="mt-2">
@@ -408,11 +413,11 @@
 						}
 					</div>
 				</div>
-			</div>
+			</div> -->
 
-			<div class="col-12 text-center">
+			<div class="col-4 text-center">
 				<div class="bg-custom-shade px-2 py-1" style="border-bottom-right-radius: 0.5rem;"
-					aria-label="Close" style="border-bottom-right-radius: 0.5rem; border-bottom-left-radius: 0.5rem;" data-bs-dismiss="offcanvas" (click)="openLink('https://suyashjawale.github.io/slate/')">
+					aria-label="Close" style="border-bottom-right-radius: 0.5rem;" data-bs-dismiss="offcanvas" (click)="openLink('https://suyashjawale.github.io/slate/')">
 					<div class="mt-2">
 						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14.1716 21H7C5.11438 21 4.17157 21 3.58579 20.4142C3 19.8284 3 18.8856 3 17V7C3 5.11438 3 4.17157 3.58579 3.58579C4.17157 3 5.11438 3 7 3H17C18.8856 3 19.8284 3 20.4142 3.58579C21 4.17157 21 5.11438 21 7V14.1716C21 14.5803 21 14.7847 20.9239 14.9685C20.8478 15.1522 20.7032 15.2968 20.4142 15.5858L15.5858 20.4142C15.2968 20.7032 15.1522 20.8478 14.9685 20.9239C14.7847 21 14.5803 21 14.1716 21Z" stroke="#ffffff" stroke-width="2"></path> <path d="M14 21V16.3333C14 15.2334 14 14.6834 14.3417 14.3417C14.6834 14 15.2334 14 16.3333 14H21" stroke="#ffffff" stroke-width="2"></path> </g></svg>
 					</div>

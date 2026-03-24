@@ -3,6 +3,7 @@ import { NgClass, NgStyle } from '@angular/common';
 import { StateService } from '../../../services/state-service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../../environment/environment';
 
 @Component({
 	selector: 'app-collection-item',
@@ -28,7 +29,7 @@ export class CollectionItem {
 				'X-Site-Identity': 'portfolio-admin-v1'
 			});
 
-			this.http.get<any>(this.stateService.apiGateway() + `.netlify/functions/getCollection?name=${productID}`, { headers }).subscribe({
+			this.http.get<any>(environment.domain + `.netlify/functions/getCollection?name=${productID}`, { headers }).subscribe({
 				next: data => {
 					this.selected.set(data);
 				}

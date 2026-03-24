@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, signal, StateKey } from '@angular/core';
 import { StateService } from '../../../services/state-service';
 import { DatePipe, NgStyle } from '@angular/common';
+import { environment } from '../../../../environment/environment';
 
 @Component({
 	selector: 'app-wisdom',
@@ -27,7 +28,7 @@ export class Wisdom {
 			'X-Site-Identity': 'portfolio-admin-v1'
 		});
 
-		this.http.get<any>(this.stateService.apiGateway() + '.netlify/functions/getWisdom', { headers }).subscribe({
+		this.http.get<any>(environment.domain + '.netlify/functions/getWisdom', { headers }).subscribe({
 			next: data => {
 				this.wisdom.set(data.sort((a:any, b:any) => b.uploadIndex - a.uploadIndex));
 				this.loadingStatus.set('loaded');

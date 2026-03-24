@@ -1,6 +1,7 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { Song } from '../interfaces/song';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environment/environment';
 
 @Injectable({
 	providedIn: 'root'
@@ -37,7 +38,7 @@ export class MusicPlayer {
 			'X-Site-Identity': 'portfolio-admin-v1'
 		});
 
-		this.http.get<Song[]>('https://dashing-llama-639318.netlify.app/.netlify/functions/fetchSongs', { headers }).subscribe({
+		this.http.get<Song[]>(environment.domain+'.netlify/functions/fetchSongs', { headers }).subscribe({
 			next: (data) => {
 				this.songs.set(data.sort((a, b) => a.rank - b.rank));
 			}

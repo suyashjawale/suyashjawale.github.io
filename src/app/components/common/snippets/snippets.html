@@ -1,16 +1,13 @@
 @if(snippets().length>0){
-<div [ngStyle]="{'margin-top': stateService.navHeight()+38+'px'}" class="container-fluid">
-
-    @for (item of snippets(); track $index) {
-        <div class="mb-5">
+<div [ngStyle]="{'margin-top': stateService.navHeight()+38+'px'}">
+    
+    @for (item of snippets(); let snipInd=$index; track snipInd) {
+        <div class="container-fluid border-bottom" [ngClass]="{'py-4':snipInd!=0, 'pb-4':snipInd==0}">
         <div>
             {{item.title}}
         </div>
         <div class="text-muted text-x-small mt-1 mb-3">{{item.timeStamp | date: 'MMMM d, yyyy h:mm:ss a'}}</div>
-        @for (block of item.codeBlocks; track $index) {
-            @if(block.explanation!=''){
-            <div class="text-small mb-2 text-muted">{{block.explanation}}</div>
-            }
+        @for (block of item.codeBlocks; let blockIndex = $index; track blockIndex) {
             <div class="text-small border border rounded-top-2 d-flex align-items-center p-2 gap-2">
                 <div>
                     @if(block.language=='python'){
@@ -59,9 +56,24 @@
                 <div class="font-w-500 flex-grow-1">
                     {{block.title}}
                 </div>
-                <div>Copied</div>
+                <div (click)="block.copyStatus='copying';copyCode(block)">
+                    @switch(block.copyStatus){
+                        @case ('copying'){
+                            <div class="loader" [ngStyle]="{'--loaderColor':'#fff'}"></div>
+                        }
+                        @case ('copied'){
+                            Copied
+                        }
+                        @case ('error'){
+                            Error
+                        }
+                        @default {
+                            Copy
+                        }
+                    }
+                </div>
             </div>
-            <div class="overflow-scroll border border-top-0 rounded-bottom-2 py-2 pe-2 allow-select-allow mb-3" style="max-height: 22rem;">
+            <div class="overflow-scroll border border-top-0 rounded-bottom-2 py-2 pe-2 allow-select-allow mb-2" style="max-height: 22rem;">
                 <table>
                     <tbody>
                         @for (codeLine of block.code.split("\n"); let i = $index; track i) {
@@ -73,6 +85,9 @@
                     </tbody>
                 </table>
             </div>
+            @if(block.explanation!=''){
+                <div class="text-small text-muted" [ngClass]="{'mb-3': blockIndex!=(item.codeBlocks.length-1)}">{{block.explanation}}</div>
+            }
         }
         </div>
     }   

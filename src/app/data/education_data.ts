@@ -19,7 +19,7 @@ export const college_data: organization[] = [
                 role_name: "Bachelor In Computer Science",
                 role_start: new Date("2017-06-01"),
                 role_end: new Date("2020-06-01"),
-                tag_line: "Didn't get admission into Mechanical Engineering, so I opted for a 3-year CS degree and learned everything from the basics.",
+                tag_line: "Didn't get admission into Mechanical Engineering, so I opted for a 3-year CS degree and learned everything from the basics. Listing my projects and learning below.",
                 projects: [
                     {
                         project_name: "Hypenotes",

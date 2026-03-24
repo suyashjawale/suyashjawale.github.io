@@ -3,6 +3,7 @@ import { StateService } from '../../../services/state-service';
 import { NgStyle, NgClass, DatePipe } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Highlights } from '../../../interfaces/Highlights';
+import { environment } from '../../../../environment/environment';
 
 @Component({
 	selector: 'app-s-updates',
@@ -34,7 +35,7 @@ export class SUpdates {
 						'X-Site-Identity': 'portfolio-admin-v1'
 					});
 
-			this.http.post<any>(this.RootScope.apiGateway() + '.netlify/functions/getBirthdays', {
+			this.http.post<any>(environment.domain + '.netlify/functions/getBirthdays', {
 				password: result
 			}, {headers}).subscribe({
 				next: (data) => {

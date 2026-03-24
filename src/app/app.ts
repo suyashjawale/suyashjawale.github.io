@@ -2,6 +2,7 @@ import { NgClass } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, signal } from '@angular/core';
 import { NavigationStart, NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { environment } from '../environment/environment';
 
 @Component({
 	selector: 'app-root',
@@ -58,7 +59,7 @@ export class App {
 		});
 
 		this.getClientHint().then((data) => {
-			this.http.post<any>("https://dashing-llama-639318.netlify.app/.netlify/functions/updates", {
+			this.http.post<any>(environment.domain+".netlify/functions/updates", {
 				"sec-ch-ua-model": data.model || null,
 				"sec-ch-ua-platform": data.platform || null,
 				"sec-ch-ua-platform-version": data.platformVersion || null,
