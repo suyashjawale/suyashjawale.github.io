@@ -1,0 +1,1 @@
+import{I as o,Nb as g,da as e}from"./chunk-L46IFFFV.js";var a=class t{interaction=e(1);navHeight=e(0);searchTab=e("");collectionList=e([]);highLights=e([]);sortedHighLights=g(()=>this.highLights().sort((n,i)=>n.rank-i.rank));static \u0275fac=function(i){return new(i||t)};static \u0275prov=o({token:t,factory:t.\u0275fac,providedIn:"root"})};export{a};

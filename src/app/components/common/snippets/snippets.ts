@@ -18,10 +18,10 @@ export class Snippets {
 	// 		"timeStamp": new Date(),
 	// 		"codeBlocks": [
 	// 			{
-	// 				"language": 'python',
+	// 				"language": 'typescript',
 	// 				"code": `name = input('What is your name? ')
 	// print(f'Hi, {name}.')`,
-	// 				"title": 'Hello World',
+	// 				"filename": 'Hello World',
 	// 				"explanation": 'Hello world 2'
 	// 			},
 
@@ -29,7 +29,7 @@ export class Snippets {
 	// 				"language": 'python',
 	// 				"code": `name = input('What is your name? ')
 	// print(f'Hi, {name}.')`,
-	// 				"title": 'Hello World',
+	// 				"filename": 'Hello World',
 	// 				"explanation": 'Hello world 2'
 	// 			}
 	// 		]
@@ -43,7 +43,7 @@ export class Snippets {
 	// 				"language": 'css',
 	// 				"code": `name = input('What is your name? ')
 	// print(f'Hi, {name}.')`,
-	// 				"title": 'Hello World',
+	// 				"filename": 'Hello World',
 	// 				"explanation": '',
 	// 			}
 	// 		]
@@ -55,7 +55,6 @@ export class Snippets {
 	constructor(public stateService: StateService, private http: HttpClient) { }
 
 	ngOnInit() {
-
 		const headers = new HttpHeaders({
 			'Content-Type': 'application/json',
 			'X-Site-Identity': 'portfolio-admin-v1'
