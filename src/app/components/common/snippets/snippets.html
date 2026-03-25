@@ -86,7 +86,7 @@
                 </table>
             </div>
             @if(block.explanation!=''){
-                <div class="text-small text-muted" [ngClass]="{'mb-3': blockIndex!=(item.codeBlocks.length-1)}">{{block.explanation}}</div>
+                <div class="text-small text-muted" style="white-space: pre-wrap;" [ngClass]="{'mb-3': blockIndex!=(item.codeBlocks.length-1)}">{{block.explanation}}</div>
             }
         }
         </div>
