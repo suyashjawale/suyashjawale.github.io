@@ -76,7 +76,7 @@ export class Snippets {
 			await navigator.clipboard.writeText(block.code);
 			setTimeout(()=>{
 				block.copyStatus = 'copied';
-			},100);
+			},10);
 		} catch (err) {
 			block.copyStatus = 'error';
 		}
