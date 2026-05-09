@@ -1,0 +1,1 @@
+import{Pa as s,jb as o,kb as n,yb as p}from"./chunk-L46IFFFV.js";var a=class e{static \u0275fac=function(t){return new(t||e)};static \u0275cmp=s({type:e,selectors:[["app-l-posts"]],decls:2,vars:0,template:function(t,l){t&1&&(o(0,"p"),p(1,"l-posts works!"),n())},encapsulation:2})};export{a as LPosts};

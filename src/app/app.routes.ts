@@ -2,44 +2,44 @@ import { Routes } from '@angular/router';
 import { BLOG_LIST } from './components/blogs/blogs.index';
 
 export function getRoutes(): Routes {
-    // if (window.innerWidth > 768) {
-    //     return [
-    //         {
-    //             path: '',
-    //             loadComponent: () => import('./components/large/l-landing/l-landing').then(mod => mod.LLanding),
-    //             children: [
-    //                 {
-    //                     path: '',
-    //                     loadComponent: () => import('./components/large/l-home/l-home').then(mod => mod.LHome),
-    //                 },
-    //                 {
-    //                     path: 'blog',
-    //                     loadComponent: () => import('./components/large/l-blog/l-blog').then(mod => mod.LBlog),
-    //                 },
-    //                 {
-    //                     path: 'collection',
-    //                     loadComponent: () => import('./components/large/l-collection/l-collection').then(mod => mod.LCollection),
-    //                 },
-    //                 {
-    //                     path: 'projects',
-    //                     loadComponent: () => import('./components/large/l-projects/l-projects').then(mod => mod.LProjects),
-    //                 },
-    //                 {
-    //                     path: 'snippets',
-    //                     loadComponent: () => import('./components/large/l-snippets/l-snippets').then(mod => mod.LSnippets),
-    //                 },
-    //                 {
-    //                     path: 'posts',
-    //                     loadComponent: () => import('./components/large/l-posts/l-posts').then(mod => mod.LPosts),
-    //                 },
-    //                 {
-    //                     path: 'playlist',
-    //                     loadComponent: () => import('./components/large/l-playlist/l-playlist').then(mod => mod.LPlaylist),
-    //                 },
-    //             ]
-    //         }
-    //     ]
-    // }
+    if (window.innerWidth > 768) {
+        return [
+            {
+                path: '',
+                loadComponent: () => import('./components/large/l-landing/l-landing').then(mod => mod.LLanding),
+                children: [
+                    {
+                        path: '',
+                        loadComponent: () => import('./components/large/l-home/l-home').then(mod => mod.LHome),
+                    },
+                    {
+                        path: 'blog',
+                        loadComponent: () => import('./components/large/l-blog/l-blog').then(mod => mod.LBlog),
+                    },
+                    {
+                        path: 'collection',
+                        loadComponent: () => import('./components/large/l-collection/l-collection').then(mod => mod.LCollection),
+                    },
+                    {
+                        path: 'projects',
+                        loadComponent: () => import('./components/large/l-projects/l-projects').then(mod => mod.LProjects),
+                    },
+                    {
+                        path: 'snippets',
+                        loadComponent: () => import('./components/large/l-snippets/l-snippets').then(mod => mod.LSnippets),
+                    },
+                    {
+                        path: 'posts',
+                        loadComponent: () => import('./components/large/l-posts/l-posts').then(mod => mod.LPosts),
+                    },
+                    {
+                        path: 'playlist',
+                        loadComponent: () => import('./components/large/l-playlist/l-playlist').then(mod => mod.LPlaylist),
+                    },
+                ]
+            }
+        ]
+    }
 
     return [
         {

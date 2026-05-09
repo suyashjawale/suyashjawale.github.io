@@ -4,6 +4,13 @@
 <head>
 	<meta charset="utf-8">
 	<title>Suyash Jawale</title>
+	<script>
+		const params = new URLSearchParams(window.location.search);
+		const redirect = params.get('redirect');
+		if (redirect) {
+			window.history.replaceState(null, '', decodeURIComponent(redirect));
+		}
+	</script>
 	<meta name="google-site-verification" content="c3a6n6Sgr9qfkBl7E5LFX7LxKDpA-knF0k1ah37KdHw">
 	<meta name="title" content="Suyash Jawale">
 	<meta name="description" content="Hey there! I'm Suyash. This is where I keep my projects, resume, and coding experiments. Poke around and see what I've been working on lately.">
@@ -27,6 +34,6 @@
 
 <body>
 	<app-root></app-root>
-<link rel="modulepreload" href="chunk-FQYX354F.js"><link rel="modulepreload" href="chunk-JSXWC53T.js"><link rel="modulepreload" href="chunk-H2NOWFGM.js"><link rel="modulepreload" href="chunk-NP2SFXRB.js"><link rel="modulepreload" href="chunk-W6DSAECG.js"><link rel="modulepreload" href="chunk-L46IFFFV.js"><script src="scripts-3XTIANUT.js" defer></script><script src="main-V345Z7JW.js" type="module"></script></body>
+<link rel="modulepreload" href="chunk-FQYX354F.js"><link rel="modulepreload" href="chunk-JSXWC53T.js"><link rel="modulepreload" href="chunk-UFATLWFK.js"><link rel="modulepreload" href="chunk-PB2VKDD6.js"><link rel="modulepreload" href="chunk-Y5HYAFQR.js"><link rel="modulepreload" href="chunk-L46IFFFV.js"><script src="scripts-3XTIANUT.js" defer></script><script src="main-LVSQAVNZ.js" type="module"></script></body>
 
 </html>

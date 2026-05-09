@@ -78,7 +78,7 @@ export class SSidebar {
 					const xmlDoc = parser.parseFromString(xml.toString(), 'text/xml');
 					const items = Array.from(xmlDoc.querySelectorAll('item'));
 
-					this.RootScope.highLights.update((item) => [...item, ...items.slice(0, 5).map((rss: any) => ({
+					this.RootScope.highLights.update((item) => [...item, ...items.slice(0, 10).map((rss: any) => ({
 						uid: '',
 						isBirthdayHighlight: false,
 						content: rss.querySelector('title')?.textContent,
@@ -138,33 +138,12 @@ export class SSidebar {
 			}
 		});
 
-		this.http.get<any>('https://hacker-news.firebaseio.com/v0/topstories.json').subscribe({
-			next: data => {
+	}
 
-				for (let i = 0; i < 5; i++) {
-					this.http.get<any>(`https://hacker-news.firebaseio.com/v0/item/${data[i]}.json`).subscribe({
-						next: data1 => {
-							this.RootScope.highLights.update((item) => [...item,
-							{
-								uid: data1.id,
-								isBirthdayHighlight: false,
-								content: `${data1.title} ${data1.text != undefined ? ' - ' + this.strip(data1.text) : ''}`,
-								hasImage: true,
-								bigBanner: '',
-								publishedTime: new Date(data1.time * 1000).toUTCString(),
-								source: 'hacker-news.firebaseio.com',
-								description: '',
-								imageLink: 'organization_logo/hacker_news.svg',
-								link: data1.url,
-								rank: 5,
-								w: 0
-							}
-							])
-						}
-					});
-				}
-			}
-		});
+	decodeHtml(html: string): string {
+		const txt = document.createElement('textarea');
+		txt.innerHTML = html;
+		return txt.value;
 	}
 
 	ngAfterViewInit() {
