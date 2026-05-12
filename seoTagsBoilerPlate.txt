@@ -1,0 +1,67 @@
+<!-- Basic Meta -->
+<title>My Awesome Project | Suyash Jawale</title>
+<meta name="title" content="My Awesome Project | Suyash Jawale" />
+<meta name="description" content="A short description of this project or article goes here." />
+<meta name="keywords" content="angular, typescript, web development, project" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://suyashjawale.github.io/projects/my-awesome-project" />
+
+<!-- Open Graph -->
+<meta property="og:title" content="My Awesome Project | Suyash Jawale" />
+<meta property="og:description" content="A short description of this project or article goes here." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://suyashjawale.github.io/projects/my-awesome-project" />
+<meta property="og:site_name" content="Suyash Jawale" />
+<meta property="og:image" content="https://suyashjawale.github.io/projects/my-awesome-project/thumbnail.png" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="My Awesome Project | Suyash Jawale" />
+<meta name="twitter:description" content="A short description of this project or article goes here." />
+<meta name="twitter:image" content="https://suyashjawale.github.io/projects/my-awesome-project/thumbnail.png" />
+
+<!-- Article -->
+<meta property="article:author" content="Suyash Jawale" />
+<meta property="article:section" content="Technology" />
+<meta property="article:published_time" content="2026-05-10T00:00:00.000Z" />
+<meta property="article:modified_time" content="2026-05-10T00:00:00.000Z" />
+
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "My Awesome Project | Suyash Jawale",
+    "@id": "My Awesome Project | Suyash Jawale",
+    "url": "https://suyashjawale.github.io/projects/my-awesome-project",
+    "description": "A short description of this project or article goes here.",
+    "image": ["https://suyashjawale.github.io/projects/my-awesome-project/thumbnail.png"],
+    "author": {
+        "@type": "Person",
+        "name": "Suyash Jawale",
+        "url": "https://suyashjawale.github.io",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://suyashjawale.github.io/android-chrome-512x512.png",
+            "width": 512,
+            "height": 512
+        }
+    },
+    "datePublished": "2026-05-10T00:00:00.000Z",
+    "dateModified": "2026-05-10T00:00:00.000Z",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Suyash Jawale",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://suyashjawale.github.io/android-chrome-512x512.png"
+        }
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://suyashjawale.github.io/projects/my-awesome-project"
+    },
+    "inLanguage": "en",
+    "isAccessibleForFree": true
+}
+</script>

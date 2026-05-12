@@ -1,8 +1,9 @@
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, PLATFORM_ID, ViewChild } from '@angular/core';
 import { SSidebar } from '../s-sidebar/s-sidebar';
 import { Router, RouterOutlet } from '@angular/router';
 import { StateService } from '../../../services/state-service';
 import { SNavbar } from '../s-navbar/s-navbar';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
 	selector: 'app-s-landing',
@@ -13,6 +14,8 @@ import { SNavbar } from '../s-navbar/s-navbar';
 
 export class SLanding {
 
+	isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+	
 	constructor(private RootScope: StateService, public router: Router) { }
 
 	@HostListener('click')

@@ -1,0 +1,3 @@
+/project/instagram-cli
+/project/model-x
+/project/video-sync

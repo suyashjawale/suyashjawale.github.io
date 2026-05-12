@@ -1,0 +1,1 @@
+import{J as o,Qb as g,ea as e}from"./chunk-HMWG2WGH.js";var a=class t{interaction=e(1);navHeight=e(0);searchTab=e("");collectionList=e([]);highLights=e([]);sortedHighLights=g(()=>this.highLights().sort((n,i)=>n.rank-i.rank));static \u0275fac=function(i){return new(i||t)};static \u0275prov=o({token:t,factory:t.\u0275fac,providedIn:"root"})};export{a};

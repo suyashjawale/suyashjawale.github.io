@@ -1,1 +1,0 @@
-import{Pa as o,jb as l,kb as n,yb as c}from"./chunk-L46IFFFV.js";var i=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=o({type:t,selectors:[["app-l-collection"]],decls:2,vars:0,template:function(e,s){e&1&&(l(0,"p"),c(1,"l-collection works!"),n())},encapsulation:2})};export{i as LCollection};

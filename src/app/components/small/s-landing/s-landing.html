@@ -1,5 +1,7 @@
-<app-s-sidebar />
-@if(!this.router.url.includes('search')){
-    <app-s-navbar />
+@if(isBrowser) {
+  <app-s-sidebar />
+}
+@if(isBrowser && !this.router.url.includes('search')){
+  <app-s-navbar />
 }
 <router-outlet />

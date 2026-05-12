@@ -1,0 +1,1 @@
+import{Ab as a,Ra as o,lb as n,mb as m}from"./chunk-HMWG2WGH.js";var s=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=o({type:t,selectors:[["app-model-x"]],decls:2,vars:0,template:function(e,i){e&1&&(n(0,"p"),a(1,"model-x works!"),m())},encapsulation:2})};export{s as ModelX};
