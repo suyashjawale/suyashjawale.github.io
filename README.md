@@ -4,4 +4,4 @@ A minimalist and professional portfolio website designed to showcase my journey 
 
 🌐 **Live Demo:** [suyashjawale.github.io](https://suyashjawale.github.io/)
 
-Angular Version - ![Angular Version](https://img.shields.io/github/package-json/dependency-version/suyashjawale/suyashjawale.github.io/@angular/core)
+![Angular Version](https://img.shields.io/github/package-json/dependency-version/suyashjawale/suyashjawale.github.io/@angular/core)
