@@ -1,0 +1,1 @@
+import{Ma as s,eb as a,fb as n,tb as l}from"./chunk-S3OKOC3N.js";var i=class e{static \u0275fac=function(t){return new(t||e)};static \u0275cmp=s({type:e,selectors:[["app-playlists"]],decls:2,vars:0,template:function(t,p){t&1&&(a(0,"p"),l(1,"playlists works!"),n())},encapsulation:2})};export{i as Playlists};

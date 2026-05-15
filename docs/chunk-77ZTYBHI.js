@@ -1,1 +1,0 @@
-var l=[{slug:"lifecycle-of-milk",title:"The Lifecycle Of Milk",thumbnail:"/blogs/lifecycle-of-milk/pexels-chevanon-302901.jpg",publishedTime:new Date,summary:"My research on milk",loadComponent:()=>import("./chunk-W6EJITHE.js").then(e=>e.LifecycleOfMilk)}];export{l as a};

@@ -1,0 +1,1 @@
+import{Ma as o,eb as n,fb as c,tb as l}from"./chunk-S3OKOC3N.js";var i=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=o({type:t,selectors:[["app-collection"]],decls:2,vars:0,template:function(e,s){e&1&&(n(0,"p"),l(1,"collection works!"),c())},encapsulation:2})};export{i as Collection};
