@@ -4,6 +4,13 @@
 <head>
   <meta charset="utf-8">
   <title>Suyash Jawale</title>
+  	<script>
+		const params = new URLSearchParams(window.location.search);
+		const redirect = params.get('redirect');
+		if (redirect) {
+			window.history.replaceState(null, '', decodeURIComponent(redirect));
+		}
+	</script>
   <meta name="google-site-verification" content="c3a6n6Sgr9qfkBl7E5LFX7LxKDpA-knF0k1ah37KdHw">
   <meta name="title" content="Suyash Jawale">
   <meta name="description" content="Hey there! I'm Suyash. This is where I keep my projects, resume, and coding experiments. Poke around and see what I've been working on lately.">
